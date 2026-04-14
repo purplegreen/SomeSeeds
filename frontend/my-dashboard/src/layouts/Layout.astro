@@ -17,9 +17,9 @@ const nav = await getNavigation()
 		<title>Hello Project</title>
 	</head>
 	<body>
-		 <Navbar links={nav.links} logo={nav.logo} />
+		 <Navbar links={nav?.links ?? []} logo={nav?.logo ?? null} />
 		<slot />
-		<Footer logo={nav.logo} footer={nav.footer} />
+		<Footer logo={nav?.logo ?? null} footer={nav?.footer ?? null} />
 	</body>
 </html>
 
