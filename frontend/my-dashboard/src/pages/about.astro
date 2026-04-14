@@ -1,0 +1,17 @@
+---
+import { getSimplePage } from "../lib/sanity"
+import PageHeader from "../components/sections/PageHeader.astro"
+import Layout from "../layouts/Layout.astro"
+
+const data = await getSimplePage("about")
+---
+
+<Layout>
+  <PageHeader 
+    title={data.title} 
+    description={data.description} 
+    image={data.image} 
+    category={data.category}
+    tags={data.tags}
+  />
+</Layout>

@@ -1,0 +1,75 @@
+---
+import MobileMenu from "./MobileMenu.vue"
+
+interface Props {
+  links: { label: string; href: string }[]
+  logo?: string
+}
+const { links, logo } = Astro.props
+---
+
+<header class="navbar">
+  <div class="navbar__inner">
+
+   <a href="/" class="navbar__logo">
+  {logo ? <img src={logo} alt="Logo" /> : "YourLogo"}
+</a>
+
+    <!-- Desktop links -->
+    <nav class="navbar__links">
+      {links.map(link => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <!-- Mobile menu -->
+    <MobileMenu client:load links={links} />
+
+  </div>
+</header>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #ffffff;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .navbar__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar__logo {
+   width: 5rem;
+   height: auto;
+  }
+
+  .navbar__links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .navbar__links a {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .navbar__links a:hover { opacity: 0.5; }
+
+  /* Hide desktop links on mobile */
+  @media (max-width: 768px) {
+    .navbar__links { display: none; }
+  }
+</style>
