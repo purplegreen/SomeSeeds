@@ -9,15 +9,16 @@
 :root {
   /* Colors */
   --color-background: #ffffff;
-  --color-surface: #f8f9fa;
-  --color-border: #e9ecef;
 
   --color-text-primary: #1a1a1a;
-  --color-text-muted: #6c757d;
-  --color-text-light: #adb5bd;
+  --color-text-muted: #3e3e3e;
+  --color-text-light: #c4c4c4;
 
-  --color-accent: #2d6a4f;
-  --color-accent-hover: #1b4332;
+  --color-accent: #0022ff;
+  --color-accent-hover: #1333ff;
+
+  --color-accent-contra: #ff85de;
+  --color-accent-contra-hover: #ffa2e6;
 
   --color-success: #40c057;
   --color-warning: #fab005;
