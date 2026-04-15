@@ -1,8 +1,11 @@
-# SomeSeeds
+## SomeSeeds — v2.0
 
-Website and CMS for [SomeSeeds](https://www.someseeds.net) — an interdisciplinary
-research initiative exploring restorative practices, regenerative principles, and
-modes of coexistence among life forms and their ecosystems.
+This repository contains the v2.0 rebuild of SomeSeeds,
+migrating from a Webflow site to a custom stack with a headless CMS.
+SomeSeeds is an interdisciplinary research initiative exploring restorative practices,
+regenerative principles, and modes of coexistence among life forms and their ecosystems.
+The new architecture introduces a content-managed layer for documenting Explorations
+and Activations (workshops, events, field work) as the project grows.
 
 ---
 
