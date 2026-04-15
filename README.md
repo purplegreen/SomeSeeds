@@ -57,4 +57,4 @@ The CMS is structured around two core document types:
 - **Activations** — lived events (workshops, sessions, field work) that enact Explorations
 
 For full documentation of the content model and design decisions →
-[cms/schemas/README.md](./cms/schemas/README.md)
+[cms/schemas/README.md]
