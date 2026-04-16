@@ -1,28 +1,29 @@
 ---
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
-import Button from "../ui/Button.vue"
+
 ---
-
-<div id="container">
+		<section class="section-hero">
 	
-	<main>
-		<section class="section">
-	
-			<h1>
-				Welcome  
+			<h1 class="title_xl">
+				Practices that empower situated knowledge
 			</h1>
-			<container class="container">
-				<code><pre>hello</pre></code>
-			<h2>This is my working setup</h2>
-		<p>
-			with Astro, Vue.Js, and Sanity as a headless CMS.
-		</p>
-		<Button href="/about" variant="primary">more</Button>
-			</container>
-		</section>
-	</main>
 
+		</section>
+
+<style>
+
+	.section-hero {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 70vh;
+		width: 100dvw;
+		padding: var(--space-1) var(--space-3)
+	}
+	.title_xl {
+		color: var(--color-primary);
+		font-size: 17vh;
+		font-weight: 700;
+		line-height: .88em;
 		
-	
-</div>
+	}
+</style>

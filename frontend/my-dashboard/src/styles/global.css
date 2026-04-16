@@ -14,11 +14,11 @@
   --color-text-muted: #3e3e3e;
   --color-text-light: #c4c4c4;
 
-  --color-accent: #0022ff;
-  --color-accent-hover: #1333ff;
+  --color-primary: #0022ff;
+  --color-primary-hover: #1333ff;
 
-  --color-accent-contra: #ff85de;
-  --color-accent-contra-hover: #ffa2e6;
+  --color-secondary-contra: #ff85de;
+  --color-secondary-contra-hover: #ffa2e6;
 
   --color-success: #40c057;
   --color-warning: #fab005;
