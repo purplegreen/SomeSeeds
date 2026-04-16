@@ -21,7 +21,11 @@ const nav = await getNavigation()
 	<body>
 		 <Navbar links={nav?.links ?? []} logo={nav?.logo ?? null} currentPath={currentPath} />
 		<slot />
-		<Footer logo={nav?.logo ?? null} footer={nav?.footer ?? null} />
+		<Footer 
+		logo={nav?.logo ?? null} 
+		footer={nav?.footer ?? null} 
+		footerLinks={nav?.footerLinks ?? []}
+		currentPath={currentPath} />
 	</body>
 </html>
 

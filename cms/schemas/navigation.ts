@@ -40,6 +40,28 @@ export const navigation = defineType({
       ],
     }),
     defineField({
+      name: 'footerLinks',
+      title: 'Footer Links',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+            }),
+            defineField({
+              name: 'href',
+              title: 'URL',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'footer',
       title: 'Footer',
       type: 'object',
