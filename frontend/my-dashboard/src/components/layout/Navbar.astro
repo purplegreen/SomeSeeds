@@ -30,25 +30,26 @@ const { links, logo } = Astro.props
 
 <style>
   .navbar {
-    position: sticky;
+    display: flex;
+    position: relative;
     top: 0;
     z-index: 50;
-    background: #ffffff;
-    border-bottom: 1px solid #f0f0f0;
+    padding: var(--space-4);
+    width: 100%;
   }
 
   .navbar__inner {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     padding: 0 1.5rem;
-    height: 64px;
+    height: auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
   }
 
-  .navbar__logo {
-   width: 5rem;
+  .navbar__logo img {
+   width: 13rem;
    height: auto;
   }
 
@@ -56,17 +57,22 @@ const { links, logo } = Astro.props
     display: flex;
     gap: 2rem;
     align-items: center;
+    justify-content: flex-end;
+    width: 100%;
   }
 
   .navbar__links a {
     font-size: var(--text-base);
-    font-weight: 500;
-    color: #1a1a1a;
+    font-weight: 600;
     text-decoration: none;
     transition: opacity 0.15s ease;
   }
 
-  .navbar__links a:hover { opacity: 0.5; }
+  .navbar__links a:hover { 
+    text-decoration: underline;
+    text-underline-offset: var(--space-2);
+    text-decoration-thickness: 3px;
+  }
 
   /* Hide desktop links on mobile */
   @media (max-width: 768px) {
