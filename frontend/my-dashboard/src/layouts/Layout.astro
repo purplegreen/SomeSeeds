@@ -4,8 +4,9 @@ import "../styles/global.css"
 import Navbar from "../components/layout/Navbar.astro"
 import Footer from "../components/layout/Footer.astro"
 
+const currentPath = Astro.url.pathname.replace(/\/$/, ""); 
 const nav = await getNavigation()
-console.log(nav)
+
 ---
 <!doctype html>
 <html lang="en">
@@ -18,7 +19,7 @@ console.log(nav)
 		<title>Hello Project</title>
 	</head>
 	<body>
-		 <Navbar links={nav?.links ?? []} logo={nav?.logo ?? null} />
+		 <Navbar links={nav?.links ?? []} logo={nav?.logo ?? null} currentPath={currentPath} />
 		<slot />
 		<Footer logo={nav?.logo ?? null} footer={nav?.footer ?? null} />
 	</body>

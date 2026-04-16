@@ -3,9 +3,13 @@ import MobileMenu from "./MobileMenu.vue"
 
 interface Props {
   links: { label: string; href: string }[]
-  logo?: string
+  logo?: string;
+  currentPath: string;
 }
-const { links, logo } = Astro.props
+const { links, logo, currentPath: rawPath } = Astro.props;
+const currentPath = rawPath.replace(/\/$/, "");
+console.log("currentPath:", currentPath);
+console.log("links:", links.map(l => l.href));
 ---
 
 <header class="navbar">
@@ -16,14 +20,20 @@ const { links, logo } = Astro.props
 </a>
 
     <!-- Desktop links -->
-    <nav class="navbar__links">
-      {links.map(link => (
-        <a href={link.href}>{link.label}</a>
-      ))}
-    </nav>
+<nav class="navbar__links">
+  {links.map(link => (
+    
+   <a href={link.href}
+  class:list={["navbar__link", { "navbar__link--active": currentPath === link.href.replace(/\/$/, "") }]}
+  aria-current={currentPath === link.href.replace(/\/$/, "") ? "page" : undefined}
+>
+  {link.label}
+</a>
+  ))}
+</nav>
 
-    <!-- Mobile menu -->
-    <MobileMenu client:load links={links} />
+<!-- Mobile menu -->
+<MobileMenu client:load links={links} currentPath={currentPath} />
 
   </div>
 </header>
@@ -73,6 +83,12 @@ const { links, logo } = Astro.props
     text-underline-offset: var(--space-2);
     text-decoration-thickness: 3px;
   }
+.navbar__links a.navbar__link--active {
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
+    text-underline-offset: var(--space-2);
+    text-decoration-thickness: 3px;
+}
 
   /* Hide desktop links on mobile */
   @media (max-width: 768px) {
