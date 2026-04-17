@@ -28,8 +28,8 @@ export async function getNavigation() {
     `*[_type == "navigation"][0]{
       "logo": logo.asset->url,
       links,
-      footer,
-      footerLinks
+      footerLinks,
+      footerSocialLinks
     }`,
   );
 }

@@ -62,20 +62,10 @@ export const navigation = defineType({
       ],
     }),
     defineField({
-      name: 'footer',
-      title: 'Footer',
+      name: 'footerSocialLinks',
+      title: 'Footer Social Links',
       type: 'object',
       fields: [
-        defineField({
-          name: 'copyright',
-          title: 'Copyright text',
-          type: 'string',
-        }),
-        defineField({
-          name: 'linkedin',
-          title: 'LinkedIn URL',
-          type: 'string',
-        }),
         defineField({
           name: 'instagram',
           title: 'Instagram URL',

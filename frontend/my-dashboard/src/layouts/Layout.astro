@@ -6,7 +6,7 @@ import Footer from "../components/layout/Footer.astro"
 
 const currentPath = Astro.url.pathname.replace(/\/$/, ""); 
 const nav = await getNavigation()
-
+console.log("full nav:", JSON.stringify(nav, null, 2))
 ---
 <!doctype html>
 <html lang="en">
@@ -22,10 +22,11 @@ const nav = await getNavigation()
 		 <Navbar links={nav?.links ?? []} logo={nav?.logo ?? null} currentPath={currentPath} />
 		<slot />
 		<Footer 
-		logo={nav?.logo ?? null} 
-		footer={nav?.footer ?? null} 
-		footerLinks={nav?.footerLinks ?? []}
-		currentPath={currentPath} />
+  logo={nav?.logo ?? null} 
+  footerSocialLinks={nav?.footerSocialLinks ?? null} 
+  footerLinks={nav?.footerLinks ?? []}
+  currentPath={currentPath} 
+/>
 	</body>
 </html>
 
