@@ -14,6 +14,7 @@ export async function getSimplePage(slug: string) {
     `*[_type == "simple_page" && slug.current == $slug][0]{
       title,
       description,
+      body,
       "image": image.asset->url,
       "category": category->{ title, slug },
       "tags": tags[]->{ title, slug }

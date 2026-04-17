@@ -1,13 +1,18 @@
 ---
+import { PortableText } from '@portabletext/vue'
+
 interface Props {
   title: string
   description: string
   image?: string 
   category?: { title: string }
   tags?: { title: string }[]
+   body?: any[]
 }
 
-const { title, description, image, category, tags } = Astro.props
+const { title, description, image, category, tags, body } = Astro.props
+
+console.log("body:", JSON.stringify(body, null, 2))
 ---
 
 <section class="section">
@@ -25,6 +30,10 @@ const { title, description, image, category, tags } = Astro.props
     </div>
   )}
 </div>
+
+</section>
+<section class="section">
+  <PortableText value={body} />
 </section>
 
 <style>
