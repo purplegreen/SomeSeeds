@@ -46,9 +46,22 @@ const year = new Date().getFullYear()
 >{link.label}</a></li>
           ))}
         </ul>
-      </div>
+     
+
+      <p class="footer__copyleft">
+        (ɔ) {year}
+      </p>
+      
 </div>
-</div>
+
+      </section>
+
+
+
+
+
+          <!-- Bottom bar -->
+    <section class="section__b">
       <!-- Logo -->
       <div class="footer__brand">
         <a href="/" class="footer__logo">
@@ -59,17 +72,6 @@ const year = new Date().getFullYear()
         </a>
       
 </div>
-      </section>
-
-
-
-
-
-          <!-- Bottom bar -->
-    <section class="section__b">
-      <p class="footer__copyleft">
-        (ɔ) {year}
-      </p>
     </section>
 
   
@@ -77,14 +79,19 @@ const year = new Date().getFullYear()
 
 <style>
 .footer {
+  display: flex;
+  flex-direction: row;
   background: var(--color-surface);
   padding: var(--space-8);
   margin-top: var(--space-16);
+  justify-content: space-between;
+  align-items: baseline;
 
 }
 
 .section__a {
   display: flex;
+  flex-direction: column;
   margin-bottom: var(--space-2);
   justify-content: space-between;
   align-items: baseline;
@@ -93,7 +100,7 @@ const year = new Date().getFullYear()
 
 .footer_items {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   gap: var(--space-4);
   align-items: end;
 }
