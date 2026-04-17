@@ -1,5 +1,4 @@
 ---
-import NewsletterForm from "../ui/NewsletterForm.vue"
 
 interface Props {
   logo?: string
@@ -18,46 +17,9 @@ const year = new Date().getFullYear()
 ---
 
 <footer class="footer">
-  <div class="container">
+  <section class="section__a">
 
-    <div class="footer__grid">
-
-      <!-- Col 1: Logo + tagline -->
-      <div class="footer__brand">
-        <a href="/" class="footer__logo">
-          {logo
-            ? <img src={logo} alt="Logo" />
-            : <span>YourLogo</span>
-          }
-        </a>
-      </div>
-
-      <!-- Col 3: Footer links -->
-      <div class="footer__col">
-        <p class="footer__heading">Legal</p>
-        <ul class="footer__links">
-          {footerLinks?.map(link => (
-            <li><a href={link.href}
-  class:list={["navbar__link", { "navbar__link--active": currentPath === link.href.replace(/\/$/, "") }]}
-  aria-current={currentPath === link.href.replace(/\/$/, "") ? "page" : undefined}
->{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Col 4: Newsletter -->
-      <div class="footer__col">
-        <NewsletterForm client:load />
-      </div>
-
-    </div>
-
-    <!-- Bottom bar -->
-    <div class="footer__bottom">
-      <p class="footer__copyright">
-        (ɔ) {year}
-      </p>
-
+    <div class="footer_items">
       <!-- Social Links -->
       <div class="footer__social">
         {footerSocialLinks?.instagram && (
@@ -75,84 +37,121 @@ const year = new Date().getFullYear()
           </a>
         )}
       </div>
-    </div>
+      <!-- Footer links -->
+        <ul class="footer__links">
+          {footerLinks?.map(link => (
+            <li><a href={link.href}
+  class:list={["navbar__link", { "navbar__link--active": currentPath === link.href.replace(/\/$/, "") }]}
+  aria-current={currentPath === link.href.replace(/\/$/, "") ? "page" : undefined}
+>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+</div>
+</div>
+      <!-- Logo -->
+      <div class="footer__brand">
+        <a href="/" class="footer__logo">
+          {logo
+            ? <img src={logo} alt="Logo" />
+            : <span>YourLogo</span>
+          }
+        </a>
+      
+</div>
+      </section>
 
-  </div>
+
+
+
+
+          <!-- Bottom bar -->
+    <section class="section__b">
+      <p class="footer__copyleft">
+        (ɔ) {year}
+      </p>
+    </section>
+
+  
 </footer>
 
 <style>
 .footer {
   background: var(--color-surface);
-  border-top: var(--border-default);
-  padding-top: var(--space-16);
-  padding-bottom: var(--space-8);
+  padding: var(--space-8);
   margin-top: var(--space-16);
+
 }
 
-.footer__grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 2fr;
-  gap: var(--space-8);
-  margin-bottom: var(--space-12);
+.section__a {
+  display: flex;
+  margin-bottom: var(--space-2);
+  justify-content: space-between;
+  align-items: baseline;
+
+}
+
+.footer_items {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-4);
+  align-items: end;
 }
 
 .footer__logo img {
-  height: 32px;
-  width: auto;
+  width: 46vw; 
+  height: auto;
 }
 
-.footer__logo span {
-  font-size: var(--text-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-}
 
-.footer__tagline {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  margin-top: var(--space-3);
-  max-width: 24ch;
-}
-
-.footer__heading {
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-4);
-  max-width: none;
-}
-
-.footer__links {
+ .footer__links {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  flex-direction: row;
+  gap: var(--space-4);
+
 }
 
-.footer__links a {
-  font-size: var(--text-sm);
+ .footer__links a {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin: 0;
   color: black;
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
+  .footer__links a:hover { 
+    text-decoration: underline;
+    text-underline-offset: var(--space-2);
+    text-decoration-thickness: 3px;
+  }
+.footer__links a.footer__links--active {
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
+    text-underline-offset: var(--space-2);
+    text-decoration-thickness: 3px;
+}
+
+
+
 .footer__links a:hover {
   color: var(--color-accent);
 }
 
-.footer__bottom {
+.section__b {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: var(--space-6);
   border-top: var(--border-default);
+
 }
 
-.footer__copyright {
-  font-size: var(--text-xs);
+.footer__copyleft {
+  font-size: var(--text-s);
   color: var(--color-text-muted);
   max-width: none;
 }
@@ -161,6 +160,13 @@ const year = new Date().getFullYear()
   display: flex;
   gap: var(--space-4);
   align-items: center;
+
+}
+
+.footer__social svg {
+  width: 3rem;
+  height: 3rem;
+  display: block;
 }
 
 .footer__social a {
@@ -176,14 +182,6 @@ const year = new Date().getFullYear()
 
 /* Responsive */
 @media (max-width: 768px) {
-  .footer__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
-  }
-
-  .footer__brand {
-    grid-column: 1 / -1;
-  }
 
   .footer__bottom {
     flex-direction: column;
@@ -193,8 +191,6 @@ const year = new Date().getFullYear()
 }
 
 @media (max-width: 480px) {
-  .footer__grid {
-    grid-template-columns: 1fr;
-  }
+
 }
 </style>

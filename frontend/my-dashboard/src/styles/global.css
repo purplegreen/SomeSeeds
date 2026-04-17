@@ -180,16 +180,6 @@ a:hover {
 }
 
 /* Lists */
-ul,
-ol {
-  padding-left: var(--space-6);
-  color: var(--color-text-primary);
-}
-
-li {
-  margin-bottom: var(--space-2);
-  line-height: 1.6;
-}
 
 /* Selection */
 ::selection {
