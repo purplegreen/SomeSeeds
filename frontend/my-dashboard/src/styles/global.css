@@ -11,7 +11,7 @@
   --color-background: #ffffff;
 
   --color-text-primary: #1a1a1a;
-  --color-text-muted: #3e3e3e;
+  --color-text-muted: #5c5c5c;
   --color-text-light: #c4c4c4;
 
   --color-primary: #0022ff;
@@ -127,6 +127,7 @@ h1 {
 }
 h2 {
   font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
 }
 h3 {
   font-size: var(--text-2xl);
@@ -167,13 +168,13 @@ em {
 
 /* Links */
 a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color var(--transition-fast);
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: var(--space-1);
 }
 
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-text-muted);
 }
 
 /* Lists */
