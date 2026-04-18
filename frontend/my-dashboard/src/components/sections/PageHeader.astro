@@ -1,5 +1,5 @@
 ---
-import { PortableText } from '@portabletext/vue'
+import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
 
 interface Props {
   title: string
@@ -7,8 +7,9 @@ interface Props {
   image?: string 
   category?: { title: string }
   tags?: { title: string }[]
-   body?: any[]
+  body?: any[]
 }
+
 
 const { title, description, image, category, tags, body } = Astro.props
 ---
@@ -35,10 +36,9 @@ const { title, description, image, category, tags, body } = Astro.props
  <div class="image_wrapper">{image && <img src={image} alt={title} />    }</div>
 </section>
 
-</section>
 <section class="section">
   <div class="portable-text-simple">
-  <PortableText value={body} />
+  <PortableTextRenderer body={body} client:load />
   </div>
 </section>
 
