@@ -11,14 +11,13 @@ interface Props {
 }
 
 const { title, description, image, category, tags, body } = Astro.props
-
-console.log("body:", JSON.stringify(body, null, 2))
 ---
 
 <section class="section">
-  <h1>{title}</h1>
+  <h1 class="page_title">{title}</h1>
+  <div class="portable-text-simple">
   <p>{description}</p>
-  <div class="image_wrapper">{image && <img src={image} alt={title} />    }</div>
+ </div>
 
 <div>{category && <span class="category">{category.title}</span>}
 
@@ -30,16 +29,36 @@ console.log("body:", JSON.stringify(body, null, 2))
     </div>
   )}
 </div>
+</section>
+
+<section class="poster_section">
+ <div class="image_wrapper">{image && <img src={image} alt={title} />    }</div>
+</section>
 
 </section>
 <section class="section">
+  <div class="portable-text-simple">
   <PortableText value={body} />
+  </div>
 </section>
 
+
 <style>
-
-
-.image_wrapper {
+.page_title {
+  display: flex;
+  align-items: start;
+  width: 100%;
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-6);
+}
+.portable-text-simple {
+  width: 98vw;
+  padding-left: 40vw;
+  padding-right: var(--space-6);
+  margin-top: var(--space-4);
+  line-height: 1.8;
+}
+img .image_wrapper{
   width: 100%;
   height: 40vh;
 }
@@ -51,14 +70,12 @@ console.log("body:", JSON.stringify(body, null, 2))
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-
   .tags {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
     margin-top: var(--space-2);
   }
-
   .tag {
     font-size: var(--text-xs);
     padding: var(--space-1) var(--space-3);

@@ -36,12 +36,13 @@
   /* Fluid type scale (clamp: min, preferred, max) */
   --text-xs: clamp(0.7rem, 0.5vw + 0.6rem, 0.75rem);
   --text-sm: clamp(0.85rem, 0.5vw + 0.7rem, 0.925rem);
-  --text-base: clamp(1rem, 0.5vw + 0.85rem, 1rem);
-  --text-lg: clamp(1.1rem, 1vw + 0.85rem, 1.25rem);
+  --text-s: clamp(1rem, 0.5vw + 0.85rem, 1rem);
+  --text-base: clamp(1.1rem, 1vw + 0.85rem, 1.25rem);
   --text-xl: clamp(1.25rem, 1.5vw + 0.9rem, 1.5rem);
   --text-2xl: clamp(1.5rem, 2vw + 1rem, 2rem);
   --text-3xl: clamp(1.75rem, 2.5vw + 1rem, 2.5rem);
   --text-4xl: clamp(2rem, 3vw + 1rem, 3.5rem);
+  --text-6xl: clamp(3rem, 5vw + 1rem, 6rem);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -118,18 +119,14 @@ h4,
 h5,
 h6 {
   font-family: var(--font-base);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.2;
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: var(--text-4xl);
+  font-size: var(--text-6xl);
   font-weight: var(--font-weight-bold);
 }
 h2 {
-  font-size: var(--text-3xl);
+  font-size: var(--text-4xl);
 }
 h3 {
   font-size: var(--text-2xl);
