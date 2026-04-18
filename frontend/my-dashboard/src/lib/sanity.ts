@@ -55,3 +55,73 @@ export async function getAllTags() {
     }`,
   );
 }
+// ── Explorations ──
+export async function getExplorations() {
+  return sanityClient.fetch(
+    `*[_type == "exploration"] | order(title asc){
+      title,
+      "slug": slug.current,
+      summary,
+      "coverImage": coverImage.asset->url,
+      "category": category->{ title, slug },
+      "tags": tags[]->{ title, slug }
+    }`,
+  );
+}
+
+export async function getExploration(slug: string) {
+  return sanityClient.fetch(
+    `*[_type == "exploration" && slug.current == $slug][0]{
+      title,
+      "slug": slug.current,
+      summary,
+      body,
+      "coverImage": coverImage.asset->url,
+      "category": category->{ title, slug },
+      "tags": tags[]->{ title, slug },
+      collaborators
+    }`,
+    { slug },
+  );
+}
+
+// ── Activations ──
+export async function getActivationsByExploration(explorationId: string) {
+  return sanityClient.fetch(
+    `*[_type == "activation" && references($explorationId)] | order(startDate desc){
+      title,
+      "slug": slug.current,
+      type,
+      status,
+      startDate,
+      endDate,
+      location,
+      "coverImage": coverImage.asset->url,
+      hostingInstitutions
+    }`,
+    { explorationId },
+  );
+}
+
+export async function getActivation(slug: string) {
+  return sanityClient.fetch(
+    `*[_type == "activation" && slug.current == $slug][0]{
+      title,
+      "slug": slug.current,
+      type,
+      status,
+      startDate,
+      endDate,
+      location,
+      hostingInstitutions,
+      "coverImage": coverImage.asset->url,
+      research,
+      documentation,
+      outcomes,
+      "explorations": explorations[]->{ title, "slug": slug.current },
+      "categories": categories[]->{ title, slug },
+      "tags": tags[]->{ title, slug }
+    }`,
+    { slug },
+  );
+}

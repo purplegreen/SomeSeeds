@@ -16,6 +16,24 @@
         <li v-for="link in links" :key="link.href">
           <a :href="link.href" @click="close">{{ link.label }}</a>
         </li>
+        <!-- Explorations submenu -->
+        <li v-if="explorations.length > 0">
+          <button class="mobile-submenu__trigger" @click="toggleExplorations">
+            Explorations
+            <span
+              class="mobile-submenu__arrow"
+              :class="{ open: explorationsOpen }"
+              >↓</span
+            >
+          </button>
+        </li>
+      </ul>
+      <ul class="mobile-submenu" :class="{ open: explorationsOpen }">
+        <li v-for="exploration in explorations" :key="exploration.slug">
+          <a :href="`/explorations/${exploration.slug}`" @click="close">
+            {{ exploration.title }}
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -24,17 +42,30 @@
 <script setup>
 import { ref } from "vue";
 
-const isOpen = ref(false);
-const toggle = () => (isOpen.value = !isOpen.value);
-const close = () => (isOpen.value = false);
+const props = defineProps({
+  links: {
+    type: Array,
+    default: () => [],
+  },
+  explorations: {
+    type: Array,
+    default: () => [],
+  },
+  currentPath: {
+    type: String,
+    default: "",
+  },
+});
 
-const links = [
-  { label: "Approach", href: "/approach" },
-  { label: "Practices", href: "/practices" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+const isOpen = ref(false);
+const explorationsOpen = ref(false);
+const toggle = () => (isOpen.value = !isOpen.value);
+const close = () => {
+  isOpen.value = false;
+  explorationsOpen.value = false;
+};
+const toggleExplorations = () =>
+  (explorationsOpen.value = !explorationsOpen.value);
 </script>
 
 <style scoped>
@@ -102,6 +133,45 @@ const links = [
 
 .mobile-menu a:hover {
   opacity: 0.5;
+}
+
+.mobile-submenu__trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  padding: 0;
+  font-family: inherit;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-submenu__arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-style: normal;
+}
+
+.mobile-submenu__arrow.open {
+  transform: rotate(180deg);
+}
+
+.mobile-submenu {
+  display: none;
+  padding-left: 1rem !important;
+  gap: 1rem !important;
+  margin-top: 0.75rem;
+}
+.mobile-submenu.open {
+  display: flex;
+}
+
+.mobile-submenu a {
+  font-size: 1.2rem;
 }
 
 @media (max-width: 768px) {

@@ -1,12 +1,13 @@
 ---
-import { getNavigation } from "../lib/sanity"
+import { getNavigation, getExplorations } from "../lib/sanity"
 import "../styles/global.css"
 import Navbar from "../components/layout/Navbar.astro"
 import Footer from "../components/layout/Footer.astro"
 
 const currentPath = Astro.url.pathname.replace(/\/$/, ""); 
 const nav = await getNavigation()
-console.log("full nav:", JSON.stringify(nav, null, 2))
+const explorations = await getExplorations()
+console.log("explorations:", JSON.stringify(explorations, null, 2))
 ---
 <!doctype html>
 <html lang="en">
@@ -16,10 +17,14 @@ console.log("full nav:", JSON.stringify(nav, null, 2))
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Hello Project</title>
+		<title>SomeSeeds</title>
 	</head>
 	<body>
-		 <Navbar links={nav?.links ?? []} logo={nav?.logo ?? null} currentPath={currentPath} />
+		 <Navbar links={nav?.links ?? []} 
+		 logo={nav?.logo ?? null}
+		currentPath={currentPath} 
+		explorations={explorations ?? []}
+		/>
 		<slot />
 		<Footer 
   logo={nav?.logo ?? null} 

@@ -1,27 +1,30 @@
 ---
 import MobileMenu from "./MobileMenu.vue"
+import ExplorationDropdown from "./ExplorationDropdown.vue"
 
 interface Props {
   links: { label: string; href: string }[]
   logo?: string;
   currentPath: string;
+  explorations?: { title: string; slug: string }[]
 }
-const { links, logo, currentPath: rawPath } = Astro.props;
+const { links, logo, currentPath: rawPath, explorations = []  } = Astro.props;
 const currentPath = rawPath.replace(/\/$/, "");
-console.log("currentPath:", currentPath);
-console.log("links:", links.map(l => l.href));
+
+const regularLinks = links.filter(l => l.href !== "/explorations")
+
 ---
 
 <header class="navbar">
   <div class="navbar__inner">
 
    <a href="/" class="navbar__logo">
-  {logo ? <img src={logo} alt="Logo" /> : "YourLogo"}
+  {logo ? <img src={logo} alt="Logo" /> : "SomeSeeds"}
 </a>
 
     <!-- Desktop links -->
 <nav class="navbar__links">
-  {links.map(link => (
+  {regularLinks.map(link => (
     
    <a href={link.href}
   class:list={["navbar__link", { "navbar__link--active": currentPath === link.href.replace(/\/$/, "") }]}
@@ -30,10 +33,16 @@ console.log("links:", links.map(l => l.href));
   {link.label}
 </a>
   ))}
+       <!-- Explorations dropdown -->
+      <ExplorationDropdown
+        client:load
+        explorations={explorations}
+        currentPath={currentPath}
+      />
 </nav>
 
 <!-- Mobile menu -->
-<MobileMenu client:load links={links} currentPath={currentPath} />
+<MobileMenu client:load links={links} explorations={explorations} currentPath={currentPath} />
 
   </div>
 </header>
