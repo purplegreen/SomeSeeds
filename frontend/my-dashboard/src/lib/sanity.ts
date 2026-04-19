@@ -72,6 +72,7 @@ export async function getExplorations() {
 export async function getExploration(slug: string) {
   return sanityClient.fetch(
     `*[_type == "exploration" && slug.current == $slug][0]{
+      _id,
       title,
       "slug": slug.current,
       summary,
@@ -86,6 +87,14 @@ export async function getExploration(slug: string) {
 }
 
 // ── Activations ──
+export async function getAllActivations() {
+  return sanityClient.fetch(
+    `*[_type == "activation" && defined(slug.current)]{ 
+      "slug": slug.current 
+    }`,
+  );
+}
+
 export async function getActivationsByExploration(explorationId: string) {
   return sanityClient.fetch(
     `*[_type == "activation" && references($explorationId)] | order(startDate desc){

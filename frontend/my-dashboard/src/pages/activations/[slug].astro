@@ -1,0 +1,275 @@
+---
+import { getActivation, getExplorations } from "../../lib/sanity"
+import Layout from "../../layouts/Layout.astro"
+import PortableTextRenderer from "../../components/ui/PortableTextRenderer.vue"
+
+export async function getStaticPaths() {
+  const { getAllActivations } = await import("../../lib/sanity")
+  const activations = await getAllActivations()
+  return activations.map(a => ({
+    params: { slug: a.slug },
+  }))
+}
+
+const { slug } = Astro.params
+const activation = await getActivation(slug)
+---
+
+<Layout>
+
+  <!-- Header -->
+  <section class="section">
+    <div class="activation-meta">
+      {activation.type && <span class="tag">{activation.type}</span>}
+      {activation.status && <span class="tag tag--status">{activation.status}</span>}
+    </div>
+    <h1 class="page_title">{activation.title}</h1>
+
+    <!-- Date & Location -->
+    <div class="activation-details">
+      {activation.startDate && (
+        <p class="activation-date">
+          {new Date(activation.startDate).toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+          {activation.endDate && (
+            ` — ${new Date(activation.endDate).toLocaleDateString("en-GB", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}`
+          )}
+        </p>
+      )}
+      {activation.location?.city && (
+        <p class="activation-location">
+          {[activation.location.venue, activation.location.city, activation.location.country]
+            .filter(Boolean)
+            .join(", ")}
+        </p>
+      )}
+    </div>
+
+    <!-- Parent Explorations -->
+    {activation.explorations && activation.explorations.length > 0 && (
+      <div class="activation-explorations">
+        {activation.explorations.map(e => (
+          <a href={`/explorations/${e.slug}`} class="tag tag--exploration">
+            {e.title}
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <!-- Hosting Institutions -->
+  {activation.hostingInstitutions && activation.hostingInstitutions.length > 0 && (
+    <section class="section">
+      <div class="hosting-institutions">
+        {activation.hostingInstitutions.map(institution => (
+          <div class="institution">
+            {institution.logo && (
+              <img src={institution.logo.asset.url} alt={institution.name} />
+            )}
+            {institution.url
+              ? <a href={institution.url} target="_blank" rel="noopener noreferrer">{institution.name}</a>
+              : <span>{institution.name}</span>
+            }
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Cover image -->
+  {activation.coverImage && (
+    <section class="poster_section">
+      <div class="image_wrapper">
+        <img src={activation.coverImage} alt={activation.title} />
+      </div>
+    </section>
+  )}
+
+  <!-- BEFORE — Research -->
+  {activation.research?.text && (
+    <section class="section">
+      <h2>Research</h2>
+      <div class="portable-text-simple">
+        <PortableTextRenderer body={activation.research.text} client:load />
+      </div>
+      {activation.research.images && activation.research.images.length > 0 && (
+        <div class="image-gallery">
+          {activation.research.images.map(img => (
+            <figure>
+              <img src={img.asset.url} alt={img.caption ?? ""} />
+              {img.caption && <figcaption>{img.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+      {activation.research.links && activation.research.links.length > 0 && (
+        <ul class="link-list">
+          {activation.research.links.map(link => (
+            <li>
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                {link.label ?? link.url}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )}
+
+  <!-- DURING — Documentation -->
+  {activation.documentation?.text && (
+    <section class="section">
+      <h2>Documentation</h2>
+      <div class="portable-text-simple">
+        <PortableTextRenderer body={activation.documentation.text} client:load />
+      </div>
+      {activation.documentation.images && activation.documentation.images.length > 0 && (
+        <div class="image-gallery">
+          {activation.documentation.images.map(img => (
+            <figure>
+              <img src={img.asset.url} alt={img.caption ?? ""} />
+              {img.caption && <figcaption>{img.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+    </section>
+  )}
+
+  <!-- AFTER — Outcomes -->
+  {activation.outcomes && activation.outcomes.length > 0 && (
+    <section class="section">
+      <h2>Outcomes</h2>
+      <ul class="outcomes-list">
+        {activation.outcomes.map(outcome => (
+          <li class="outcome">
+            <span>{outcome.label}</span>
+            {outcome.url && (
+              <a href={outcome.url} target="_blank" rel="noopener noreferrer">
+                {outcome.url}
+              </a>
+            )}
+            {outcome.internalRef && (
+              <a href={`/${outcome.internalRef._type}s/${outcome.internalRef.slug.current}`}>
+                {outcome.internalRef.title}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+</Layout>
+
+<style>
+.activation-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.activation-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1rem;
+}
+
+.activation-date,
+.activation-location {
+  font-size: var(--text-s);
+  margin: 0;
+  opacity: 0.6;
+}
+
+.activation-explorations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag--exploration {
+  text-decoration: none;
+}
+
+.tag--exploration:hover {
+  text-decoration: underline;
+}
+
+.hosting-institutions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.institution {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.institution img {
+  height: 2rem;
+  width: auto;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.image-gallery figure {
+  margin: 0;
+}
+
+.image-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-gallery figcaption {
+  font-size: var(--text-s);
+  opacity: 0.6;
+  margin-top: 0.5rem;
+}
+
+.link-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1rem;
+}
+
+.link-list a {
+  font-size: var(--text-s);
+}
+
+.outcomes-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: var(--text-s);
+}
+</style>

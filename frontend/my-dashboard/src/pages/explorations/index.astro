@@ -1,0 +1,72 @@
+---
+import { getExplorations } from "../../lib/sanity"
+import Layout from "../../layouts/Layout.astro"
+
+const explorations = await getExplorations()
+---
+
+<Layout>
+  <section class="section">
+    <h1 class="page_title">Explorations</h1>
+    <p class="page_description">
+      Living research containers — each exploring a specific theme or issue
+      through situated practices and activations.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="explorations-grid">
+      {explorations.map(exploration => (
+        <a href={`/explorations/${exploration.slug}`} class="exploration-card">
+          {exploration.coverImage && (
+            <div class="exploration-card__image">
+              <img src={exploration.coverImage} alt={exploration.title} />
+            </div>
+          )}
+          <div class="exploration-card__body">
+            <h2 class="exploration-card__title">{exploration.title}</h2>
+            {exploration.summary && (
+              <p class="exploration-card__summary">{exploration.summary}</p>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+.explorations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.exploration-card {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: opacity 0.15s ease;
+}
+
+.exploration-card:hover {
+  opacity: 0.7;
+}
+
+.exploration-card__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.exploration-card__title {
+  font-size: var(--text-l);
+  margin: 0;
+}
+
+.exploration-card__summary {
+  font-size: var(--text-s);
+  margin: 0;
+}
+</style>
