@@ -11,8 +11,6 @@ interface Props {
 const { links, logo, currentPath: rawPath, explorations = []  } = Astro.props;
 const currentPath = rawPath.replace(/\/$/, "");
 
-const regularLinks = links.filter(l => l.href !== "/explorations")
-
 ---
 
 <header class="navbar">
@@ -24,21 +22,21 @@ const regularLinks = links.filter(l => l.href !== "/explorations")
 
     <!-- Desktop links -->
 <nav class="navbar__links">
-  {regularLinks.map(link => (
-    
-   <a href={link.href}
-  class:list={["navbar__link", { "navbar__link--active": currentPath === link.href.replace(/\/$/, "") }]}
-  aria-current={currentPath === link.href.replace(/\/$/, "") ? "page" : undefined}
->
+      {links.map(link => (
+        link.href === "/explorations"
+          ? <ExplorationDropdown
+              client:load
+              explorations={explorations}
+              currentPath={currentPath}
+            />
+          : 
+             <a href={link.href}
+              class:list={["navbar__link", { "navbar__link--active": currentPath === link.href.replace(/\/$/, "") }]}
+              aria-current={currentPath === link.href.replace(/\/$/, "") ? "page" : undefined}
+            >
   {link.label}
 </a>
   ))}
-       <!-- Explorations dropdown -->
-      <ExplorationDropdown
-        client:load
-        explorations={explorations}
-        currentPath={currentPath}
-      />
 </nav>
 
 <!-- Mobile menu -->

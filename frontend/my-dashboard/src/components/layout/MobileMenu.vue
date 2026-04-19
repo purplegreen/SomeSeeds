@@ -13,7 +13,7 @@
 
     <nav class="mobile-menu" :class="{ open: isOpen }">
       <ul>
-        <li v-for="link in links" :key="link.href">
+        <li v-for="link in regularLinks" :key="link.href">
           <a :href="link.href" @click="close">{{ link.label }}</a>
         </li>
         <!-- Explorations submenu -->
@@ -26,13 +26,29 @@
               >↓</span
             >
           </button>
-        </li>
-      </ul>
-      <ul class="mobile-submenu" :class="{ open: explorationsOpen }">
-        <li v-for="exploration in explorations" :key="exploration.slug">
-          <a :href="`/explorations/${exploration.slug}`" @click="close">
-            {{ exploration.title }}
-          </a>
+          <ul class="mobile-submenu" :class="{ open: explorationsOpen }">
+            <li v-for="exploration in explorations" :key="exploration.slug">
+              <a :href="`/explorations/${exploration.slug}`" @click="close">
+                {{ exploration.title }}
+              </a>
+              <!-- Activations nested under each exploration -->
+              <ul
+                v-if="
+                  exploration.activations && exploration.activations.length > 0
+                "
+                class="mobile-submenu mobile-submenu--nested"
+              >
+                <li
+                  v-for="activation in exploration.activations"
+                  :key="activation.slug"
+                >
+                  <a :href="`/activations/${activation.slug}`" @click="close">
+                    {{ activation.title }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
@@ -40,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   links: {
@@ -57,8 +73,14 @@ const props = defineProps({
   },
 });
 
+// filter out /explorations from regular links to avoid duplication
+const regularLinks = computed(() =>
+  props.links.filter((l) => l.href !== "/explorations"),
+);
+
 const isOpen = ref(false);
 const explorationsOpen = ref(false);
+
 const toggle = () => (isOpen.value = !isOpen.value);
 const close = () => {
   isOpen.value = false;

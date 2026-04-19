@@ -64,7 +64,13 @@ export async function getExplorations() {
       summary,
       "coverImage": coverImage.asset->url,
       "category": category->{ title, slug },
-      "tags": tags[]->{ title, slug }
+      "tags": tags[]->{ title, slug },
+      "activations": *[_type == "activation" && references(^._id)] | order(startDate desc){
+        title,
+        "slug": slug.current,
+        status,
+        startDate
+      }
     }`,
   );
 }
