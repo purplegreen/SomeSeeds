@@ -54,7 +54,7 @@ const isActive = props.currentPath.startsWith("/explorations");
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0 0 1rem 0;
   font-size: var(--text-s);
   font-weight: 600;
   font-family: inherit;
@@ -63,7 +63,7 @@ const isActive = props.currentPath.startsWith("/explorations");
 .dropdown__menu {
   display: none;
   position: absolute;
-  top: calc(100% + 1rem);
+  top: 100%;
   right: 0;
   background: var(--color-bg, #fff);
   border: 1px solid var(--color-border, #e5e5e5);
