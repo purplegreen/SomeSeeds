@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   explorations: {
@@ -74,7 +74,7 @@ const isOpen = ref(false);
 const open = () => (isOpen.value = true);
 const close = () => (isOpen.value = false);
 
-const isActive = props.currentPath.startsWith("/explorations");
+const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 </script>
 
 <style scoped>
