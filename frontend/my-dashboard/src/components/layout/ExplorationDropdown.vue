@@ -90,6 +90,7 @@ const isActive = props.currentPath.startsWith("/explorations");
   font-size: var(--text-s);
   font-weight: 600;
   font-family: inherit;
+  height: 4.5rem;
 }
 
 .dropdown__menu {
@@ -98,7 +99,6 @@ const isActive = props.currentPath.startsWith("/explorations");
   top: 100%;
   left: 0;
   background: var(--color-bg, #ffffff);
-  border: 1px solid var(--color-border, #e5e5e5);
   padding: 1.5rem;
   width: 100vw;
   z-index: 100;
@@ -111,10 +111,11 @@ const isActive = props.currentPath.startsWith("/explorations");
   display: flex;
 }
 
-.dropdown__exploration {
+/*.dropdown__exploration {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
 }
 
 .dropdown__exploration-title {
@@ -122,7 +123,7 @@ const isActive = props.currentPath.startsWith("/explorations");
   font-weight: 600;
   text-decoration: none;
 }
-
+*/
 .dropdown__exploration-title:hover {
   text-decoration: underline;
   text-underline-offset: var(--space-2);

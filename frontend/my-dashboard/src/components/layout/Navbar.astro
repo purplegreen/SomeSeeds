@@ -51,7 +51,7 @@ const currentPath = rawPath.replace(/\/$/, "");
     display: flex;
     position: relative;
     top: 0;
-    padding: var(--space-4);
+    padding: 0 var(--space-4);
     width: 100%;
   }
 
@@ -59,7 +59,7 @@ const currentPath = rawPath.replace(/\/$/, "");
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 1.5rem;
+    padding: 0;
     height: auto;
     display: flex;
     align-items: center;
@@ -68,6 +68,7 @@ const currentPath = rawPath.replace(/\/$/, "");
   .navbar__logo img {
    width: 13rem;
    height: auto;
+   align-self: baseline;
   }
 
   .navbar__links {
@@ -76,13 +77,15 @@ const currentPath = rawPath.replace(/\/$/, "");
     align-items: center;
     justify-content: flex-end;
     width: 100%;
+    height: 100%;
   }
 
   .navbar__links a {
     font-size: var(--text-s);
     font-weight: 600;
     text-decoration: none;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.15s ease; 
+    align-items: center;
   }
 
   .navbar__links a:hover { 
