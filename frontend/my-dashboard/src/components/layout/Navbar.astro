@@ -28,6 +28,7 @@ const currentPath = rawPath.replace(/\/$/, "");
               client:load
               explorations={explorations}
               currentPath={currentPath}
+              label={link.label}
             />
           : 
              <a href={link.href}
@@ -57,7 +58,6 @@ const currentPath = rawPath.replace(/\/$/, "");
   .navbar__inner {
     width: 100%;
     display: flex;
-  
     justify-content: space-between;
     padding: 0 1.5rem;
     height: auto;

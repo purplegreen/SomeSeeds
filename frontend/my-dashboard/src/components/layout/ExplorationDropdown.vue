@@ -4,7 +4,7 @@
       class="dropdown__trigger navbar__link"
       :class="{ 'navbar__link--active': isActive }"
     >
-      Explorations
+      {{ label }}
     </button>
 
     <div class="dropdown__menu" :class="{ open: isOpen }">
@@ -65,6 +65,9 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  label: {
+    type: String,
+  },
 });
 
 const isOpen = ref(false);
@@ -76,14 +79,14 @@ const isActive = props.currentPath.startsWith("/explorations");
 
 <style scoped>
 .dropdown {
-  position: relative;
+  position: static;
 }
 
 .dropdown__trigger {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0 0 1rem 0;
+  padding: 0;
   font-size: var(--text-s);
   font-weight: 600;
   font-family: inherit;
@@ -93,11 +96,11 @@ const isActive = props.currentPath.startsWith("/explorations");
   display: none;
   position: absolute;
   top: 100%;
-  right: 0;
-  background: var(--color-bg, #fff);
+  left: 0;
+  background: var(--color-bg, #ffffff);
   border: 1px solid var(--color-border, #e5e5e5);
   padding: 1.5rem;
-  min-width: 280px;
+  width: 100vw;
   z-index: 100;
   display: none;
   flex-direction: column;
