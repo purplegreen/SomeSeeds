@@ -20,6 +20,15 @@
   --color-secondary-contra: #ff85de;
   --color-secondary-contra-hover: #ffa2e6;
 
+  --color-neutral-200: #e5e4e4;
+  --color-neutral-300: #c8c8c8;
+  --color-neutral-400: #a9a9a9;
+  --color-neutral-500: #8b8b8b;
+  --color-neutral-600: #6e6e6e;
+  --color-neutral-700: #525252;
+  --color-neutral-800: #383838;
+  --color-neutral-900: #1a1a1a;
+
   --color-success: #40c057;
   --color-warning: #fab005;
   --color-danger: #fa5252;
@@ -44,7 +53,15 @@
   --text-4xl: clamp(2rem, 3vw + 1rem, 3.5rem);
   --text-6xl: clamp(3rem, 5vw + 1rem, 6rem);
 
+  --line-height-normal: 1.5;
+  --line-height-snug: 1.2;
+  --line-height-snug: 1.1;
+  --line-height-tight: 1.1; /* large display titles */
+  --line-height-flat: 1;
+  --line-height-flatter: 0; /* single line, no spacing */
+
   /* Spacing */
+  --space-0: 0.1rem;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -140,6 +157,18 @@ h5 {
 }
 h6 {
   font-size: var(--text-base);
+}
+
+.underline-hover:hover {
+  text-decoration: underline;
+  text-underline-offset: var(--space-2);
+  text-decoration-thickness: 3px;
+}
+
+.underline-active {
+  text-decoration: underline;
+  text-underline-offset: var(--space-2);
+  text-decoration-thickness: 3px;
 }
 
 p {
