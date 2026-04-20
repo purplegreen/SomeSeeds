@@ -51,11 +51,11 @@
   --text-2xl: clamp(1.5rem, 2vw + 1rem, 2rem);
   --text-3xl: clamp(1.75rem, 2.5vw + 1rem, 2.5rem);
   --text-4xl: clamp(2rem, 3vw + 1rem, 3.5rem);
+  --text-5xl: clamp(2.5rem, 4vw + 1rem, 4.5rem);
   --text-6xl: clamp(3rem, 5vw + 1rem, 6rem);
 
   --line-height-normal: 1.5;
   --line-height-snug: 1.2;
-  --line-height-snug: 1.1;
   --line-height-tight: 1.1; /* large display titles */
   --line-height-flat: 1;
   --line-height-flatter: 0; /* single line, no spacing */
@@ -212,6 +212,16 @@ a:hover {
 ::selection {
   background-color: var(--color-accent);
   color: #ffffff;
+}
+
+/* ============================================
+   Typography Classes
+   ============================================ */
+
+.page_title {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
 }
 
 /* ============================================

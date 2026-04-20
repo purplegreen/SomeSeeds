@@ -1,53 +1,59 @@
 <template>
   <div class="dropdown" @mouseenter="open" @mouseleave="close">
     <button
-      class="dropdown__trigger navbar__link"
+      class="dropdown__trigger navbar__link underline-hover"
       :class="{ 'navbar__link--active': isActive }"
     >
       {{ label }}
     </button>
 
     <div class="dropdown__menu" :class="{ open: isOpen }">
-      <div
-        v-for="exploration in explorations"
-        :key="exploration.slug"
-        class="dropdown__exploration"
-      >
-        <a
-          :href="`/explorations/${exploration.slug}`"
-          class="dropdown__exploration-title"
-          @click="close"
+      <div class="dropdown__items">
+        <div
+          v-for="exploration in explorations"
+          :key="exploration.slug"
+          class="dropdown__exploration"
         >
-          {{ exploration.title }}
-        </a>
-
-        <ul
-          v-if="exploration.activations && exploration.activations.length > 0"
-          class="dropdown__activations"
-        >
-          <li
-            v-for="activation in exploration.activations"
-            :key="activation.slug"
+          <a
+            :href="`/explorations/${exploration.slug}`"
+            class="dropdown__exploration-title"
+            :class="{
+              'navbar__link--active':
+                currentPath === `/explorations/${exploration.slug}`,
+            }"
+            @click="close"
           >
-            <a
-              href="`/activations/${activation.slug}`"
-              class="dropdown__activation-item"
-              @click="close"
+            {{ exploration.title }}
+          </a>
+
+          <ul
+            v-if="exploration.activations && exploration.activations.length > 0"
+            class="dropdown__activations"
+          >
+            <li
+              v-for="activation in exploration.activations"
+              :key="activation.slug"
             >
-              <span class="dropdown__activation-title">{{
-                activation.title
-              }}</span>
-              <span
-                v-if="activation.status"
-                class="dropdown__activation-status"
-                :class="`status--${activation.status}`"
+              <a
+                href="`/activations/${activation.slug}`"
+                class="dropdown__activation-item"
+                @click="close"
               >
-                {{ activation.status }}
-              </span>
-            </a>
-          </li>
-        </ul>
-        <p v-else class="dropdown__no-activations"></p>
+                <span class="dropdown__activation-title">{{
+                  activation.title
+                }}</span>
+                <span
+                  v-if="activation.status"
+                  class="dropdown__activation-status"
+                  :class="`status--${activation.status}`"
+                >
+                  {{ activation.status }}
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p v-else class="dropdown__no-activations"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -90,7 +96,11 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   font-size: var(--text-s);
   font-weight: 600;
   font-family: inherit;
-  height: 4.5rem;
+  height: 4rem;
+  display: flex;
+  align-items: flex-end;
+  z-index: 50;
+  padding-bottom: 1rem;
 }
 
 .dropdown__menu {
@@ -99,58 +109,70 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   top: 100%;
   left: 0;
   background: var(--color-bg, #ffffff);
-  padding: 1.5rem;
+  border: 1px solid var(--color-neutral-200, #e5e7eb);
+  padding: var(--space-16);
   width: 100vw;
   z-index: 100;
   display: none;
-  flex-direction: column;
-  gap: 1.5rem;
+  flex-direction: row;
+  align-items: flex-end;
 }
 
 .dropdown__menu.open {
   display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
-/*.dropdown__exploration {
+.dropdown__items {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: fit-content;
+  gap: var(--space-8);
+  justify-content: flex-end;
+  margin-left: auto;
+}
 
+.dropdown__exploration {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 20vw;
+}
+
+.navbar__links a.navbar__link--active {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: var(--space-0);
+  text-decoration-thickness: 3px;
 }
 
 .dropdown__exploration-title {
   font-size: var(--text-s);
+  line-height: var(--line-height-snug);
+  text-transform: uppercase;
   font-weight: 600;
   text-decoration: none;
 }
-*/
-.dropdown__exploration-title:hover {
-  text-decoration: underline;
-  text-underline-offset: var(--space-2);
-  text-decoration-thickness: 3px;
-}
 
 .dropdown__activations {
+  font-size: var(--text-sm);
   list-style: none;
-  margin: 0;
   padding: 0 0 0 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  border-left: 2px solid var(--color-border, #e5e5e5);
 }
 
 .dropdown__activation-item {
+  line-height: var(--line-height-flat);
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.dropdown__activation-item:hover .dropdown__activation-title {
-  text-decoration: underline;
-  text-underline-offset: var(--space-2);
+  gap: var(--space-4);
 }
 
 .dropdown__activation-status {
@@ -172,6 +194,6 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-2);
 }
 </style>
