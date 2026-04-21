@@ -109,7 +109,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   top: 100%;
   left: 0;
   background: var(--color-bg, #ffffff);
-  border: 1px solid var(--color-neutral-200, #e5e7eb);
+  border-bottom: 1px solid var(--color-neutral-200, #e5e7eb);
   padding: var(--space-16);
   width: 100vw;
   z-index: 100;
