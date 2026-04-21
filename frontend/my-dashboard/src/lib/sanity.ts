@@ -130,8 +130,21 @@ export async function getActivation(slug: string) {
       location,
       hostingInstitutions,
       "coverImage": coverImage.asset->url,
-      research,
-      documentation,
+      research{
+        text,
+        "images": images[]{
+          "url": asset->url,
+          caption
+        },
+        links
+      },
+      documentation{
+        text,
+        "images": images[]{
+          "url": asset->url,
+          caption
+        }
+      },
       outcomes,
       "explorations": explorations[]->{ title, "slug": slug.current },
       "categories": categories[]->{ title, slug },

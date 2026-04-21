@@ -15,6 +15,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params
 const exploration = await getExploration(slug)
 const activations = await getActivationsByExploration(exploration._id)
+console.log("activations slugs:", activations.map(a => a.slug))
 ---
 
 <Layout>

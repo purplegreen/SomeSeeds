@@ -4,7 +4,7 @@ import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
 interface Props {
   research?: {
     text?: any[]
-    images?: { asset: { url: string }; caption?: string }[]
+    images?: { url: string; caption?: string }[]
     links?: { label?: string; url: string }[]
   }
 }
@@ -26,7 +26,7 @@ const { research } = Astro.props
       <div class="image-gallery">
         {research.images.map(img => (
           <figure>
-            <img src={img.asset.url} alt={img.caption ?? ""} />
+            <img src={img.url} alt={img.caption ?? ""} />
             {img.caption && <figcaption>{img.caption}</figcaption>}
           </figure>
         ))}

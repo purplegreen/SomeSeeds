@@ -15,6 +15,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params
 const activation = await getActivation(slug)
+console.log("documentation images:", JSON.stringify(activation.documentation?.images, null, 2))
 ---
 
 <Layout>

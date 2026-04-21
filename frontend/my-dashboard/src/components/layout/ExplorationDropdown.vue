@@ -35,7 +35,7 @@
               :key="activation.slug"
             >
               <a
-                href="`/activations/${activation.slug}`"
+                :href="`/activations/${activation.slug}`"
                 class="dropdown__activation-item"
                 @click="close"
               >
