@@ -1,6 +1,8 @@
 ---
 import { getExplorations, getExploration, getActivationsByExploration } from "../../lib/sanity"
 import Layout from "../../layouts/Layout.astro"
+import PageHeader from "../../components/sections/PageHeader.astro"
+import ActivationsList from "../../components/sections/ActivationsList.astro"
 import PortableTextRenderer from "../../components/ui/PortableTextRenderer.vue"
 
 export async function getStaticPaths() {
@@ -11,31 +13,19 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params
-
 const exploration = await getExploration(slug)
 const activations = await getActivationsByExploration(exploration._id)
-
 ---
 
 <Layout>
-  <!-- Header -->
-  <section class="section">
-    <h1 class="page_title">{exploration.title}</h1>
-    {exploration.summary && (
-      <p class="page_description">{exploration.summary}</p>
-    )}
-  </section>
+  <PageHeader
+    title={exploration.title}
+    description={exploration.summary}
+    image={exploration.coverImage}
+    category={exploration.category}
+    tags={exploration.tags}
+  />
 
-  <!-- Cover image -->
-  {exploration.coverImage && (
-    <section class="poster_section">
-      <div class="image_wrapper">
-        <img src={exploration.coverImage} alt={exploration.title} />
-      </div>
-    </section>
-  )}
-
-  <!-- Body -->
   {exploration.body && (
     <section class="section">
       <div class="portable-text-simple">
@@ -44,10 +34,9 @@ const activations = await getActivationsByExploration(exploration._id)
     </section>
   )}
 
-  <!-- Collaborators -->
   {exploration.collaborators && exploration.collaborators.length > 0 && (
     <section class="section">
-      <h2>Collaborators</h2>
+      <h2 class="heading-m">Collaborators</h2>
       <div class="collaborators">
         {exploration.collaborators.map(c => (
           <div class="collaborator">
@@ -62,53 +51,7 @@ const activations = await getActivationsByExploration(exploration._id)
     </section>
   )}
 
-  <!-- Activations -->
-  <section class="section">
-    <h2>Activations</h2>
-    {activations.length === 0 ? (
-      <p>No activations yet.</p>
-    ) : (
-      <div class="activations-list">
-        {activations.map(activation => (
-          <a href={`/activations/${activation.slug}`} class="activation-card">
-            {activation.coverImage && (
-              <div class="activation-card__image">
-                <img src={activation.coverImage} alt={activation.title} />
-              </div>
-            )}
-            <div class="activation-card__body">
-              <div class="activation-card__meta">
-                {activation.type && <span class="tag">{activation.type}</span>}
-                {activation.status && <span class="tag">{activation.status}</span>}
-              </div>
-              <h3 class="activation-card__title">{activation.title}</h3>
-              {activation.startDate && (
-                <p class="activation-card__date">
-                  {new Date(activation.startDate).toLocaleDateString("en-GB", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                  {activation.endDate && ` — ${new Date(activation.endDate).toLocaleDateString("en-GB", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}`}
-                </p>
-              )}
-              {activation.location?.city && (
-                <p class="activation-card__location">
-                  {[activation.location.venue, activation.location.city, activation.location.country]
-                    .filter(Boolean)
-                    .join(", ")}
-                </p>
-              )}
-            </div>
-          </a>
-        ))}
-      </div>
-    )}
-  </section>
+  <ActivationsList activations={activations} />
 </Layout>
 
 <style>
@@ -128,53 +71,5 @@ const activations = await getActivationsByExploration(exploration._id)
 .collaborator img {
   height: 2rem;
   width: auto;
-}
-
-.activations-list {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.activation-card {
-  text-decoration: none;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 1.5rem;
-  transition: opacity 0.15s ease;
-}
-
-.activation-card:hover {
-  opacity: 0.7;
-}
-
-.activation-card__image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.activation-card__meta {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.activation-card__title {
-  font-size: var(--text-m);
-  margin: 0 0 0.5rem;
-}
-
-.activation-card__date,
-.activation-card__location {
-  font-size: var(--text-s);
-  margin: 0;
-  opacity: 0.6;
-}
-
-@media (max-width: 768px) {
-  .activation-card {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

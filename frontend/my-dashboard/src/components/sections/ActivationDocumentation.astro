@@ -1,0 +1,62 @@
+---
+import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
+
+interface Props {
+  documentation?: {
+    text?: any[]
+    images?: { asset: { url: string }; caption?: string }[]
+  }
+}
+
+const { documentation } = Astro.props
+---
+
+{documentation && (documentation.text || documentation.images?.length) && (
+  <section class="section">
+    <h2 class="heading-m">Documentation</h2>
+
+    {documentation.text && (
+      <div class="portable-text-simple">
+        <PortableTextRenderer body={documentation.text} client:load />
+      </div>
+    )}
+
+    {documentation.images && documentation.images.length > 0 && (
+      <div class="image-gallery">
+        {documentation.images.map(img => (
+          <figure>
+            <img src={img.asset.url} alt={img.caption ?? ""} />
+            {img.caption && <figcaption>{img.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    )}
+  </section>
+)}
+
+<style>
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.image-gallery figure {
+  margin: 0;
+  flex: 1 1 calc(50% - var(--space-4));
+  min-width: 240px;
+}
+
+.image-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-gallery figcaption {
+  font-size: var(--text-s);
+  opacity: 0.6;
+  margin-top: var(--space-2);
+}
+</style>
