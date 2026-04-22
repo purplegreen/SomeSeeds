@@ -1,5 +1,6 @@
 ---
 import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
+import ImageSlider from '../ui/ImageSlider.vue'
 
 interface Props {
   documentation?: {
@@ -9,6 +10,12 @@ interface Props {
 }
 
 const { documentation } = Astro.props
+
+
+const sliderImages = documentation?.images?.map(img => ({
+  url: img.url,
+  alt: img.caption ?? ''
+})) ?? []
 ---
 
 {documentation && (documentation.text || documentation.images?.length) && (
@@ -21,18 +28,13 @@ const { documentation } = Astro.props
       </div>
     )}
 
-    {documentation.images && documentation.images.length > 0 && (
-      <div class="image-gallery">
-        {documentation.images.map(img => (
-          <figure>
-            <img src={img.url} alt={img.caption ?? ""} />
-            {img.caption && <figcaption>{img.caption}</figcaption>}
-          </figure>
-        ))}
+ {sliderImages.length > 0 && (
+      <ImageSlider images={sliderImages} client:load />
+    )}
       </div>
     )}
   </section>
-)}
+)
 
 <style>
 .image-gallery {
