@@ -1,7 +1,7 @@
 ---
 import { getAllActivations, getActivation } from "../../lib/sanity"
 import Layout from "../../layouts/Layout.astro"
-import PageHeader from "../../components/sections/PageHeader.astro"
+import ContentHeader from "../../components/sections/ContentHeader.astro"
 import ActivationResearch from "../../components/sections/ActivationResearch.astro"
 import ActivationDocumentation from "../../components/sections/ActivationDocumentation.astro"
 import ActivationOutcomes from "../../components/sections/ActivationOutcomes.astro"
@@ -19,7 +19,7 @@ console.log("documentation images:", JSON.stringify(activation.documentation?.im
 ---
 
 <Layout>
-  <PageHeader
+  <ContentHeader
     title={activation.title}
     description={activation.summary}
     image={activation.coverImage}
