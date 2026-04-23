@@ -6,6 +6,7 @@ import ActivationResearch from "../../components/sections/ActivationResearch.ast
 import ActivationDocumentation from "../../components/sections/ActivationDocumentation.astro"
 import ActivationOutcomes from "../../components/sections/ActivationOutcomes.astro"
 
+
 export async function getStaticPaths() {
   const activations = await getAllActivations()
   return activations.map(a => ({

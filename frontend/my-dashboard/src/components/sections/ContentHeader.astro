@@ -1,5 +1,7 @@
 ---
 import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
+import CategoryTag from '../ui/CategoryTag.astro'
+import TagPill from '../ui/TagPill.astro'
 
 interface Props {
   title: string
@@ -22,20 +24,14 @@ const { title, description, image, category, tags, body } = Astro.props
   <p>{description}</p>
  </div>
 
-<div class="tags_cat__box">{category && <span class="category">{category.title}</span>}
-
-{tags && tags.length > 0 && (
-    <div class="tags">
-      {tags.map(tag => (
-        <span class="tag">{tag.title}</span>
-      ))}
-    </div>
+<div class="tags_cat__box">
+  {category && <CategoryTag label={category.title} />}
+  {tags && tags.length > 0 && (
+    tags.map(tag => <TagPill label={tag.title} />)
   )}
 </div>
-</section>
 
-<section class="poster_section">
- 
+</section>
 
 <section class="section">
   <div class="portable-text-simple">
@@ -45,7 +41,6 @@ const { title, description, image, category, tags, body } = Astro.props
 
 
 <style>
-
 .section-header {
   display: flex;
   flex-direction: row;
