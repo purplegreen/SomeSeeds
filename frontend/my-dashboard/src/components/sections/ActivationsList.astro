@@ -1,4 +1,6 @@
 ---
+import ActivationCard from '../ui/ActivationCard.astro'
+
 interface Props {
   activations: {
     title: string
@@ -9,7 +11,9 @@ interface Props {
     endDate?: string
     location?: { venue?: string; city?: string; country?: string }
     coverImage?: string
-    hostingInstitutions?: { name: string; logo?: string; url?: string }[]
+    partnerInstitutions?: { name: string; logo?: string; url?: string }[]
+    categories?: { title: string }[]
+    tags?: { title: string }[]
   }[]
 }
 
@@ -22,129 +26,26 @@ const { activations } = Astro.props
   </section>
 ) : (
   <section class="section">
-    <div class="activations-list">
+    <div class="activations-grid">
       {activations.map(activation => (
-        <a href={`/activations/${activation.slug}`} class="activation-card">
-
-          {activation.coverImage && (
-            <div class="activation-card__image">
-              <img src={activation.coverImage} alt={activation.title} />
-            </div>
-          )}
-
-          <div class="activation-card__body">
-
-            <div class="activation-card__meta">
-              {activation.type && (
-                <span class="tag">{activation.type}</span>
-              )}
-              {activation.status && (
-                <span class={`tag tag--${activation.status}`}>
-                  {activation.status}
-                </span>
-              )}
-            </div>
-
-            <h3 class="activation-card__title heading-s">
-              {activation.title}
-            </h3>
-
-            {activation.startDate && (
-              <p class="activation-card__date">
-                {new Date(activation.startDate).toLocaleDateString("en-GB", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-                {activation.endDate && (
-                  ` — ${new Date(activation.endDate).toLocaleDateString("en-GB", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}`
-                )}
-              </p>
-            )}
-
-            {activation.location?.city && (
-              <p class="activation-card__location">
-                {[
-                  activation.location.venue,
-                  activation.location.city,
-                  activation.location.country
-                ].filter(Boolean).join(", ")}
-              </p>
-            )}
-
-            {activation.hostingInstitutions && activation.hostingInstitutions.length > 0 && (
-              <div class="activation-card__institutions">
-                {activation.hostingInstitutions.map(i => (
-                  <span class="institution-name">{i.name}</span>
-                ))}
-              </div>
-            )}
-
-          </div>
-        </a>
+        <ActivationCard {...activation} />
       ))}
     </div>
   </section>
 )}
 
 <style>
-.activations-list {
+.activations-grid {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-8);
+    border: 2px solid red;
 }
 
-.activation-card {
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
+.activations-grid > * {
   flex: 1 1 calc(50% - var(--space-8));
   min-width: 280px;
-  gap: 1rem;
-  transition: opacity 0.15s ease;
-}
 
-.activation-card:hover {
-  opacity: 0.7;
-}
-
-.activation-card__image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.activation-card__meta {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.activation-card__title {
-  margin: 0.5rem 0;
-}
-
-.activation-card__date,
-.activation-card__location {
-  font-size: var(--text-s);
-  margin: 0;
-  opacity: 0.6;
-}
-
-.activation-card__institutions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
-
-.institution-name {
-  font-size: var(--text-s);
-  opacity: 0.6;
 }
 
 .no-content {
@@ -153,7 +54,7 @@ const { activations } = Astro.props
 }
 
 @media (max-width: 768px) {
-  .activation-card {
+  .activations-grid > * {
     flex: 1 1 100%;
   }
 }
