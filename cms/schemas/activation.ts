@@ -80,15 +80,25 @@ export const activation = defineType({
     // ── When & Where ──────────────────────────────────────────
     defineField({
       name: 'startDate',
-      title: 'Start Date',
-      type: 'date',
+      title: 'Start Date & Time',
+      type: 'datetime',
+      options: {
+        dateFormat: 'DD/MM/YYYY',
+        timeFormat: 'HH:mm',
+        timeStep: 15,
+      },
     }),
 
     defineField({
       name: 'endDate',
-      title: 'End Date',
-      description: 'Only needed for multi-day activations.',
-      type: 'date',
+      title: 'End Date & Time',
+      description: 'Optional — for multi-day events or to specify end time.',
+      type: 'datetime',
+      options: {
+        dateFormat: 'DD/MM/YYYY',
+        timeFormat: 'HH:mm',
+        timeStep: 15,
+      },
     }),
 
     defineField({
@@ -102,17 +112,18 @@ export const activation = defineType({
       ],
     }),
 
-    // ── Hosting Institutions ──────────────────────────────────
+    // ── Partner Institutions ───────────────────────────────────
     defineField({
-      name: 'hostingInstitutions',
-      title: 'Hosting Institutions',
+      name: 'partnerInstitutions',
+      title: 'Partner Institutions',
+      description: 'Organisations, collectives, or institutions collaborating on this activation.',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
             defineField({name: 'name', title: 'Name', type: 'string'}),
-            defineField({name: 'logo', title: 'Logo', type: 'image'}),
+            defineField({name: 'logo', title: 'Logo', type: 'image', options: {hotspot: true}}),
             defineField({name: 'url', title: 'URL', type: 'url'}),
           ],
           preview: {

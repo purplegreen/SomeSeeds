@@ -59,7 +59,7 @@ export async function getAllTags() {
 // ── Explorations ──
 export async function getExplorations() {
   return sanityClient.fetch(
-    `*[_type == "exploration"] | order(title asc){
+    `*[_type == "exploration" && defined(slug.current)] | order(title asc){
       title,
       "slug": slug.current,
       summary,
@@ -70,7 +70,14 @@ export async function getExplorations() {
         title,
         "slug": slug.current,
         status,
-        startDate
+        startDate,
+        type,
+        location,
+        "partnerInstitutions": partnerInstitutions[]{
+          name,
+          "logo": logo.asset->url,
+          url
+        }
       }
     }`,
   );
@@ -113,7 +120,11 @@ export async function getActivationsByExploration(explorationId: string) {
       endDate,
       location,
       "coverImage": coverImage.asset->url,
-      hostingInstitutions
+        "partnerInstitutions": partnerInstitutions[]{
+        name,
+        "logo": logo.asset->url,
+        url
+  }
     }`,
     { explorationId },
   );
@@ -129,7 +140,11 @@ export async function getActivation(slug: string) {
       startDate,
       endDate,
       location,
-      hostingInstitutions,
+       "partnerInstitutions": partnerInstitutions[]{
+        name,
+        "logo": logo.asset->url,
+        url
+      },
       "coverImage": coverImage.asset->url,
       research{
         text,
