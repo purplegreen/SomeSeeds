@@ -39,20 +39,13 @@
                 class="dropdown__activation-item"
                 @click="close"
               >
+                <span class="activation__title_tag"> activations </span>
                 <span class="dropdown__activation-title">{{
                   activation.title
                 }}</span>
-                <span
-                  v-if="activation.status"
-                  class="dropdown__activation-status"
-                  :class="`status--${activation.status}`"
-                >
-                  {{ activation.status }}
-                </span>
               </a>
             </li>
           </ul>
-          <p v-else class="dropdown__no-activations"></p>
         </div>
       </div>
     </div>
@@ -85,7 +78,9 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 
 <style scoped>
 .dropdown {
-  position: static;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
 }
 
 .dropdown__trigger {
@@ -107,13 +102,11 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
-  background: var(--color-bg, #ffffff);
-  border-bottom: 1px solid var(--color-neutral-200, #e5e7eb);
+  left: -100%;
+  background: none;
   padding: var(--space-16);
-  width: 100vw;
+  width: auto;
   z-index: 100;
-  display: none;
   flex-direction: row;
   align-items: flex-end;
 }
@@ -127,9 +120,10 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 .dropdown__items {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   width: fit-content;
-  gap: var(--space-8);
+  padding-top: 0.7rem;
+  gap: var(--space-0);
   justify-content: flex-end;
   margin-left: auto;
 }
@@ -138,7 +132,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-1);
   min-width: 20vw;
 }
 
@@ -158,6 +152,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 
 .dropdown__activations {
   font-size: var(--text-sm);
+  font-weight: 600;
   list-style: none;
   padding: 0 0 0 0.75rem;
   display: flex;
@@ -169,9 +164,30 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   line-height: var(--line-height-flat);
   text-decoration: none;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-0);
+}
+
+.activation__title_tag {
+  color: var(--color-primary-contra);
+  padding-right: 0.45rem;
+}
+
+.dropdown__exploration-title,
+.dropdown__activation-item {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-neutral-200);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  min-width: 32vw;
+}
+
+.dropdown__exploration-title:hover,
+.dropdown__activation-item:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .dropdown__activation-status {
