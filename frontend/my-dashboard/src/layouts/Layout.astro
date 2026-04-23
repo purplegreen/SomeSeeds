@@ -20,10 +20,12 @@ console.log("explorations:", JSON.stringify(explorations, null, 2))
 		<title>SomeSeeds</title>
 	</head>
 	<body>
-		 <Navbar links={nav?.links ?? []} 
+		 <Navbar 
+		 links={nav?.links ?? []} 
 		 logo={nav?.logo ?? null}
-		currentPath={currentPath} 
-		explorations={explorations ?? []}
+		 currentPath={currentPath} 
+		 explorations={explorations ?? []}
+		 ctaLink={nav?.ctaLink ?? null}
 		/>
 		<slot />
 		<Footer 

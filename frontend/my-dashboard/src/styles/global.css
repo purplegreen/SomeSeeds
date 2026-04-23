@@ -28,6 +28,8 @@
   --color-neutral-700: #525252;
   --color-neutral-800: #383838;
   --color-neutral-900: #1a1a1a;
+  --color-black: #000000;
+  --color-white: #ffffff;
 
   --color-success: #40c057;
   --color-warning: #fab005;
@@ -192,13 +194,13 @@ em {
 }
 
 /* Links */
-a {
+a:not(.btn) {
   color: var(--color-text-primary);
   text-decoration: underline;
   text-underline-offset: var(--space-1);
 }
 
-a:hover {
+a:not(.btn):hover {
   color: var(--color-text-muted);
 }
 

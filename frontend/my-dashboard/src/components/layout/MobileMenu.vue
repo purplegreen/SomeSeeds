@@ -18,14 +18,6 @@
         </li>
         <!-- Explorations submenu -->
         <li v-if="explorations.length > 0">
-          <button class="mobile-submenu__trigger" @click="toggleExplorations">
-            Explorations
-            <span
-              class="mobile-submenu__arrow"
-              :class="{ open: explorationsOpen }"
-              >↓</span
-            >
-          </button>
           <ul class="mobile-submenu" :class="{ open: explorationsOpen }">
             <li v-for="exploration in explorations" :key="exploration.slug">
               <a :href="`/explorations/${exploration.slug}`" @click="close">

@@ -1,14 +1,16 @@
 ---
 import MobileMenu from "./MobileMenu.vue"
 import ExplorationDropdown from "./ExplorationDropdown.vue"
+import Button from '../ui/Button.vue'
 
 interface Props {
   links: { label: string; href: string }[]
   logo?: string;
   currentPath: string;
   explorations?: { title: string; slug: string }[]
+  ctaLink?: { label: string; href: string } | null
 }
-const { links, logo, currentPath: rawPath, explorations = []  } = Astro.props;
+const { links, logo, currentPath: rawPath, explorations = [], ctaLink } = Astro.props;
 const currentPath = rawPath.replace(/\/$/, "");
 
 ---
@@ -38,6 +40,11 @@ const currentPath = rawPath.replace(/\/$/, "");
   {link.label}
 </a>
   ))}
+    {ctaLink && (
+    <Button href={ctaLink.href} variant="secondary" size="sm" client:load>
+      {ctaLink.label}
+    </Button>
+  )}
 </nav>
 
 <!-- Mobile menu -->
@@ -78,7 +85,7 @@ const currentPath = rawPath.replace(/\/$/, "");
   height: 100%;
 }
 
-  .navbar__links a {
+  .navbar__links a:not(.btn) {
     font-size: var(--text-s);
     font-weight: 600;
     text-decoration: none;
@@ -86,7 +93,7 @@ const currentPath = rawPath.replace(/\/$/, "");
     align-items: center;
   }
 
-  .navbar__links a:hover { 
+  .navbar__links a:not(.btn):hover { 
     text-decoration: underline;
     text-underline-offset: var(--space-2);
     text-decoration-thickness: 3px;

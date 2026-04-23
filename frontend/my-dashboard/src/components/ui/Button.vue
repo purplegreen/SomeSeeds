@@ -46,9 +46,8 @@ defineEmits(["click"]);
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-base);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.01em;
-  border-radius: var(--radius-md);
+  font-weight: 600;
+  border-radius: var(--radius-full);
   cursor: pointer;
   text-decoration: none;
   transition:
@@ -58,7 +57,7 @@ defineEmits(["click"]);
     box-shadow var(--transition-fast),
     transform var(--transition-fast);
   white-space: nowrap;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
 }
 
 .btn:active:not(.btn--disabled) {
@@ -67,12 +66,12 @@ defineEmits(["click"]);
 
 /* ── Sizes ── */
 .btn--sm {
-  font-size: var(--text-xs);
-  padding: 0.4rem 0.875rem;
+  font-size: var(--text-s);
+  padding: 0.8rem 1.25rem;
 }
 
 .btn--md {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   padding: 0.6rem 1.25rem;
 }
 
@@ -97,14 +96,15 @@ defineEmits(["click"]);
 /* ── Secondary ── */
 .btn--secondary {
   background-color: transparent;
-  color: var(--color-accent);
-  border-color: var(--color-accent);
+  color: var(--color-black);
+  border-color: var(--color-black);
 }
 
 .btn--secondary:hover:not(.btn--disabled) {
-  background-color: var(--color-accent);
-  color: #ffffff;
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+  text-decoration: none;
 }
 
 /* ── Disabled ── */
