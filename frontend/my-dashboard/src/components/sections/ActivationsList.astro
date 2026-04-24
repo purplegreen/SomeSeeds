@@ -1,20 +1,9 @@
 ---
 import ActivationCard from '../ui/ActivationCard.astro'
+import CardsSlider from '../ui/CardsSlider.vue'
 
 interface Props {
-  activations: {
-    title: string
-    slug: string
-    type?: string
-    status?: string
-    startDate?: string
-    endDate?: string
-    location?: { venue?: string; city?: string; country?: string }
-    coverImage?: string
-    partnerInstitutions?: { name: string; logo?: string; url?: string }[]
-    categories?: { title: string }[]
-    tags?: { title: string }[]
-  }[]
+  activations: any[]
 }
 
 const { activations } = Astro.props
@@ -24,34 +13,19 @@ const { activations } = Astro.props
   <section class="section">
     <p class="no-content">No activations yet.</p>
   </section>
+) : activations.length === 1 ? (
+  <section class="section">
+    <ActivationCard {...activations[0]} />
+  </section>
 ) : (
   <section class="section">
-    <div class="activations-grid">
-      {activations.map(activation => (
-        <ActivationCard {...activation} />
-      ))}
-    </div>
+    <CardsSlider items={activations} gap={12} client:load />
   </section>
 )}
 
 <style>
-.activations-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  border: 2px solid red;
-}
-
-
-
 .no-content {
   opacity: 0.4;
   font-size: var(--text-s);
-}
-
-@media (max-width: 768px) {
-  .activations-grid > * {
-    flex: 1 1 100%;
-  }
 }
 </style>
