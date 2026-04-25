@@ -15,9 +15,10 @@ interface Props {
   endDate?: string
   endTime?: string
   location?: { venue?: string; city?: string; country?: string }
+  partnerInstitutions?: { name?: string; logo?: string; url?: string }[]
 }
 
-const { title, description, image, category, tags, body, startDate, startTime, endDate, endTime, location } = Astro.props
+const { title, description, image, category, tags, body, startDate, startTime, endDate, endTime, location, partnerInstitutions } = Astro.props
 
 // ── Date formatting ───────────────────────────────────────
 const formatDate = (dateStr: string) => {
@@ -65,6 +66,17 @@ const locationDisplay = location
   </div>
 )}
 
+{partnerInstitutions && partnerInstitutions.length > 0 && (
+  <div class="partner-institutions go_side">
+    {partnerInstitutions.map(p => (
+      <div class="partner">
+        {p.logo && <img src={p.logo} alt={p.name ?? ''} class="partner__logo" />}
+        {p.name && <span class="partner__name">{p.name}</span>}
+      </div>
+    ))}
+  </div>
+)}
+
 {description && (
   <div class="portable-text-simple go_side">
     <p>{description}</p>
@@ -93,6 +105,30 @@ const locationDisplay = location
   width: 100%;
   padding: var(--space-8);
   gap: var(--space-8);
+}
+
+.partner-institutions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.partner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.partner__logo {
+  height: 2rem;
+  width: auto;
+}
+
+.partner__name {
+  font-size: var(--text-s);
+  opacity: 0.7;
 }
 
 .page_title {
