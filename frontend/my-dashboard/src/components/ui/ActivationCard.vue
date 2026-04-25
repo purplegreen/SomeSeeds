@@ -96,7 +96,7 @@ const locationDisplay = computed(() => {
   gap: 0;
   overflow: hidden;
   min-width: 0;
-  max-width: 32vw;
+  max-width: 48vw;
   height: 80vh;
   text-decoration: none;
   border-radius: var(--radius-s);
@@ -152,5 +152,13 @@ const locationDisplay = computed(() => {
   font-size: var(--text-s);
   color: var(--color-primary);
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  a.activation-card {
+    width: 100%;
+  }
+  @media (max-width: 480px) {
+  }
 }
 </style>

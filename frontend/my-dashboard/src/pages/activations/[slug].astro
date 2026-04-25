@@ -28,7 +28,8 @@ console.log("documentation images:", JSON.stringify(activation.documentation?.im
     category={activation.categories?.[0]}
   />
 
-  <ActivationResearch research={activation.research} />
+  
   <ActivationDocumentation documentation={activation.documentation} />
+  <ActivationResearch research={activation.research} />
   <ActivationOutcomes outcomes={activation.outcomes} />
 </Layout>

@@ -216,4 +216,10 @@ const onTouchEnd = (e) => {
 .cards-slider__dot.active {
   opacity: 1;
 }
+
+@media (max-width: 768px) {
+  .cards-slider__slide {
+    width: 85vw;
+  }
+}
 </style>
