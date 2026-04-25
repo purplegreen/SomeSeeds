@@ -284,6 +284,7 @@ svg {
 }
 
 .section {
+  border: 1px solid red;
   padding: var(--space-16) var(--space-2);
 }
 
@@ -298,6 +299,22 @@ svg {
   padding-block: var(--space-24);
 }
 
+
+/* padding top */
+.pt-s: {
+  padding-top: var(--space-4)}; /* 1 rem */
+.pt-m  {
+  padding-top: var(--space-8)}; /* 2 rem */
+.pt-l {
+  padding-top: var(--space-16)}; /* 4 rem */
+
+/* padding bottom */
+.pb-s:{
+padding-bottom: var(--space-4)}; /* 1 rem */
+.pb-m{
+padding-bottom: var(--space-8)}; /* 2 rem */
+.pb-l: {
+padding-bottom: var(--space-16)}; /* 4 rem */
 
 /* ============================================
    ACCESSIBILITY

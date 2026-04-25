@@ -116,8 +116,10 @@ export async function getActivationsByExploration(explorationId: string) {
       "slug": slug.current,
       type,
       status,
-      startDate,
-      endDate,
+     startDate,
+startTime,
+endDate,
+endTime,
       location,
       "coverImage": coverImage.asset->url,
         "partnerInstitutions": partnerInstitutions[]{
@@ -133,20 +135,24 @@ export async function getActivationsByExploration(explorationId: string) {
 export async function getActivation(slug: string) {
   return sanityClient.fetch(
     `*[_type == "activation" && slug.current == $slug][0]{
+      _id,
       title,
       "slug": slug.current,
       type,
       status,
       startDate,
+      startTime,
       endDate,
+      endTime,
       location,
-       "partnerInstitutions": partnerInstitutions[]{
+      "partnerInstitutions": partnerInstitutions[]{
         name,
         "logo": logo.asset->url,
         url
       },
       "coverImage": coverImage.asset->url,
       research{
+      "posterImage": posterImage.asset->url,
         text,
         "images": images[]{
           "url": asset->url,
@@ -155,17 +161,26 @@ export async function getActivation(slug: string) {
         links
       },
       documentation{
+      "posterImage": posterImage.asset->url,
         text,
         "images": images[]{
           "url": asset->url,
           caption
         }
       },
-      outcomes,
+      outcomes[]{
+        label,
+        url,
+        "internalRef": internalRef->{
+          _type,
+          title,
+          "slug": slug.current
+        }
+      },
       "explorations": explorations[]->{ title, "slug": slug.current },
       "categories": categories[]->{ title, slug },
       "tags": tags[]->{ title, slug }
     }`,
     { slug },
-  );
+  )
 }

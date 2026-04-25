@@ -11,7 +11,7 @@ const { outcomes } = Astro.props
 ---
 
 {outcomes && outcomes.length > 0 && (
-  <section class="section">
+  <section class="section go_side">
     <h2 class="heading-m">Threads</h2>
     <ul class="outcomes-list">
       {outcomes.map(outcome => (
@@ -31,7 +31,7 @@ const { outcomes } = Astro.props
           )}
           {outcome.internalRef && (
             
-            <a  href={`/${outcome.internalRef._type}s/${outcome.internalRef.slug.current}`}
+          <a  href={`/${outcome.internalRef._type}s/${outcome.internalRef.slug}`}
               class="outcome__link underline-hover"
             >
               {outcome.internalRef.title}

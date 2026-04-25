@@ -79,27 +79,36 @@ export const activation = defineType({
 
     // ── When & Where ──────────────────────────────────────────
     defineField({
-      name: 'startDate',
-      title: 'Start Date & Time',
-      type: 'datetime',
-      options: {
-        dateFormat: 'DD/MM/YYYY',
-        timeFormat: 'HH:mm',
-        timeStep: 15,
-      },
-    }),
-
-    defineField({
-      name: 'endDate',
-      title: 'End Date & Time',
-      description: 'Optional — for multi-day events or to specify end time.',
-      type: 'datetime',
-      options: {
-        dateFormat: 'DD/MM/YYYY',
-        timeFormat: 'HH:mm',
-        timeStep: 15,
-      },
-    }),
+  name: 'startDate',
+  title: 'Start Date',
+  type: 'date',
+  options: {
+    dateFormat: 'DD/MM/YYYY',
+  },
+}),
+defineField({
+  name: 'startTime',
+  title: 'Start Time',
+  description: 'Optional',
+  type: 'string',
+  placeholder: '14:00',
+}),
+defineField({
+  name: 'endTime',
+  title: 'End Time',
+  description: 'Optional',
+  type: 'string',
+  placeholder: '18:00',
+}),
+defineField({
+  name: 'endDate',
+  title: 'End Date',
+  description: 'Optional — only for multi-day events',
+  type: 'date',
+  options: {
+    dateFormat: 'DD/MM/YYYY',
+  },
+}),
 
     defineField({
       name: 'location',
@@ -141,14 +150,55 @@ export const activation = defineType({
       options: {hotspot: true},
     }),
 
-    // ── BEFORE — Research ─────────────────────────────────────
-    // Material gathered and prepared in order to run the activation.
+    
+
+    // ── DURING — Documentation ────────────────────────────────
+    // The record — what happened during the activation.
+  defineField({
+  name: 'documentation',
+  title: 'Documentation',
+  type: 'object',
+  fields: [
     defineField({
-      name: 'research',
-      title: 'Research',
-      description: 'The input — material that informed and prepared this activation.',
-      type: 'object',
-      fields: [
+      name: 'posterImage',
+      title: 'Poster Image',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+        defineField({
+          name: 'text',
+          title: 'Text',
+          type: 'array',
+          of: [{type: 'block'}],
+        }),
+        defineField({
+          name: 'images',
+          title: 'Images',
+          type: 'array',
+          of: [
+            {
+              type: 'image',
+              options: {hotspot: true},
+              fields: [defineField({name: 'caption', title: 'Caption', type: 'string'})],
+            },
+          ],
+        }),
+      ],
+    }),
+
+// ── BEFORE — Research ─────────────────────────────────────
+    // Material gathered and prepared in order to run the activation.
+   defineField({
+  name: 'research',
+  title: 'Research',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'posterImage',
+      title: 'Poster Image',
+      type: 'image',
+      options: { hotspot: true },
+    }),
         defineField({
           name: 'text',
           title: 'Text',
@@ -181,35 +231,6 @@ export const activation = defineType({
               preview: {
                 select: {title: 'label', subtitle: 'url'},
               },
-            },
-          ],
-        }),
-      ],
-    }),
-
-    // ── DURING — Documentation ────────────────────────────────
-    // The record — what happened during the activation.
-    defineField({
-      name: 'documentation',
-      title: 'Documentation',
-      description: 'The record — what happened during this activation.',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'text',
-          title: 'Text',
-          type: 'array',
-          of: [{type: 'block'}],
-        }),
-        defineField({
-          name: 'images',
-          title: 'Images',
-          type: 'array',
-          of: [
-            {
-              type: 'image',
-              options: {hotspot: true},
-              fields: [defineField({name: 'caption', title: 'Caption', type: 'string'})],
             },
           ],
         }),

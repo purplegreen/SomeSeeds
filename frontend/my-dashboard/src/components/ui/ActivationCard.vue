@@ -28,58 +28,42 @@ const props = defineProps({
   slug: String,
   type: String,
   startDate: String,
+  startTime: String,
   endDate: String,
+  endTime: String,
   location: Object,
   coverImage: String,
 });
 
-const formatDate = (dateStr) =>
-  new Date(dateStr).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-
-const formatTime = (dateStr) =>
-  new Date(dateStr).toLocaleTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-const hasTime = (dateStr) => {
-  const d = new Date(dateStr);
-  return d.getHours() !== 0 || d.getMinutes() !== 0;
-};
+const formatDate = (dateStr) => {
+  if (!dateStr) return ''
+  const d = new Date(dateStr)
+  return d.toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric',
+    timeZone: 'UTC'
+  })
+}
 
 const dateDisplay = computed(() => {
-  const { startDate, endDate } = props;
-  if (!startDate) return "";
+  if (!props.startDate) return ''
 
-  const isSameDay =
-    endDate &&
-    new Date(startDate).toDateString() === new Date(endDate).toDateString();
-  const isMultiDay = endDate && !isSameDay;
+  const isSameDay = props.endDate &&
+    new Date(props.startDate).toDateString() === new Date(props.endDate).toDateString()
+  const isMultiDay = props.endDate && !isSameDay
 
   if (isMultiDay) {
-    const startDay = new Date(startDate).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "short",
-    });
-    const endFull = new Date(endDate).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-    return `${startDay}–${endFull}`;
+    const startDay = new Date(props.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
+    const endFull = new Date(props.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+    return `${startDay}–${endFull}`
   }
 
-  let display = formatDate(startDate);
-  if (hasTime(startDate)) {
-    display += ` · ${formatTime(startDate)}`;
-    if (endDate && hasTime(endDate)) display += `–${formatTime(endDate)}`;
+  let display = formatDate(props.startDate)
+  if (props.startTime) {
+    display += ` · ${props.startTime}`
+    if (props.endTime) display += `–${props.endTime}`
   }
-  return display;
-});
+  return display
+})
 
 const locationDisplay = computed(() => {
   if (!props.location) return null;

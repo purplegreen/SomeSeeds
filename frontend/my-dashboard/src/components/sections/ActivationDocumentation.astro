@@ -4,13 +4,14 @@ import ImageSlider from '../ui/ImageSlider.vue'
 
 interface Props {
   documentation?: {
+    posterImage?: image 
     text?: any[]
     images?: { url: string; caption?: string }[]
   }
 }
 
 const { documentation } = Astro.props
-
+const posterImage = documentation?.posterImage
 
 const sliderImages = documentation?.images?.map(img => ({
   url: img.url,
@@ -19,15 +20,28 @@ const sliderImages = documentation?.images?.map(img => ({
 ---
 
 {documentation && (documentation.text || documentation.images?.length) && (
-  <section class="section">
-    <h2 class="heading-m">Documentation</h2>
 
+
+  <section class="section">
+    <h2 class="heading-m go_side">Documentation</h2>
+  </section>
+  <section class="section_poster">
+     {posterImage && (
+      <div class="poster">
+        <img src={posterImage} alt="" />
+      </div>
+    )}
+  </section>
+
+ <section class="section">
     {documentation.text && (
       <div class="portable-text-simple go_side">
         <PortableTextRenderer body={documentation.text} client:load />
       </div>
     )}
 
+   </section>
+ <section class="section">
  {sliderImages.length > 0 && (
       <ImageSlider images={sliderImages} client:load />
     )}
@@ -36,28 +50,4 @@ const sliderImages = documentation?.images?.map(img => ({
 )}
 
 <style>
-.image-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-top: var(--space-8);
-}
-
-.image-gallery figure {
-  margin: 0;
-  flex: 1 1 calc(50% - var(--space-4));
-  min-width: 240px;
-}
-
-.image-gallery img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.image-gallery figcaption {
-  font-size: var(--text-s);
-  opacity: 0.6;
-  margin-top: var(--space-2);
-}
 </style>
