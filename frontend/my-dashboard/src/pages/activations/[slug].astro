@@ -20,13 +20,17 @@ console.log("documentation images:", JSON.stringify(activation.documentation?.im
 ---
 
 <Layout>
-  <ContentHeader
-    title={activation.title}
-    description={activation.summary}
-    image={activation.coverImage}
-    tags={activation.tags}
-    category={activation.categories?.[0]}
-  />
+<ContentHeader
+  title={activation.title}
+  image={activation.coverImage}
+  tags={activation.tags}
+  category={activation.categories?.[0]}
+  startDate={activation.startDate}
+  startTime={activation.startTime}
+  endDate={activation.endDate}
+  endTime={activation.endTime}
+  location={activation.location}
+/>
 
   
   <ActivationDocumentation documentation={activation.documentation} />
