@@ -78,7 +78,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 
 <style scoped>
 .dropdown {
-  position: relative;
+  position: static;
   display: flex;
   align-items: flex-end;
 }
@@ -100,13 +100,13 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 .dropdown__menu {
   display: none;
   position: absolute;
-  top: 100%;
-  left: -100%;
+  top: 0px;
+  left: 0px;
+  padding: 4rem 1rem;
   background: none;
-  padding: var(--space-16);
   width: auto;
   z-index: 100;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-end;
 }
 
@@ -117,22 +117,18 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 }
 
 .dropdown__items {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: fit-content;
+  display: grid;
+  width: 98vw;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   padding-top: 0.7rem;
-  gap: var(--space-0);
-  justify-content: flex-end;
-  margin-left: auto;
+  background-color: var(--color-white);
 }
 
 .dropdown__exploration {
   display: flex;
-  flex: 1;
   flex-direction: column;
   gap: var(--space-1);
-  min-width: 20vw;
+  padding: 0.2rem;
 }
 
 .navbar__links a.navbar__link--active {
@@ -155,11 +151,11 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   list-style: none;
   padding: 0 0 0 0.75rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  gap: auto;
 }
 
 .dropdown__activation-item {
+  display: inline-flex;
   line-height: var(--line-height-flat);
   text-decoration: none;
   display: flex;
@@ -176,10 +172,8 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 .dropdown__exploration-title,
 .dropdown__activation-item {
   background-color: var(--color-white);
-  border: 2px solid var(--color-neutral-200);
   border-radius: var(--radius-xl);
-  padding: 1.5rem;
-  min-width: 32vw;
+  padding: 0.5rem;
 }
 
 .dropdown__exploration-title:hover,
