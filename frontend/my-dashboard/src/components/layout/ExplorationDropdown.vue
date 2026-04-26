@@ -39,7 +39,9 @@
                 class="dropdown__activation-item"
                 @click="close"
               >
-                <span class="activation__title_tag"> activations </span>
+                <span class="activation_dot"
+                  ><img src="/activation_dot.svg" alt="description"
+                /></span>
                 <span class="dropdown__activation-title">{{
                   activation.title
                 }}</span>
@@ -146,34 +148,36 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 }
 
 .dropdown__activations {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+  color: var(--color-neutral-700);
   font-weight: 600;
   list-style: none;
-  padding: 0 0 0 0.75rem;
+  padding: 0.25rem;
   display: flex;
-  gap: auto;
+  gap: 0px;
 }
 
 .dropdown__activation-item {
-  display: inline-flex;
+  display: flex;
   line-height: var(--line-height-flat);
   text-decoration: none;
   display: flex;
   align-items: start;
-  justify-content: space-between;
-  gap: var(--space-0);
+  justify-content: start;
+  gap: 0px;
+  border: 1px solid red;
 }
 
-.activation__title_tag {
-  color: var(--color-primary-contra);
-  padding-right: 0.45rem;
+.activation_dot {
+  width: 1rem;
+  height: auto;
 }
 
 .dropdown__exploration-title,
 .dropdown__activation-item {
   background-color: var(--color-white);
   border-radius: var(--radius-xl);
-  padding: 0.5rem;
+  padding: 0.24rem;
 }
 
 .dropdown__exploration-title:hover,
