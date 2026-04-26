@@ -84,6 +84,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 }
 
 .dropdown__trigger {
+  display: flex;
   background: none;
   border: none;
   cursor: pointer;
@@ -92,10 +93,8 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   font-weight: 600;
   font-family: inherit;
   height: 4rem;
-  display: flex;
-  align-items: flex-end;
+  align-items: center;
   z-index: 50;
-  padding-bottom: 1rem;
 }
 
 .dropdown__menu {
