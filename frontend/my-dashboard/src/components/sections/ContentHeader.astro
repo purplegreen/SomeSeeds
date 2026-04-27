@@ -64,8 +64,16 @@ const locationDisplay = location
 <div class="container">
 {(dateDisplay || locationDisplay) && (
   <div class="date_location__box">
-    {dateDisplay && <span class="date">{dateDisplay}</span>}
-    {locationDisplay && <span class="location">{locationDisplay}</span>}
+    {dateDisplay && <h5><span class="date">{dateDisplay}</span></h5>}
+    {locationDisplay && <h3><span class="location">{locationDisplay}</span></h3>}
+  </div>
+)}
+
+
+
+{credits && (
+  <div class="portable-text-simple">
+    <PortableTextRenderer body={credits} client:load />
   </div>
 )}
 
@@ -74,15 +82,8 @@ const locationDisplay = location
     {partnerInstitutions.map(p => (
       <div class="item_partner__box">
         {p.logo && <img src={p.logo} alt={p.name ?? ''} class="partner__logo" />}
-        {p.name && <span class="partner__name">{p.name}</span>}
       </div>
     ))}
-  </div>
-)}
-
-{credits && (
-  <div class="portable-text-simple">
-    <PortableTextRenderer body={credits} client:load />
   </div>
 )}
 
@@ -99,25 +100,25 @@ const locationDisplay = location
 <style>
 .header_grid{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 20vw 20vw 1fr 1fr;
   grid-template-rows: 1fr auto;
   gap: 1rem;
   grid-template-areas:
   "box-1 box-1 box-3 box-3"
   "box-1 box-1 box-5 box-5";
-  border: 1px solid red;
+  padding: var(--space-16) var(--space-4);
 }
 .image_box {
+  display: flex;
   flex: 1;
   min-width: 0;
-  display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   grid-area: box-1;
 }
 .image_box img {
-  max-height: 85vh;
-  height: auto;
+  width: auto;
+  height: 98vh;
   width: auto;
   display: block;
 }
@@ -125,22 +126,33 @@ const locationDisplay = location
  grid-area: box-3;
 }
 .container {
-  border: 1px solid red;
   grid-area: box-5;
 }
-
-.date_location__box{border: 1px solid blue;}
-.partners_box{ border: 1px solid green;}
-.item_partner__box{ border: 1px solid violet;}
-.description_box{ background-color: aqua; border: 1px solid rgb(255, 72, 0);}
-.tags_cat__box{ border: 1px solid goldenrod;}
-.partner__logo {
-  height: 2rem; 
-  width: auto;
+.date_location__box{
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4) 0;
 }
-.partner__name {
-  font-size: var(--text-s);
-  opacity: 0.7;
+.partners_box{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8) 0;
+}
+
+.partner__logo {
+ width: auto;
+ height: 4rem;
+}
+
+.tags_cat__box{  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: start;
+  gap: var(--space-4);
+  padding: var(--space-8) 0; 
 }
 
 
