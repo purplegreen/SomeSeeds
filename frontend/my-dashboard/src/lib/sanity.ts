@@ -145,6 +145,7 @@ export async function getActivation(slug: string) {
       endDate,
       endTime,
       location,
+      credits,
       "partnerInstitutions": partnerInstitutions[]{
         name,
         "logo": logo.asset->url,
@@ -182,5 +183,5 @@ export async function getActivation(slug: string) {
       "tags": tags[]->{ title, slug }
     }`,
     { slug },
-  )
+  );
 }

@@ -1,7 +1,7 @@
 ---
 import { getExplorations, getExploration, getActivationsByExploration } from "../../lib/sanity"
 import Layout from "../../layouts/Layout.astro"
-import ContentHeader from "../../components/sections/ContentHeader.astro"
+import ExplorationHeader from "../../components/sections/ExplorationHeader.astro"
 import ActivationsList from "../../components/sections/ActivationsList.astro"
 import PortableTextRenderer from "../../components/ui/PortableTextRenderer.vue"
 
@@ -21,7 +21,7 @@ console.log("first activation:", JSON.stringify(activations[0], null, 2))
 ---
 
 <Layout>
-  <ContentHeader
+  <ExplorationHeader
     title={exploration.title}
     description={exploration.summary}
     image={exploration.coverImage}

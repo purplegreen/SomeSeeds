@@ -9,7 +9,7 @@ interface Props {
   image?: string 
   category?: { title: string }
   tags?: { title: string }[]
-  credits?: any[]
+  body?: any[]
   startDate?: string
   startTime?: string
   endDate?: string
@@ -18,7 +18,7 @@ interface Props {
   partnerInstitutions?: { name?: string; logo?: string; url?: string }[]
 }
 
-const { title, image, category, tags, credits, startDate, startTime, endDate, endTime, location, partnerInstitutions } = Astro.props
+const { title, description, image, category, tags, body, startDate, startTime, endDate, endTime, location, partnerInstitutions } = Astro.props
 
 // ── Date formatting ───────────────────────────────────────
 const formatDate = (dateStr: string) => {
@@ -54,25 +54,22 @@ const locationDisplay = location
   : null
 ---
 
+<section class="section-header">
+  <h1 class="page_title">{title}</h1>
+  <div class="image_wrapper">{image && <img src={image} alt={title} />}</div>
+</section>
 
-<section class="header_grid">
-
-<h1 class="page_title title_in_grid">{title}</h1>
-
-<div class="image_box">{image && <img src={image} alt={title} />}</div>
-
-<div class="container">
 {(dateDisplay || locationDisplay) && (
-  <div class="date_location__box">
-    {dateDisplay && <span class="date">{dateDisplay}</span>}
-    {locationDisplay && <span class="location">{locationDisplay}</span>}
+  <div class="activation-meta go_side">
+    {dateDisplay && <span class="activation-meta__date">{dateDisplay}</span>}
+    {locationDisplay && <span class="activation-meta__location">{locationDisplay}</span>}
   </div>
 )}
 
 {partnerInstitutions && partnerInstitutions.length > 0 && (
-  <div class="partners_box">
+  <div class="partner-institutions go_side">
     {partnerInstitutions.map(p => (
-      <div class="item_partner__box">
+      <div class="partner">
         {p.logo && <img src={p.logo} alt={p.name ?? ''} class="partner__logo" />}
         {p.name && <span class="partner__name">{p.name}</span>}
       </div>
@@ -80,70 +77,100 @@ const locationDisplay = location
   </div>
 )}
 
-{credits && (
-  <div class="portable-text-simple">
-    <PortableTextRenderer body={credits} client:load />
+{description && (
+  <div class="portable-text-simple go_side">
+    <p>{description}</p>
   </div>
 )}
 
-<div class="tags_cat__box">
+<div class="tags_cat__box go_side">
   {category && <CategoryTag label={category.title} />}
   {tags && tags.length > 0 && (
     tags.map(tag => <TagPill label={tag.title} />)
   )}
 </div>
-</div>
 
-</section>
+{body && (
+  <div class="portable-text-simple go_side">
+    <PortableTextRenderer body={body} client:load />
+  </div>
+)}
 
 <style>
-.header_grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr auto;
-  gap: 1rem;
-  grid-template-areas:
-  "box-1 box-1 box-3 box-3"
-  "box-1 box-1 box-5 box-5";
-  border: 1px solid red;
-}
-.image_box {
-  flex: 1;
-  min-width: 0;
+.section-header {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: flex-start;
-  grid-area: box-1;
-}
-.image_box img {
-  max-height: 85vh;
-  height: auto;
-  width: auto;
-  display: block;
-}
-.title_in_grid {
- grid-area: box-3;
-}
-.container {
-  border: 1px solid red;
-  grid-area: box-5;
+  width: 100%;
+  padding: var(--space-8);
+  gap: var(--space-8);
 }
 
-.date_location__box{border: 1px solid blue;}
-.partners_box{ border: 1px solid green;}
-.item_partner__box{ border: 1px solid violet;}
-.description_box{ background-color: aqua; border: 1px solid rgb(255, 72, 0);}
-.tags_cat__box{ border: 1px solid goldenrod;}
+.partner-institutions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.partner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
 .partner__logo {
-  height: 2rem; 
+  height: 2rem;
   width: auto;
 }
+
 .partner__name {
   font-size: var(--text-s);
   opacity: 0.7;
 }
 
+.page_title {
+  flex: 1;
+  font-size: var(--text-5xl);
+  font-weight: var(--font-weight-bold);
+}
 
+.image_wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.image_wrapper img {
+  max-height: 85vh;
+  height: auto;
+  width: auto;
+  display: block;
+}
+
+.activation-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+  font-size: var(--text-s);
+}
+
+.activation-meta__location {
+  opacity: 0.6;
+}
+
+.tags_cat__box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
 
 @media (max-width: 768px) {
   .page_title {

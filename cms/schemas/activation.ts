@@ -79,36 +79,36 @@ export const activation = defineType({
 
     // ── When & Where ──────────────────────────────────────────
     defineField({
-  name: 'startDate',
-  title: 'Start Date',
-  type: 'date',
-  options: {
-    dateFormat: 'DD/MM/YYYY',
-  },
-}),
-defineField({
-  name: 'startTime',
-  title: 'Start Time',
-  description: 'Optional',
-  type: 'string',
-  placeholder: '14:00',
-}),
-defineField({
-  name: 'endTime',
-  title: 'End Time',
-  description: 'Optional',
-  type: 'string',
-  placeholder: '18:00',
-}),
-defineField({
-  name: 'endDate',
-  title: 'End Date',
-  description: 'Optional — only for multi-day events',
-  type: 'date',
-  options: {
-    dateFormat: 'DD/MM/YYYY',
-  },
-}),
+      name: 'startDate',
+      title: 'Start Date',
+      type: 'date',
+      options: {
+        dateFormat: 'DD/MM/YYYY',
+      },
+    }),
+    defineField({
+      name: 'startTime',
+      title: 'Start Time',
+      description: 'Optional',
+      type: 'string',
+      placeholder: '14:00',
+    }),
+    defineField({
+      name: 'endTime',
+      title: 'End Time',
+      description: 'Optional',
+      type: 'string',
+      placeholder: '18:00',
+    }),
+    defineField({
+      name: 'endDate',
+      title: 'End Date',
+      description: 'Optional — only for multi-day events',
+      type: 'date',
+      options: {
+        dateFormat: 'DD/MM/YYYY',
+      },
+    }),
 
     defineField({
       name: 'location',
@@ -119,6 +119,15 @@ defineField({
         defineField({name: 'city', title: 'City', type: 'string'}),
         defineField({name: 'country', title: 'Country', type: 'string'}),
       ],
+    }),
+
+    // ── Credits Info ───────────────────────────────────────────────
+    defineField({
+      name: 'credits',
+      title: 'Credits',
+      description: 'Mentions of Partner Credits.',
+      type: 'array',
+      of: [{type: 'block'}],
     }),
 
     // ── Partner Institutions ───────────────────────────────────
@@ -150,21 +159,19 @@ defineField({
       options: {hotspot: true},
     }),
 
-    
-
     // ── DURING — Documentation ────────────────────────────────
     // The record — what happened during the activation.
-  defineField({
-  name: 'documentation',
-  title: 'Documentation',
-  type: 'object',
-  fields: [
     defineField({
-      name: 'posterImage',
-      title: 'Poster Image',
-      type: 'image',
-      options: { hotspot: true },
-    }),
+      name: 'documentation',
+      title: 'Documentation',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'posterImage',
+          title: 'Poster Image',
+          type: 'image',
+          options: {hotspot: true},
+        }),
         defineField({
           name: 'text',
           title: 'Text',
@@ -186,19 +193,19 @@ defineField({
       ],
     }),
 
-// ── BEFORE — Research ─────────────────────────────────────
+    // ── BEFORE — Research ─────────────────────────────────────
     // Material gathered and prepared in order to run the activation.
-   defineField({
-  name: 'research',
-  title: 'Research',
-  type: 'object',
-  fields: [
     defineField({
-      name: 'posterImage',
-      title: 'Poster Image',
-      type: 'image',
-      options: { hotspot: true },
-    }),
+      name: 'research',
+      title: 'Research',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'posterImage',
+          title: 'Poster Image',
+          type: 'image',
+          options: {hotspot: true},
+        }),
         defineField({
           name: 'text',
           title: 'Text',
