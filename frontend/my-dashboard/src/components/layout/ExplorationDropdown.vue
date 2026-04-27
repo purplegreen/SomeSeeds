@@ -102,14 +102,14 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 .dropdown__menu {
   display: none;
   position: absolute;
-  top: 0px;
+  top: 4rem;
   left: 0px;
-  padding: 4rem 1rem;
-  background: none;
-  width: auto;
+  width: 100%;
   z-index: 100;
-  flex-direction: column;
-  align-items: flex-end;
+  padding: 1rem 2rem;
+  background-color: var(--color-white);
+  box-shadow: 0 0.2rem 0.2rem var(--color-neutral-200);
+  transform: translate(-0.2%);
 }
 
 .dropdown__menu.open {
@@ -120,17 +120,16 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 
 .dropdown__items {
   display: grid;
-  width: 98vw;
+  width: 100vw;
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   padding-top: 0.7rem;
-  background-color: var(--color-white);
 }
 
 .dropdown__exploration {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  padding: 0.2rem;
+  gap: 0.75rem;
+  padding: 0.75rem;
 }
 
 .navbar__links a.navbar__link--active {
@@ -148,7 +147,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 }
 
 .dropdown__activations {
-  font-size: var(--text-base);
+  font-size: var(--text-s);
   color: var(--color-neutral-700);
   font-weight: 600;
   list-style: none;
@@ -164,12 +163,12 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   display: flex;
   align-items: start;
   justify-content: start;
-  gap: 0px;
-  border: 1px solid red;
+  gap: 4px;
+  border: 1px solid var(--color-primary);
 }
 
 .activation_dot {
-  width: 1rem;
+  flex: 0 0 1rem;
   height: auto;
 }
 
@@ -177,7 +176,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 .dropdown__activation-item {
   background-color: var(--color-white);
   border-radius: var(--radius-xl);
-  padding: 0.24rem;
+  padding: 0.5rem;
 }
 
 .dropdown__exploration-title:hover,
@@ -187,19 +186,6 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   color: var(--color-white);
 }
 
-.dropdown__activation-status {
-  font-size: var(--text-xs, 0.75rem);
-  opacity: 0.6;
-  text-transform: capitalize;
-  white-space: nowrap;
-}
-
-.dropdown__no-activations {
-  font-size: var(--text-xs, 0.75rem);
-  opacity: 0.4;
-  margin: 0;
-  padding-left: 0.75rem;
-}
 .dropdown__menu ul {
   list-style: none;
   margin: 0;
