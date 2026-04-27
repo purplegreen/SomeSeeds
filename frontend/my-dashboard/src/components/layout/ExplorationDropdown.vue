@@ -164,7 +164,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   align-items: start;
   justify-content: start;
   gap: 4px;
-  border: 1px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .activation_dot {
