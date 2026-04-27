@@ -99,6 +99,13 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   z-index: 50;
 }
 
+.dropdown__trigger.navbar__link--active {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: var(--space-2);
+  text-decoration-thickness: 3px;
+}
+
 .dropdown__menu {
   display: none;
   position: absolute;

@@ -102,11 +102,11 @@ const currentPath = rawPath.replace(/\/$/, "");
     text-underline-offset: var(--space-2);
     text-decoration-thickness: 3px;
   }
-.navbar__links a.navbar__link--active {
-    text-decoration: underline;
-    text-decoration-color: var(--color-primary);
-    text-underline-offset: var(--space-2);
-    text-decoration-thickness: 3px;
+.navbar__links .navbar__link--active:not(.btn) {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: var(--space-2);
+  text-decoration-thickness: 3px;
 }
 
   /* Hide desktop links on mobile */
