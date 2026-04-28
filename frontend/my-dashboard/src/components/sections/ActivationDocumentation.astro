@@ -21,15 +21,18 @@ const sliderImages = documentation?.images?.map(img => ({
 ---
 
 {documentation && (documentation.posterImage || documentation.text || documentation.images?.length) && (
- <section class="section">
-    <h2 class="heading-m go_side">{type ?? 'Documentation'}</h2>
-  </section>
+ 
+
   <section class="section_poster">
      {posterImage && (
       <div class="poster">
         <img src={posterImage} alt="" />
       </div>
     )}
+  </section>
+
+   <section class="section">
+    <h2 class="heading_sm">{type ?? 'Documentation'}</h2>
   </section>
 
  <section class="section">
