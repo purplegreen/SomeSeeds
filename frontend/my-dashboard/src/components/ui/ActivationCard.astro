@@ -5,10 +5,10 @@ interface Props {
   title: string
   slug: string
   type?: string
-startDate: String,
-  startTime: String,
-  endDate: String,
-  endTime: String,
+  startDate?: string
+  startTime?: string
+  endDate?: string
+  endTime?: string
   location?: { venue?: string; city?: string; country?: string }
   coverImage?: string
 }
@@ -23,7 +23,6 @@ const {
   endDate,
   location,
   coverImage,
-
 } = Astro.props
 
 // ── Date formatting ───────────────────────────────────────
@@ -36,26 +35,24 @@ const formatDate = (dateStr: string) => {
   })
 }
 
-const dateDisplay = computed(() => {
-  if (!props.startDate) return ''
-
-  const isSameDay = props.endDate &&
-    new Date(props.startDate).toDateString() === new Date(props.endDate).toDateString()
-  const isMultiDay = props.endDate && !isSameDay
+let dateDisplay = ''
+if (startDate) {
+  const isSameDay = endDate &&
+    new Date(startDate).toDateString() === new Date(endDate).toDateString()
+  const isMultiDay = endDate && !isSameDay
 
   if (isMultiDay) {
-    const startDay = new Date(props.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
-    const endFull = new Date(props.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-    return `${startDay}–${endFull}`
+    const startDay = new Date(startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
+    const endFull = new Date(endDate!).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+    dateDisplay = `${startDay}–${endFull}`
+  } else {
+    dateDisplay = formatDate(startDate)
+    if (startTime) {
+      dateDisplay += ` · ${startTime}`
+      if (endTime) dateDisplay += `–${endTime}`
+    }
   }
-
-  let display = formatDate(props.startDate)
-  if (props.startTime) {
-    display += ` · ${props.startTime}`
-    if (props.endTime) display += `–${props.endTime}`
-  }
-  return display
-})
+}
 
 // ── Location ──────────────────────────────────────────────
 const locationDisplay = location

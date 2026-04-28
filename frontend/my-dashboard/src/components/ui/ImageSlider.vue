@@ -44,8 +44,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick } from "vue";
+
+defineOptions({
+  name: "ImageSlider",
+});
 
 const props = defineProps({
   images: { type: Array, default: () => [] },
