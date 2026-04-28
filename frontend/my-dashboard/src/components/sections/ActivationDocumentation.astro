@@ -3,14 +3,15 @@ import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
 import ImageSlider from '../ui/ImageSlider.vue'
 
 interface Props {
+  type?: string
   documentation?: {
-    posterImage?: image 
+    posterImage?: string
     text?: any[]
     images?: { url: string; caption?: string }[]
   }
 }
 
-const { documentation } = Astro.props
+const { type, documentation } = Astro.props
 const posterImage = documentation?.posterImage
 
 const sliderImages = documentation?.images?.map(img => ({
@@ -19,11 +20,9 @@ const sliderImages = documentation?.images?.map(img => ({
 })) ?? []
 ---
 
-{documentation && (documentation.text || documentation.images?.length) && (
-
-
-  <section class="section">
-    <h2 class="heading-m go_side">Documentation</h2>
+{documentation && (documentation.posterImage || documentation.text || documentation.images?.length) && (
+ <section class="section">
+    <h2 class="heading-m go_side">{type ?? 'Documentation'}</h2>
   </section>
   <section class="section_poster">
      {posterImage && (

@@ -35,7 +35,10 @@ console.log("documentation images:", JSON.stringify(activation.documentation?.im
 />
 
   
-  <ActivationDocumentation documentation={activation.documentation} />
+  <ActivationDocumentation 
+  type={activation.type} 
+  documentation={activation.documentation} 
+/>
   <ActivationResearch research={activation.research} />
   <ActivationOutcomes outcomes={activation.outcomes} />
 </Layout>
