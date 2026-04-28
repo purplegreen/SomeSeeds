@@ -32,34 +32,30 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
 
 {documentation && (documentation.posterImage || documentation.text || documentation.images?.length) && (
  
-
-  <section class="section_poster">
+<section>
+  
      {posterImage && (
       <div class="poster">
         <img src={posterImage} alt="" />
       </div>
     )}
-  </section>
 
-   <section class="section">
     <h2 class="heading_m">{typeDisplay}</h2>
-  </section>
 
- <section class="section">
     {documentation.text && (
       <div class="portable-text-simple go_side">
         <PortableTextRenderer body={documentation.text} client:load />
       </div>
     )}
 
-   </section>
- <section class="section">
  {sliderImages.length > 0 && (
       <ImageSlider images={sliderImages} client:load />
     )}
 
-  </section>
+</section>
 )}
 
+
 <style>
+  
 </style>

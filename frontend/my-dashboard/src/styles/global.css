@@ -286,7 +286,6 @@ svg {
 }
 
 .section {
-  border: 1px solid red;
   padding: var(--space-16) var(--space-2);
 }
 
