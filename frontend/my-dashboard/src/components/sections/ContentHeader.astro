@@ -55,8 +55,8 @@ const locationDisplay = location
 ---
 
 
-<section class="header_grid">
-
+<section>
+<div  class="header_grid">
 <h1 class="page_title title_in_grid">{title}</h1>
 
 <div class="image_box">{image && <img src={image} alt={title} />}</div>
@@ -69,14 +69,6 @@ const locationDisplay = location
   </div>
 )}
 
-
-
-{credits && (
-  <div class="portable-text-simple">
-    <PortableTextRenderer body={credits} client:load />
-  </div>
-)}
-
 {partnerInstitutions && partnerInstitutions.length > 0 && (
   <div class="partners_box">
     {partnerInstitutions.map(p => (
@@ -86,13 +78,22 @@ const locationDisplay = location
     ))}
   </div>
 )}
+</div>
+</div>
 
+
+<div class="description_grid">
 <div class="tags_cat__box">
   {category && <CategoryTag label={category.title} />}
   {tags && tags.length > 0 && (
     tags.map(tag => <TagPill label={tag.title} />)
   )}
 </div>
+{credits && (
+  <div class="portable-text">
+    <PortableTextRenderer body={credits} client:load />
+  </div>
+)}
 </div>
 
 </section>
@@ -100,13 +101,14 @@ const locationDisplay = location
 <style>
 .header_grid{
   display: grid;
-  grid-template-columns: 20vw 20vw 1fr 1fr;
-  grid-template-rows: 1fr auto;
+   grid-template-columns: 40vw 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
   gap: 2rem;
   grid-template-areas:
-  "box-1 box-1 box-3 box-3"
-  "box-1 box-1 box-5 box-5";
-  padding: var(--space-16) var(--space-4);
+    "Area  Area-2  Area-2"
+    "Area  Area-2  Area-2"
+    "Area  Area-3  Area-3";
+  padding: var(--space-16) var(--space-4) 0 var(--space-4);
 }
 .image_box {
   display: flex;
@@ -114,7 +116,7 @@ const locationDisplay = location
   min-width: 0;
   justify-content: center;
   align-items: center;
-  grid-area: box-1;
+  grid-area: Area;
 }
 .image_box img {
   width: auto;
@@ -123,11 +125,11 @@ const locationDisplay = location
   display: block;
 }
 .title_in_grid {
- grid-area: box-3;
+ grid-area: Area-2;
  align-self: center;
 }
 .container {
-  grid-area: box-5;
+  grid-area: Area-3;
 }
 .date_location__box{
   display: flex;
@@ -138,9 +140,9 @@ const locationDisplay = location
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: center;
+  justify-content: start;
   gap: var(--space-4);
-  padding: var(--space-8) 0;
+  padding: var(--space-2) 0;
 }
 
 .partner__logo {
@@ -148,14 +150,30 @@ const locationDisplay = location
  height: 4rem;
 }
 
-.tags_cat__box{  display: flex;
+.description_grid {
+  display: grid;
+  grid-template-columns: 40vw 1fr;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+  grid-template-areas:
+    "B-Area  B-Area-2"
+    "B-Area  B-Area-3";
+  padding: var(--space-16) var(--space-4);
+}
+.tags_cat__box{  
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: start;
   gap: var(--space-4);
-  padding: var(--space-8) 0; 
+  padding: var(--space-0) 0; 
+  grid-area: B-Area-2;
 }
 
+.portable-text {
+  width: 100%;
+  grid-area: B-Area-3;
+}
 
 
 @media (max-width: 768px) {
