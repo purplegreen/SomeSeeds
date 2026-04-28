@@ -12,7 +12,7 @@ defineProps({ label: String, href: String });
 .category-tag {
   display: inline-flex;
   align-items: center;
-  font-size: var(--text-s);
+  font-size: var(--text-m);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;

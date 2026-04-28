@@ -36,34 +36,47 @@ const props = defineProps({
 });
 
 const formatDate = (dateStr) => {
-  if (!dateStr) return ''
-  const d = new Date(dateStr)
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'short', year: 'numeric',
-    timeZone: 'UTC'
-  })
-}
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+};
 
 const dateDisplay = computed(() => {
-  if (!props.startDate) return ''
+  if (!props.startDate) return "";
 
-  const isSameDay = props.endDate &&
-    new Date(props.startDate).toDateString() === new Date(props.endDate).toDateString()
-  const isMultiDay = props.endDate && !isSameDay
+  const isSameDay =
+    props.endDate &&
+    new Date(props.startDate).toDateString() ===
+      new Date(props.endDate).toDateString();
+  const isMultiDay = props.endDate && !isSameDay;
 
   if (isMultiDay) {
-    const startDay = new Date(props.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
-    const endFull = new Date(props.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
-    return `${startDay}–${endFull}`
+    const startDay = new Date(props.startDate).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      timeZone: "UTC",
+    });
+    const endFull = new Date(props.endDate).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+    return `${startDay}–${endFull}`;
   }
 
-  let display = formatDate(props.startDate)
+  let display = formatDate(props.startDate);
   if (props.startTime) {
-    display += ` · ${props.startTime}`
-    if (props.endTime) display += `–${props.endTime}`
+    display += ` · ${props.startTime}`;
+    if (props.endTime) display += `–${props.endTime}`;
   }
-  return display
-})
+  return display;
+});
 
 const locationDisplay = computed(() => {
   if (!props.location) return null;
@@ -133,7 +146,7 @@ const locationDisplay = computed(() => {
 
 .activation-card__date,
 .activation-card__location {
-  font-size: var(--text-s);
+  font-size: var(--text-m);
   color: var(--color-primary);
   margin: 0;
 }

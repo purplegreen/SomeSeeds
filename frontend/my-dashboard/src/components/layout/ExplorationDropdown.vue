@@ -91,7 +91,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   border: none;
   cursor: pointer;
   padding: 0;
-  font-size: var(--text-s);
+  font-size: var(--text-m);
   font-weight: 600;
   font-family: inherit;
   height: 4rem;
@@ -154,7 +154,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 }
 
 .dropdown__activations {
-  font-size: var(--text-s);
+  font-size: var(--text-m);
   color: var(--color-neutral-700);
   font-weight: 600;
   list-style: none;

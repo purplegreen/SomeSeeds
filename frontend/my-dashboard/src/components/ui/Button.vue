@@ -66,7 +66,7 @@ defineEmits(["click"]);
 
 /* ── Sizes ── */
 .btn--sm {
-  font-size: var(--text-s);
+  font-size: var(--text-m);
   padding: 0.8rem 1.25rem;
 }
 
