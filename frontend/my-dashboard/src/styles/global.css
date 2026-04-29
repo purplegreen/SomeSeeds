@@ -301,7 +301,7 @@ svg {
 }
 
 /* padding top */
-.pt-s: {
+.pt-s {
   padding-top: var(--space-4);
 } /* 1 rem */
 .pt-m {
@@ -312,13 +312,13 @@ svg {
 } /* 4 rem */
 
 /* padding bottom */
-.pb-s: {
+.pb-s {
   padding-bottom: var(--space-4);
 } /* 1 rem */
 .pb-m {
   padding-bottom: var(--space-8);
 } /* 2 rem */
-.pb-l: {
+.pb-l {
   padding-bottom: var(--space-16);
 } /* 4 rem */
 
