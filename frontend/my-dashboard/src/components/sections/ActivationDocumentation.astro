@@ -31,7 +31,6 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
 ---
 
 {documentation && (documentation.posterImage || documentation.text || documentation.images?.length) && (
- 
 <section>
   
      {posterImage && (
@@ -67,7 +66,6 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
     "a a-2 a-2 a-3 a-3"
     "a a-4 a-5 a-5 a-5";
   padding: var(--space-16) var(--space-4) 0 var(--space-4);
-  border: 1px solid blue;
 }
 
 .heading_l {
@@ -76,6 +74,7 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
 
 .portable_text {
   grid-area: a-5; 
+  padding-bottom: var(--space-16);
 }
 
 
