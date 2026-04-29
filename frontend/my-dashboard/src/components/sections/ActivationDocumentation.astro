@@ -1,6 +1,6 @@
 ---
 import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
-import ImageSlider from '../ui/ImageSlider.vue'
+import  ImageSlider  from '../ui/ImageSlider.vue'
 
 interface Props {
   type?: string
@@ -40,13 +40,14 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
       </div>
     )}
 
-    <h2 class="heading_m">{typeDisplay}</h2>
-
-    {documentation.text && (
-      <div class="portable-text-simple go_side">
-        <PortableTextRenderer body={documentation.text} client:load />
-      </div>
+<div class="container_grid">
+   
+    <h2 class="heading_l">{typeDisplay}</h2>
+  
+    <div class="portable_text">{documentation.text && ( <PortableTextRenderer body={documentation.text} client:load />
     )}
+    </div>
+</div>
 
  {sliderImages.length > 0 && (
       <ImageSlider images={sliderImages} client:load />
@@ -57,5 +58,26 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
 
 
 <style>
+.container_grid {
+  display: grid;
+  grid-template-columns: 15vw 15vw 1fr 1fr 1fr;
+  grid-template-rows: 4rem auto;
+  gap: 2rem;
+  grid-template-areas:
+    "a a-2 a-2 a-3 a-3"
+    "a a-4 a-5 a-5 a-5";
+  padding: var(--space-16) var(--space-4) 0 var(--space-4);
+  border: 1px solid blue;
+}
+
+.heading_l {
+  grid-area: a-2;
+}
+
+.portable_text {
+  grid-area: a-5; 
+}
+
+
   
 </style>
