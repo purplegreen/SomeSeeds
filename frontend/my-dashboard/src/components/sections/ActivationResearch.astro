@@ -13,15 +13,16 @@ const { research } = Astro.props
 ---
 
 {research && (research.text || research.images?.length || research.links?.length) && (
-  <section class="section">
-    <h2 class="heading-m">Research</h2>
+  <section>
 
+<div class="container_grid">
+    <h2 class="heading_l">Research</h2>
+<div class="portable_text">
     {research.text && (
-      <div class="portable-text-simple">
-        <PortableTextRenderer body={research.text} client:load />
-      </div>
+        <PortableTextRenderer body={research.text} client:load /> 
     )}
-
+    </div>
+</div>
     {research.images && research.images.length > 0 && (
       <div class="image-gallery">
         {research.images.map(img => (
@@ -48,6 +49,28 @@ const { research } = Astro.props
 )}
 
 <style>
+
+
+.container_grid {
+  display: grid;
+  grid-template-columns: 15vw 15vw 1fr 1fr 1fr;
+  grid-template-rows: 4rem auto;
+  gap: 4rem 2rem;
+  grid-template-areas:
+    "a a-2 a-2 a-3 a-3"
+    "a a-4 a-5 a-5 a-5";
+  padding: var(--space-16) var(--space-4) 0 var(--space-4);
+}
+
+.heading_l {
+  grid-area: a-2;
+}
+
+.portable_text {
+  grid-area: a-5; 
+  padding-bottom: var(--space-16);
+}
+
 .image-gallery {
   display: flex;
   flex-wrap: wrap;
