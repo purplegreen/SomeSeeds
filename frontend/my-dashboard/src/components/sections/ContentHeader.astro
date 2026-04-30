@@ -57,15 +57,15 @@ const locationDisplay = location
 
 <section>
 <div  class="header_grid">
-<h1 class="page_title title_in_grid">{title}</h1>
+<h1 class="heading_xl title_in_grid">{title}</h1>
 
 <div class="image_box">{image && <img src={image} alt={title} />}</div>
 
 <div class="container">
 {(dateDisplay || locationDisplay) && (
   <div class="date_location__box">
-    {dateDisplay && <h5><span class="date">{dateDisplay}</span></h5>}
-    {locationDisplay && <h3><span class="location">{locationDisplay}</span></h3>}
+    {dateDisplay && <h5 class="title_m"><span class="date">{dateDisplay}</span></h5>}
+    {locationDisplay && <h3 class="heading_xs"><span class="location">{locationDisplay}</span></h3>}
   </div>
 )}
 
@@ -103,31 +103,33 @@ const locationDisplay = location
  /* -----First Grid----- */
 .header_grid{
   display: grid;
-  height: 90vh;
-   grid-template-columns: 40vw 1fr 1fr;
+   grid-template-columns: 40vw 1fr;
   grid-template-rows: repeat(3, 1fr);
-  gap: 1rem 2rem;
+  gap: 1rem 2.5rem;
   grid-template-areas:
-    "Area  Area-2  Area-2"
-    "Area  Area-2  Area-2"
-    "Area  Area-3  Area-3";
+    "Area  Area-2"  
+    "Area  Area-2"  
+    "Area  Area-3";
   padding: var(--space-8) var(--space-4) 0 var(--space-4);
-
+  height: 80vh; 
 }
 
 
 .image_box {
   display: flex;
   flex: 1;
+  min-height: 0;
   justify-content: center;
   align-items: center;
   grid-area: Area;
-  min-width: 0;
-}
-.image_box img {
   width: auto;
   height: 100%;
-  object-fit: fit;
+}
+.image_box img {
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 .title_in_grid {
@@ -139,17 +141,17 @@ const locationDisplay = location
   align-self: flex-end;
 }
 .container {
+  display: flex;
+  flex-direction: column;
   grid-area: Area-3;
-  padding: 0%;
-  justify-content: center; 
+  justify-content: start; 
   align-self: flex-start;
-  gap: 4rem;
+  padding: 0%;
 }
 .date_location__box{
   display: flex;
   flex-direction: column;
-   flex-direction: column;
-  padding: var(--space-4) 0;
+  padding-bottom: 1.5rem;
 }
 .partners_box{
   display: flex;
@@ -181,7 +183,7 @@ const locationDisplay = location
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: start;
+  justify-content: center;
   gap: var(--space-4);
   padding: var(--space-0) 0; 
   grid-area: B-Area-2;
@@ -194,7 +196,7 @@ const locationDisplay = location
 
 
 @media (max-width: 768px) {
-  .page_title {
+  .heading_xl {
     padding-left: var(--space-1);
   }
 }

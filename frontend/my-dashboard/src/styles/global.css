@@ -142,10 +142,22 @@ h6 {
   font-family: var(--font-base);
 }
 
-.page_title {
-  font-size: var(--text-5xl);
+.title_s {
+  font-size: var(--text-s);
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-flat);
+  line-height: var(--line-height-snug);
+}
+
+.title_m {
+  font-size: var(--text-m);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+}
+
+.title_l {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
 }
 
 .heading_xs {
@@ -170,10 +182,11 @@ h6 {
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
 }
+
 .heading_xl {
-  font-size: var(--text-4xl);
+  font-size: var(--text-5xl);
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
+  line-height: var(--line-height-flat);
 }
 
 .underline-hover:hover {
