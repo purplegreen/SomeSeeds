@@ -23,27 +23,15 @@ const { research } = Astro.props
     )}
     </div>
 </div>
-{/*
-    {research.images && research.images.length > 0 && (
-      <div class="image-gallery">
-        {research.images.map(img => (
-          <figure>
-            <img src={img.url} alt={img.caption ?? ""} />
-            {img.caption && <figcaption>{img.caption}</figcaption>}
-          </figure>
-        ))}
-      </div>
-    )}
-      */}
 
-    {/* wrap the map in the gallery div */}
 <div class="image-gallery">
   {research.images?.map((img, i) => (
     <figure>
       <a href={`#img-${i}`}>
-        <img src={img.url} alt={img.caption ?? ""} />
+        {img.caption && <figcaption>{img.caption}</figcaption>}
+        <img src={img.url} alt={img.caption ?? ""} />  
       </a>
-      {img.caption && <figcaption>{img.caption}</figcaption>}
+      
 
       <div class="lightbox" id={`img-${i}`}>
         <a href="#gallery" class="lightbox__close">✕</a>
@@ -90,31 +78,34 @@ const { research } = Astro.props
   padding-bottom: var(--space-16);
 }
 
+
+/* Bento Image Gallery */
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 25vw; /* auto-generates rows as needed */
   gap: 0.75rem;
+  padding: var(--space-2)
 }
 
 
-css.image-gallery figure {
-  position: relative;  /* needed for figcaption absolute positioning */
-  overflow: hidden;    /* clips the zoom effect */
+.image-gallery figure {
+  position: relative;  
+  overflow: hidden;    
   margin: 0;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
 }
 
-/* Repeating bento pattern every 6 images */
+
 .image-gallery figure:nth-child(6n + 1) {
   grid-column: span 2;
-  grid-row: span 2; /* big square */
+  grid-row: span 2;  
 }
 .image-gallery figure:nth-child(6n + 4) {
   grid-column: span 2;
-  grid-row: span 2; /* big square */
+  grid-row: span 2;
 }
-
+ 
 .image-gallery figure img {
   width: 100%;
   height: 100%;
@@ -135,10 +126,11 @@ css.image-gallery figure {
   right: 0;
   padding: 0.5rem 0.75rem;
   background: rgba(0, 0, 0, 0.5);
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: var(--text-xs);
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 10;
 }
 
 .image-gallery figure:hover figcaption {
@@ -157,7 +149,7 @@ css.image-gallery figure {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(255, 255, 255, 0.85);
   z-index: 999;
   justify-content: center;
   align-items: center;
@@ -172,14 +164,14 @@ css.image-gallery figure {
   max-width: 90vw;
   max-height: 90vh;
   object-fit: contain;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
 }
 
 .lightbox__close {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 1.5rem;
   text-decoration: none;
 }
