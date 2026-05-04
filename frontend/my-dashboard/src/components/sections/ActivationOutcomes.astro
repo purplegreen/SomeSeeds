@@ -13,7 +13,7 @@ const { outcomes } = Astro.props
 {outcomes && outcomes.length > 0 && (
   <section>
     <div class="container_grid">
-    <h2 class="heading_4xl">Threads</h2>
+    <h2 class="heading_xl">Threads</h2>
     <ul class="outcomes-list">
       {outcomes.map(outcome => (
         <li class="outcome">
@@ -58,7 +58,7 @@ const { outcomes } = Astro.props
   padding: var(--space-16) var(--space-4) 0 var(--space-4);
 }
 
-.heading_4xl {
+.heading_xxl {
   grid-area: a-2;
 }
 

@@ -57,7 +57,7 @@ const locationDisplay = location
 
 <section>
 <div  class="header_grid">
-<h1 class="heading_6xl title_in_grid">{title}</h1>
+<h1 class="heading_xxl title_in_grid">{title}</h1>
 
 <div class="image_box">{image && <img src={image} alt={title} />}</div>
 
@@ -65,7 +65,7 @@ const locationDisplay = location
 {(dateDisplay || locationDisplay) && (
   <div class="date_location__box">
     {dateDisplay && <h5 class="title_m"><span class="date">{dateDisplay}</span></h5>}
-    {locationDisplay && <h3 class="heading_xs"><span class="location">{locationDisplay}</span></h3>}
+    {locationDisplay && <h3 class="heading_s"><span class="location">{locationDisplay}</span></h3>}
   </div>
 )}
 
@@ -196,7 +196,7 @@ const locationDisplay = location
 
 
 @media (max-width: 768px) {
-  .heading_6xl {
+  .heading_xxl {
     padding-left: var(--space-1);
   }
 }
