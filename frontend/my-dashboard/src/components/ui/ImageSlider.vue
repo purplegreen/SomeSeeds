@@ -21,14 +21,14 @@
       @click="prev"
       aria-label="Previous image"
     >
-      ←
+      <img src="/icons/arrow_left.svg" alt="Previous" />
     </button>
     <button
       class="slider__arrow slider__arrow--next"
       @click="next"
       aria-label="Next image"
     >
-      →
+      <img src="/icons/arrow_right.svg" alt="Next" />
     </button>
 
     <div class="slider__dots">
@@ -180,7 +180,8 @@ watch(current, (val) => {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: var(--text-xl, 1.5rem);
+  width: 5rem;
+  height: auto;
   padding: var(--space-4, 1rem);
   z-index: 10;
   opacity: 0.7;

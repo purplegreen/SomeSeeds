@@ -150,7 +150,7 @@ body {
 
 .title_l {
   font-size: var(--text-body);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-snug);
 }
 

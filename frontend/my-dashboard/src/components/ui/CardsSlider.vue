@@ -22,15 +22,15 @@
       :disabled="current === 0"
       aria-label="Previous"
     >
-      ←
+      <img src="/icons/arrow_left.svg" alt="Previous" />
     </button>
     <button
       class="cards-slider__arrow cards-slider__arrow--next"
       @click="next"
-      :disabled="current === items.length - 1"
+      :disabled="current === displayItems.length - 1"
       aria-label="Next"
     >
-      →
+      <img src="/icons/arrow_right.svg" alt="Next" />
     </button>
 
     <div class="cards-slider__dots">
@@ -171,7 +171,8 @@ const onTouchEnd = (e) => {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: var(--text-xl, 1.5rem);
+  width: 5rem;
+  height: auto;
   padding: var(--space-4, 1rem);
   z-index: 10;
   opacity: 0.7;

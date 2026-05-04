@@ -34,7 +34,7 @@ const { research } = Astro.props
       
 
       <div class="lightbox" id={`img-${i}`}>
-        <a href="#gallery" class="lightbox__close">✕</a>
+        <a href="#gallery" class="lightbox__close"> <img src="/icons/close.svg" alt="Close" /></a>
         <img src={img.url} alt={img.caption ?? ""} />
       </div>
     </figure>
@@ -171,10 +171,11 @@ const { research } = Astro.props
 
 .lightbox__close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 0.5rem;
+  right: 0.5rem;
   color: rgb(0, 0, 0);
-  font-size: 1.5rem;
+  width: 3rem;
+  width: auto;
   text-decoration: none;
 }
 

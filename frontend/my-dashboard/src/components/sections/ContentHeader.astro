@@ -64,7 +64,7 @@ const locationDisplay = location
 <div class="container">
 {(dateDisplay || locationDisplay) && (
   <div class="date_location__box">
-    {dateDisplay && <h5 class="title_m"><span class="date">{dateDisplay}</span></h5>}
+    {dateDisplay && <h5 class="title_l"><span class="date">{dateDisplay}</span></h5>}
     {locationDisplay && <h3 class="heading_s"><span class="location">{locationDisplay}</span></h3>}
   </div>
 )}
@@ -114,7 +114,6 @@ const locationDisplay = location
   height: 80vh; 
 }
 
-
 .image_box {
   display: flex;
   flex: 1;
@@ -151,7 +150,8 @@ const locationDisplay = location
 .date_location__box{
   display: flex;
   flex-direction: column;
-  padding-bottom: 1.5rem;
+  gap: var(--space-1);
+  padding-bottom: var(--space-6);
 }
 .partners_box{
   display: flex;
