@@ -16,7 +16,7 @@ const { research } = Astro.props
   <section>
 
 <div class="container_grid">
-    <h2 class="heading_l">Research</h2>
+    <h2 class="heading_4xl">Research</h2>
 <div class="portable_text">
     {research.text && (
         <PortableTextRenderer body={research.text} client:load /> 
@@ -69,7 +69,7 @@ const { research } = Astro.props
   padding: var(--space-16) var(--space-4) 0 var(--space-4);
 }
 
-.heading_l {
+.heading_4xl {
   grid-area: a-2;
 }
 

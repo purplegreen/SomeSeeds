@@ -147,7 +147,7 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 }
 
 .dropdown__exploration-title {
-  font-size: var(--text-base);
+  font-size: var(--text-body);
   line-height: var(--line-height-snug);
   font-weight: 700;
   text-decoration: none;

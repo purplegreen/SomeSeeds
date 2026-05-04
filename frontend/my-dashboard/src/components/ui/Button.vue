@@ -71,12 +71,12 @@ defineEmits(["click"]);
 }
 
 .btn--md {
-  font-size: var(--text-base);
+  font-size: var(--text-body);
   padding: 0.6rem 1.25rem;
 }
 
 .btn--lg {
-  font-size: var(--text-base);
+  font-size: var(--text-body);
   padding: 0.8rem 1.75rem;
 }
 

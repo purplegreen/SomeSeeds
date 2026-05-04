@@ -15,7 +15,7 @@ const { title, description, image, category, tags, body } = Astro.props
 ---
 
 <section class="section">
-  <h1 class=".heading_xl">{title}</h1>
+  <h1 class="heading_6xl">{title}</h1>
   <div class="portable-text-simple go_side">
   <p>{description}</p>
  </div>
@@ -44,7 +44,7 @@ const { title, description, image, category, tags, body } = Astro.props
 
 
 <style>
-.heading_xl {
+.heading_6xl {
   display: flex;
   align-items: start;
   width: 100%;
@@ -61,7 +61,7 @@ img .image_wrapper{
   
 
   @media (max-width: 768px) {
-  .heading_xl {
+  .heading_6xl {
   padding-left: var(--space-1);
 }
 
