@@ -1,9 +1,4 @@
 /* ============================================
-   IMPORTS
-   ============================================ */
-@import "./fonts.css";
-
-/* ============================================
    CSS CUSTOM PROPERTIES
    ============================================ */
 :root {
@@ -36,7 +31,7 @@
   --color-danger: #fa5252;
 
   /* Typography */
-  --font-base: "Poppins", sans-serif;
+  --font-base: "Figtree Variable", sans-serif;
 
   --font-weight-light: 300;
   --font-weight-regular: 400;
