@@ -201,7 +201,6 @@ body {
 p {
   font-size: var(--text-body);
   color: var(--color-text-primary);
-  line-height: 1.7;
   max-width: 68ch; /* optimal reading width */
 }
 
