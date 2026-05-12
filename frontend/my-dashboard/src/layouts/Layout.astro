@@ -8,7 +8,7 @@ import '@fontsource-variable/figtree';
 const currentPath = Astro.url.pathname.replace(/\/$/, ""); 
 const nav = await getNavigation()
 const explorations = await getExplorations()
-console.log("explorations:", JSON.stringify(explorations, null, 2))
+
 ---
 <!doctype html>
 <html lang="en">
