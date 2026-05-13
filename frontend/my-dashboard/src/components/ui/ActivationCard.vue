@@ -138,7 +138,7 @@ const locationDisplay = computed(() => {
 }
 
 .activation-card__title {
-  font-size: var(--text-xl);
+  font-size: var(--text-big);
   line-height: var(--line-height-tight);
   font-weight: 600;
   margin: 0;

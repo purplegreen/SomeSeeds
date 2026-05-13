@@ -45,8 +45,8 @@
   --text-xs: clamp(0.55rem, 0.17vw + 0.52rem, 0.64rem);
   --text-s: clamp(0.675rem, 0.23vw + 0.63rem, 0.8rem);
   --text-m: clamp(0.875rem, 0.24vw + 0.784rem, 1rem);
-  --text-body: clamp(1.05rem, 0.38vw + 0.908rem, 1.25rem);
-  --text-xl: clamp(1.05rem, 0.38vw + 0.98rem, 1.25rem);
+  --text-body: clamp(1.1rem, 0.26vw + 1rem, 1.313rem);
+  --text-big: clamp(1.05rem, 0.38vw + 0.98rem, 1.25rem);
   --text-2xl: clamp(1.25rem, 0.59vw + 1.14rem, 1.563rem);
   --text-3xl: clamp(1.5rem, 0.85vw + 1.34rem, 1.953rem);
   --text-4xl: clamp(1.8rem, 1.2vw + 1.58rem, 2.441rem);
@@ -123,7 +123,7 @@ body {
   font-weight: var(--font-weight-regular);
   color: var(--color-text-primary);
   background-color: var(--color-background);
-  line-height: 1.6;
+  line-height: 144%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -151,7 +151,7 @@ body {
 }
 
 .heading_xs {
-  font-size: var(--text-xl);
+  font-size: var(--text-big);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight); /* xs */
 }
@@ -170,8 +170,8 @@ body {
 .heading_m_p {
   /* heading medium paragraph */
   font-size: var(--text-2xl);
-  font-weight: 620;
-  line-height: 1.52;
+  font-weight: 560;
+  line-height: 1.48;
   letter-spacing: -0.02cap;
   display: block;
   margin-block-start: 1em;
@@ -204,6 +204,17 @@ body {
   font-weight: 490;
   line-height: 0.9;
 }
+
+.portable-text-simple {
+  width: 100%;
+}
+
+.portable_text p {
+  font-size: var(--text-body);
+  line-height: 1.22;
+  max-width: 68ch;
+}
+
 /* ================================= */
 
 .underline-hover:hover {
@@ -237,11 +248,6 @@ strong {
 
 em {
   font-style: italic;
-}
-
-.portable-text-simple {
-  width: 100%;
-  line-height: 1.2;
 }
 
 /* Links */
@@ -322,7 +328,7 @@ svg {
 
 .container_grid {
   display: grid;
-  grid-template-columns: 18vw 1fr 18vw;
+  grid-template-columns: 22vw 1fr 22vw;
   grid-template-rows: auto auto;
   gap: 2rem;
   grid-template-areas:
