@@ -41,7 +41,7 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
 
 <div class="container_grid">
    
-    <h2 class="heading_xl">{typeDisplay}</h2>
+    <h2 class="display_l">{typeDisplay}</h2>
   
     <div class="portable_text">{documentation.text && ( <PortableTextRenderer body={documentation.text} client:load />
     )}
@@ -59,7 +59,7 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
 <style>
 
 
-.heading_xxl {
+.display_l {
   grid-area: a-1;
 }
 

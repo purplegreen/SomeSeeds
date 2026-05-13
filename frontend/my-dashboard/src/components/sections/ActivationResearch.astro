@@ -16,7 +16,7 @@ const { research } = Astro.props
   <section>
 
 <div class="container_grid">
-    <h2 class="heading_xl">Research</h2>
+    <h2 class="display_l">Research</h2>
 <div class="portable_text">
     {research.text && (
         <PortableTextRenderer body={research.text} client:load /> 
@@ -57,7 +57,7 @@ const { research } = Astro.props
 
 <style>
 
-.heading_xxl {
+.display_l {
   grid-area: a-1;
 }
 
