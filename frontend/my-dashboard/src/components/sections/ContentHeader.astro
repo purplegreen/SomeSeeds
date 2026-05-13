@@ -131,7 +131,8 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : null
   flex-direction: column;
   width: 48vw;
   height: 100%; 
-  justify-content: space-between;
+  gap: var(--space-16);
+  justify-content: end;
 }
 .title_in_grid {
   padding-top: var(--space-8);
@@ -178,13 +179,22 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : null
  /* -----Second wrapper----- */
 
 .description_grid {
-  display: grid;
+ /* display: grid;
   grid-template-columns: 30vw 1fr;
   grid-template-rows: auto auto;
   gap: 2rem;
   grid-template-areas:
     "B-Area  B-Area-2"
     "B-Area  B-Area-3";
+  padding: var(--space-16) var(--space-4);
+  */
+  display: grid;
+  grid-template-columns: 18vw 1fr 18vw;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+  grid-template-areas:
+    "B-Area  B-Area-2 B-4"
+    "B-Area  B-Area-3 B-5";
   padding: var(--space-16) var(--space-4);
 }
 .tags_cat__box{  
