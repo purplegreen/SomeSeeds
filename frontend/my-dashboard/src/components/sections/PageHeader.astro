@@ -5,54 +5,48 @@ interface Props {
   title: string
   description: string
   image?: string 
-  category?: { title: string }
-  tags?: { title: string }[]
   body?: any[]
 }
 
 
-const { title, description, image, category, tags, body } = Astro.props
+const { title, description, image, body } = Astro.props
 ---
 
-<section class="section">
+<section>
+
+  <div class="container_grid">
   <h1 class="display_l">{title}</h1>
-  <div class="portable-text-simple go_side">
-  <p>{description}</p>
+  <div class="heading_m_p">
+  {description}
  </div>
-
-<div>{category && <span class="category">{category.title}</span>}
-
-{tags && tags.length > 0 && (
-    <div class="tags">
-      {tags.map(tag => (
-        <span class="tag">{tag.title}</span>
-      ))}
-    </div>
-  )}
 </div>
-</section>
+
 
 <section class="poster_section">
  <div class="image_wrapper">{image && <img src={image} alt={title} />    }</div>
 </section>
 
-<section class="go_side">
-  <div class="portable-text-simple">
+  <div class="container_grid_one_row">
+  <div class="portable_text">
   <PortableTextRenderer body={body} client:load />
   </div>
+</div>
 </section>
 
-
 <style>
+
 .display_l {
-  display: flex;
-  align-items: start;
-  width: 100%;
-  font-size: var(--text-6xl);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-2);
-  padding-left: var(--space-8);
+   grid-area: a-1;
 }
+  .heading_m_p {
+    grid-area: a-5;
+  }
+
+
+  .portable_text {
+    grid-area: a-2;
+  }
+
 
 img .image_wrapper{
   width: 100%;
