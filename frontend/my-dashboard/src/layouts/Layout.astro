@@ -11,9 +11,10 @@ interface Props {
   description?: string
   image?: string
   seoType?: 'website' | 'article'
+    jsonLd?: Record<string, unknown>
 }
 
-const { title, description, image, seoType } = Astro.props
+const { title, description, image, seoType, jsonLd } = Astro.props
 
 const currentPath = Astro.url.pathname.replace(/\/$/, ""); 
 const nav = await getNavigation()
@@ -33,6 +34,7 @@ const explorations = await getExplorations()
       description={description}
       image={image}
       type={seoType}
+	  jsonLd={jsonLd}
     />
 	</head>
 	<body>

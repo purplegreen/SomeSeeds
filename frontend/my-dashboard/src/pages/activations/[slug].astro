@@ -16,6 +16,28 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params
 const activation = await getActivation(slug)
+const jsonLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": activation.title,
+  "startDate": activation.startDate,
+  "endDate": activation.endDate ?? activation.startDate,
+  "location": activation.location?.city ? {
+    "@type": "Place",
+    "name": activation.location.venue ?? activation.location.city,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": activation.location.city,
+      "addressCountry": activation.location.country
+    }
+  } : undefined,
+  "image": activation.coverImage,
+  "organizer": {
+    "@type": "Organization",
+    "name": "SomeSeeds",
+    "url": "https://www.someseeds.net"
+  }
+}
 
 ---
 
@@ -24,6 +46,7 @@ const activation = await getActivation(slug)
   description={activation.research?.text ? undefined : undefined}
   image={activation.coverImage}
   seoType="article"
+   jsonLd={jsonLd as Record<string, unknown>}
 >
 <ContentHeader
   title={activation.title}

@@ -5,6 +5,7 @@ interface Props {
   image?: string
   type?: 'website' | 'article'
   canonicalURL?: string
+  jsonLd?: Record<string, unknown>
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   image,
   type = 'website',
   canonicalURL = Astro.url.href,
+  jsonLd
 } = Astro.props
 
 const siteName = 'SomeSeeds'
@@ -39,3 +41,6 @@ const imageURL = image ?? `${siteURL}/og-default.jpg`
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
+{jsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}

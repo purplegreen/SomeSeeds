@@ -15,7 +15,18 @@ export async function getStaticPaths() {
 const { slug } = Astro.params
 const exploration = await getExploration(slug)
 const activations = await getActivationsByExploration(exploration._id)
-
+const jsonLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": exploration.title,
+  "description": exploration.summary,
+  "image": exploration.coverImage,
+  "author": {
+    "@type": "Organization",
+    "name": "SomeSeeds",
+    "url": "https://www.someseeds.net"
+  }
+}
 
 
 ---
@@ -25,8 +36,8 @@ const activations = await getActivationsByExploration(exploration._id)
   description={exploration.summary}
   image={exploration.coverImage}
   seoType="article"
+  jsonLd={jsonLd as Record<string, unknown>}
 >
-
   <ExplorationHeader
     title={exploration.title}
     description={exploration.summary}
