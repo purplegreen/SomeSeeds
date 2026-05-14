@@ -9,7 +9,7 @@ import ActivationOutcomes from "../../components/sections/ActivationOutcomes.ast
 
 export async function getStaticPaths() {
   const activations = await getAllActivations()
-  return activations.map(a => ({
+  return activations.map((a: any) => ({
     params: { slug: a.slug },
   }))
 }
@@ -19,7 +19,12 @@ const activation = await getActivation(slug)
 
 ---
 
-<Layout>
+<Layout
+  title={activation.title}
+  description={activation.research?.text ? undefined : undefined}
+  image={activation.coverImage}
+  seoType="article"
+>
 <ContentHeader
   title={activation.title}
   image={activation.coverImage}

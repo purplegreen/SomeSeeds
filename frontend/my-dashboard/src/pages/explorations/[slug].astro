@@ -7,7 +7,7 @@ import PortableTextRenderer from "../../components/ui/PortableTextRenderer.vue"
 
 export async function getStaticPaths() {
   const explorations = await getExplorations()
-  return explorations.map(e => ({
+  return explorations.map((e: any) => ({
     params: { slug: e.slug },
   }))
 }
@@ -20,7 +20,13 @@ const activations = await getActivationsByExploration(exploration._id)
 
 ---
 
-<Layout>
+<Layout 
+  title={exploration.title}
+  description={exploration.summary}
+  image={exploration.coverImage}
+  seoType="article"
+>
+
   <ExplorationHeader
     title={exploration.title}
     description={exploration.summary}

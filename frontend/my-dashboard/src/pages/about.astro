@@ -6,13 +6,15 @@ import Layout from "../layouts/Layout.astro"
 const data = await getSimplePage("about")
 ---
 
-<Layout>
+<Layout
+  title={data?.title}
+  description={data?.description}
+  image={data?.image}
+>
   <PageHeader 
     title={data?.title} 
     description={data?.description} 
     image={data?.image} 
-    category={data?.category}
-    tags={data?.tags}
     body={data?.body}
   />
 </Layout>

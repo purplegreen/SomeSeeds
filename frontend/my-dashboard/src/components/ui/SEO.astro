@@ -1,0 +1,41 @@
+---
+interface Props {
+  title?: string
+  description?: string
+  image?: string
+  type?: 'website' | 'article'
+  canonicalURL?: string
+}
+
+const {
+  title = 'SomeSeeds',
+  description = 'An interdisciplinary research initiative exploring restorative practices, regenerative principles, and modes of coexistence among life forms and their ecosystems.',
+  image,
+  type = 'website',
+  canonicalURL = Astro.url.href,
+} = Astro.props
+
+const siteName = 'SomeSeeds'
+const fullTitle = title === 'SomeSeeds' ? title : `${title} — ${siteName}`
+const siteURL = Astro.site ?? Astro.url.origin
+const imageURL = image ?? `${siteURL}/og-default.jpg`
+---
+
+<!-- Primary -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:type" content={type} />
+
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />
