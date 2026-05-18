@@ -12,21 +12,3 @@ const { label, href } = Astro.props
   : <span class="tag-pill">{label}</span>
 }
 
-<style>
-.tag-pill {
-  display: inline-flex;
-  align-items: center;
-  font-size: var(--text-m);
-  font-weight: 300;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: opacity 0.15s ease;
-}
-
-.tag-pill:hover {
-  opacity: 0.7;
-}
-</style>
