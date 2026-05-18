@@ -292,6 +292,7 @@ svg {
   align-items: center;
   font-size: var(--text-m);
   font-weight: 300;
+  line-height: 0.8;
   color: var(--color-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -339,6 +340,17 @@ svg {
   grid-template-rows: auto;
   gap: 2rem;
   grid-template-areas: "a-1  a-2 a-3";
+  padding: var(--space-24) var(--space-6);
+}
+
+.container_grid_two_rows {
+  display: grid;
+  grid-template-columns: 22vw 1fr 22vw;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+  grid-template-areas:
+    "a-1  a-2 a-3"
+    "a-4  a-5 a-6";
   padding: var(--space-24) var(--space-6);
 }
 

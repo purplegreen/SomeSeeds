@@ -45,17 +45,15 @@ const jsonLd: Record<string, unknown> = {
     category={exploration.category}
     tags={exploration.tags}
   />
-
+ <div class="container_grid_two_rows">
   {exploration.body && (
-    <section class="section">
-      <div class="portable-text-simple go_side">
+        <div class="portable_text">
         <PortableTextRenderer body={exploration.body} client:load />
-      </div>
-    </section>
+        </div>
   )}
 
   {exploration.collaborators && exploration.collaborators.length > 0 && (
-    <section class="section">
+    <div class="optional_box">
       <h2 class="heading-m">Collaborators</h2>
       <div class="collaborators">
         {exploration.collaborators.map(c => (
@@ -68,24 +66,35 @@ const jsonLd: Record<string, unknown> = {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   )}
-
+ </div>
   <ActivationsList activations={activations} />
 </Layout>
 
 <style>
+
+  .portable_text {
+     grid-area: a-2;
+  }
+
+  .optional_box {
+    grid-area: a-5;
+    gap: var(--space-6);
+    padding: var(--space-4);
+  }
 .collaborators {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2rem;
   align-items: center;
+  padding: var(--space-4) 0;
 }
 
 .collaborator {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.2rem;
 }
 
 .collaborator img {

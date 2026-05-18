@@ -10,132 +10,57 @@ interface Props {
   category?: { title: string }
   tags?: { title: string }[]
   body?: any[]
-  startDate?: string
-  startTime?: string
-  endDate?: string
-  endTime?: string
-  location?: { venue?: string; city?: string; country?: string }
-  partnerInstitutions?: { name?: string; logo?: string; url?: string }[]
 }
 
-const { title, description, image, category, tags, body, startDate, startTime, endDate, endTime, location, partnerInstitutions } = Astro.props
+const { title, description, image, category, tags, body } = Astro.props
 
-// ── Date formatting ───────────────────────────────────────
-const formatDate = (dateStr: string) => {
-  if (!dateStr) return ''
-  const d = new Date(dateStr)
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'short', year: 'numeric',
-    timeZone: 'UTC'
-  })
-}
-
-const isSameDay = startDate && endDate &&
-  new Date(startDate).toDateString() === new Date(endDate).toDateString()
-const isMultiDay = startDate && endDate && !isSameDay
-
-let dateDisplay = ''
-if (startDate) {
-  if (isMultiDay) {
-    const startDay = new Date(startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
-    const endFull = new Date(endDate!).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
-    dateDisplay = `${startDay}–${endFull}`
-  } else {
-    dateDisplay = formatDate(startDate)
-    if (startTime) {
-      dateDisplay += ` · ${startTime}`
-      if (endTime) dateDisplay += `–${endTime}`
-    }
-  }
-}
-
-const locationDisplay = location
-  ? [location.venue, location.city, location.country].filter(Boolean).join(', ')
-  : null
 ---
 
-<section class="section-header">
-  <h1 class=".display_l">{title}</h1>
-  <div class="image_wrapper">{image && <img src={image} alt={title} />}</div>
-</section>
+<section>
 
-{(dateDisplay || locationDisplay) && (
-  <div class="activation-meta go_side">
-    {dateDisplay && <span class="activation-meta__date">{dateDisplay}</span>}
-    {locationDisplay && <span class="activation-meta__location">{locationDisplay}</span>}
-  </div>
-)}
-
-{partnerInstitutions && partnerInstitutions.length > 0 && (
-  <div class="partner-institutions go_side">
-    {partnerInstitutions.map(p => (
-      <div class="partner">
-        {p.logo && <img src={p.logo} alt={p.name ?? ''} class="partner__logo" />}
-        {p.name && <span class="partner__name">{p.name}</span>}
-      </div>
-    ))}
-  </div>
-)}
-
-{description && (
-  <div class="portable-text-simple go_side">
-    <p>{description}</p>
-  </div>
-)}
-
-<div class="tags_cat__box go_side">
+<div class="first_wrapper">
+  <div class="container">
+  <h1 class="display_xl">{title}</h1>
+  <div class="tags_box">
   {category && <CategoryTag label={category.title} />}
   {tags && tags.length > 0 && (
     tags.map(tag => <TagPill label={tag.title} />)
   )}
 </div>
+  </div>
+  <div class="image_wrapper">{image && <img src={image} alt={title} />}</div>
+</div>
 
-{body && (
-  <div class="portable-text-simple go_side">
-    <PortableTextRenderer body={body} client:load />
+{(description) && (
+  <div class="container_grid_one_row">
+    {description && <p class="heading_m_p">{description}</p>}
   </div>
 )}
+ 
+</section>
 
 <style>
-.section-header {
+
+
+.first_wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   padding: var(--space-8);
   gap: var(--space-8);
 }
 
-.partner-institutions {
+.container {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-6);
-  margin-top: var(--space-4);
+  flex-direction: column;
+  width: 48vw;
+  height: 100%; 
+  gap: var(--space-16);
+  justify-content: end;
 }
 
-.partner {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.partner__logo {
-  height: 2rem;
-  width: auto;
-}
-
-.partner__name {
-  font-size: var(--text-m);
-  opacity: 0.7;
-}
-
-.display_l {
-  flex: 1;
-  font-size: var(--text-5xl);
-  font-weight: var(--font-weight-bold);
-}
 
 .image_wrapper {
   flex: 1;
@@ -152,25 +77,18 @@ const locationDisplay = location
   display: block;
 }
 
-.activation-meta {
+.tags_box {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-top: var(--space-2);
-  font-size: var(--text-m);
-}
-
-.activation-meta__location {
-  opacity: 0.6;
-}
-
-.tags_cat__box {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  align-items: start;
   gap: var(--space-4);
   margin-top: var(--space-2);
 }
+
+  .heading_m_p {
+    grid-area: a-2;
+  }
+
 
 @media (max-width: 768px) {
   .display_l {
