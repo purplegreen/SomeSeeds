@@ -175,13 +175,9 @@ export async function getActivation(slug: string) {
       },
       outcomes[]{
         label,
-        url,
-        "internalRef": internalRef->{
-          _type,
-          title,
-          "slug": slug.current
-        }
-      },
+        text,
+        url
+        },
       "explorations": explorations[]->{ title, "slug": slug.current },
       "categories": categories[]->{ title, slug },
       "tags": tags[]->{ title, slug }

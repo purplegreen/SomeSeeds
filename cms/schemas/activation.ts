@@ -262,17 +262,16 @@ export const activation = defineType({
               type: 'string',
             }),
             defineField({
+              name: 'text',
+              title: 'Text',
+              type: 'array',
+              of: [{type: 'block'}],
+            }),
+            defineField({
               name: 'url',
               title: 'External URL',
               description: 'Link to an external resource or result.',
               type: 'url',
-            }),
-            defineField({
-              name: 'internalRef',
-              title: 'Internal Reference',
-              description: 'Or link to another Activation or Exploration on the site.',
-              type: 'reference',
-              to: [{type: 'activation'}, {type: 'exploration'}],
             }),
           ],
           preview: {

@@ -1,7 +1,10 @@
 ---
+import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
+
 interface Props {
   outcomes?: {
     label?: string
+     text?: any[]
     url?: string
     internalRef?: { _type: string; title: string; slug: { current: string } }
   }[]
@@ -20,6 +23,9 @@ const { outcomes } = Astro.props
           {outcome.label && (
             <span class="outcome__label">{outcome.label}</span>
           )}
+            {outcome.text && (
+              <PortableTextRenderer body={outcome.text} client:load /> 
+            )}
           {outcome.url && (
             
             <a  href={outcome.url}
@@ -63,11 +69,11 @@ const { outcomes } = Astro.props
 .outcome {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-0);
 }
 
 .outcome__label {
-  font-size: var(--text-m);
+  font-size: var(--text-body);
   font-weight: 600;
 }
 
