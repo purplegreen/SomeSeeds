@@ -1,0 +1,39 @@
+---
+import { getSimplePage } from "../lib/sanity"
+import Layout from "../layouts/Layout.astro"
+import PortableTextRenderer from "../components/ui/PortableTextRenderer.vue"
+
+const data = await getSimplePage("contact")
+---
+
+<Layout
+  title={data?.title}
+  description={data?.description}
+>
+  <section class="container_grid">
+    
+    <h1 class="display_xl title">{data?.title}</h1>
+
+    {data?.body && (
+      <div class="portable_text">
+        <PortableTextRenderer body={data.body} client:load />
+      </div>
+    )}
+
+  </section>
+
+
+</Layout>
+
+<style>
+.title {
+  grid-area: a-1;
+}
+
+.portable_text {
+  grid-area: a-5;
+  margin-top: var(--space-6);
+}
+
+
+</style>
