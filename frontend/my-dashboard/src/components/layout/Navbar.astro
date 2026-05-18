@@ -41,7 +41,9 @@ const currentPath = rawPath.replace(/\/$/, "");
 </a>
   ))}
     {ctaLink && (
-    <Button href={ctaLink.href} variant="secondary" size="sm" client:load>
+    <Button href={ctaLink.href}
+     variant={currentPath === ctaLink.href ? "primary" : "secondary"}
+     size="sm" client:load>
       {ctaLink.label}
     </Button>
   )}

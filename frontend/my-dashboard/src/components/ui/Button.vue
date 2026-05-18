@@ -83,8 +83,8 @@ defineEmits(["click"]);
 /* ── Primary ── */
 .btn--primary {
   background-color: var(--color-accent);
-  color: #ffffff;
-  border-color: var(--color-accent);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .btn--primary:hover:not(.btn--disabled) {
