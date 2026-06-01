@@ -21,13 +21,39 @@ export const homepage = defineType({
       type: 'image',
     }),
 
-    // ── Intro ─────────────────────────────────────────────
+    // ── Sections ─────────────────────────────────────────────
     defineField({
-      name: 'introText',
-      title: 'Intro Text',
-      description: 'Short description below the hero.',
+      name: 'sections',
+      title: 'Sections',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'key',
+              title: 'Key',
+              description:
+                'Unique identifier used to place this section in the page (e.g. "approach"). Do not change once set.',
+              type: 'string',
+            }),
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'array',
+              of: [{type: 'block'}],
+            }),
+          ],
+          preview: {
+            select: {title: 'title', subtitle: 'key'},
+          },
+        },
+      ],
     }),
 
     // ── Poster Image ──────────────────────────────────────
@@ -45,10 +71,10 @@ export const homepage = defineType({
       options: {hotspot: true},
     }),
 
-    // ── Featured Cards ────────────────────────────────────
+    // ── Slider ────────────────────────────────────
     defineField({
-      name: 'featuredCards',
-      title: 'Featured Cards',
+      name: 'slider',
+      title: 'Slider',
       description:
         'Choose and order the cards shown in the homepage slider. Mix Explorations and Activations freely.',
       type: 'array',

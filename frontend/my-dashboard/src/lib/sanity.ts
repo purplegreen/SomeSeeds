@@ -17,7 +17,7 @@ export async function getHomepage() {
       introText,
       "posterImageOne": posterImageOne.asset->url,
       "posterImageOneOverlay": posterImageOneOverlay.asset->url,
-      "featuredCards": featuredCards[]->{
+      "slider": slider[]->{
         _type,
         title,
         "slug": slug.current,
