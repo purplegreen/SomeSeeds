@@ -93,6 +93,14 @@ export const homepage = defineType({
       options: {hotspot: true},
     }),
 
+    // ── Poster Image 3 ────────────────────────────────────
+    defineField({
+      name: 'posterImageThree',
+      title: 'Poster Image 3',
+      type: 'image',
+      options: {hotspot: true},
+    }),
+
     // ── Scroll Bar SVGs ───────────────────────────────────
     defineField({
       name: 'scrollBarSvgOne',
