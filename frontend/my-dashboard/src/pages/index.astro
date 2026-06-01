@@ -2,7 +2,9 @@
 import Layout from '../layouts/Layout.astro'
 import PortableTextRenderer from '../components/ui/PortableTextRenderer.vue'
 import CardsSlider from '../components/ui/CardsSlider.vue'
+import Button from '../components/ui/Button.vue'
 import { getHomepage } from '../lib/sanity'
+
 
 const homepage = await getHomepage()
 
@@ -52,9 +54,9 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
     <section class="home-section">
       <div class="container_grid_one_row">
         <div class="section__content">
-          <h2 class="heading_l">{approach.title}</h2>
+          <h2 class="display_xl">{approach.title}</h2>
           {approach.description && (
-            <div class="portable_text">
+            <div class="heading_m_p">
               <PortableTextRenderer body={approach.description} client:load />
             </div>
           )}
@@ -65,9 +67,9 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 
   <!-- ── 3. Poster Image 1 ────────────────────────────── -->
   {homepage?.posterImageOne && (
-    <section class="poster">
+    <div class="poster">
       <img src={homepage.posterImageOne} alt="" class="poster__image" />
-    </section>
+    </div>
   )}
 
   <!-- ── 4. Explorations ──────────────────────────────── -->
@@ -75,9 +77,9 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
     <section class="home-section">
       <div class="container_grid_one_row">
         <div class="section__content">
-          <h2 class="heading_l">{explorations.title}</h2>
+          <h2 class="display_xl">{explorations.title}</h2>
           {explorations.description && (
-            <div class="portable_text">
+            <div class="heading_m_p">
               <PortableTextRenderer body={explorations.description} client:load />
             </div>
           )}
@@ -95,26 +97,28 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 
   <!-- ── 6. Poster Image 2 ────────────────────────────── -->
   {homepage?.posterImageTwo && (
-    <section class="poster">
+    <div class="poster">
       <img src={homepage.posterImageTwo} alt="" class="poster__image" />
-    </section>
+    </div>
   )}
 
   <!-- ── 7. Get Involved ──────────────────────────────── -->
   {getInvolved && (
     <section class="home-section">
-      <div class="container_grid_one_row">
-        <div class="section__content">
-          <h2 class="heading_l">{getInvolved.title}</h2>
+      <div class="container_grid_two_rows">
+        <div class="two_row__content">
+          <h2 class="display_xl">{getInvolved.title}</h2>
           {getInvolved.description && (
-            <div class="portable_text">
+            <div class="heading_m_p">
               <PortableTextRenderer body={getInvolved.description} client:load />
             </div>
           )}
         </div>
         <div class="cta-box">
-          <a href="/contact" class="btn btn--primary">Get Involved</a>
-        </div>
+              <Button href="/contact" variant="primary" size="md" client:load>
+          Get Involved
+        </Button>
+          </div>
       </div>
     </section>
   )}
@@ -191,7 +195,7 @@ h1 {
 
 /* ── Sections ─────────────────────────────────────── */
 .home-section {
-  padding: var(--space-24) 0;
+  padding: var(--space-8) 0;
 }
 
 .section__content {
@@ -201,24 +205,37 @@ h1 {
   gap: var(--space-6);
 }
 
-.cta-box {
+
+.two_row__content {
   grid-area: a-2;
   display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cta-box {
+  grid-area: a-5;
+  display: flex;
   justify-content: flex-start;
-  margin-top: var(--space-8);
+  margin-top: var(--space-0);
+  padding-right: var(--space-4);
+  justify-self: flex-end;
 }
 
 /* ── Poster ───────────────────────────────────────── */
 .poster {
-  width: 100%;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
 }
 
-.poster__image {
+.poster__image{
   width: 100%;
   height: auto;
   display: block;
 }
-
 /* ── Slider ───────────────────────────────────────── */
 .home-slider {
   padding: var(--space-8) 0;
