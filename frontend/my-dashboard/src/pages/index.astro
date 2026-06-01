@@ -1,14 +1,215 @@
 ---
-import Welcome from '../components/sections/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
+import PortableTextRenderer from '../components/ui/PortableTextRenderer.vue'
+import CardsSlider from '../components/ui/CardsSlider.vue'
 import { getHomepage } from '../lib/sanity'
+
 const homepage = await getHomepage()
-console.log("homepage:", JSON.stringify(homepage, null, 2))
+
+const approach   = homepage?.sections?.find((s: any) => s.key === 'approach')
+const explorations = homepage?.sections?.find((s: any) => s.key === 'explorations')
+const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved')
 ---
 
 <Layout
   title="SomeSeeds"
   description="An interdisciplinary research initiative exploring restorative practices, regenerative principles, and modes of coexistence among life forms and their ecosystems."
 >
-	<Welcome />
+
+  <!-- ── 1. Hero ──────────────────────────────────────── -->
+  <section class="hero">
+    {homepage?.heroSvgOne && (
+      <div class="hero__svg hero__svg--one">
+        <img src={homepage.heroSvgOne} alt="" aria-hidden="true" />
+      </div>
+    )}
+    {homepage?.heroSvgTwo && (
+      <div class="hero__svg hero__svg--two">
+        <img src={homepage.heroSvgTwo} alt="" aria-hidden="true" />
+      </div>
+    )}
+    {homepage?.heroText && (
+      <h1 class="hero__text display_xl">{homepage.heroText}</h1>
+    )}
+  </section>
+
+  <!-- ── Fixed Scroll Bar ─────────────────────────────── -->
+  {(homepage?.scrollBarSvgOne || homepage?.scrollBarSvgTwo) && (
+    <div class="scroll-bar" aria-hidden="true">
+      {homepage?.scrollBarSvgOne && (
+        <img src={homepage.scrollBarSvgOne} alt="" class="scroll-bar__svg scroll-bar__svg--one" />
+      )}
+      {homepage?.scrollBarSvgTwo && (
+        <img src={homepage.scrollBarSvgTwo} alt="" class="scroll-bar__svg scroll-bar__svg--two" />
+      )}
+    </div>
+  )}
+
+  <!-- ── 2. Approach ──────────────────────────────────── -->
+  {approach && (
+    <section class="home-section">
+      <div class="container_grid_one_row">
+        <div class="section__content">
+          <h2 class="heading_l">{approach.title}</h2>
+          {approach.description && (
+            <div class="portable_text">
+              <PortableTextRenderer body={approach.description} client:load />
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── 3. Poster Image 1 ────────────────────────────── -->
+  {homepage?.posterImageOne && (
+    <section class="poster">
+      <img src={homepage.posterImageOne} alt="" class="poster__image" />
+    </section>
+  )}
+
+  <!-- ── 4. Explorations ──────────────────────────────── -->
+  {explorations && (
+    <section class="home-section">
+      <div class="container_grid_one_row">
+        <div class="section__content">
+          <h2 class="heading_l">{explorations.title}</h2>
+          {explorations.description && (
+            <div class="portable_text">
+              <PortableTextRenderer body={explorations.description} client:load />
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── 5. Slider ────────────────────────────────────── -->
+  {homepage?.slider && homepage.slider.length > 0 && (
+    <section class="home-slider">
+      <CardsSlider items={homepage.slider} client:load />
+    </section>
+  )}
+
+  <!-- ── 6. Poster Image 2 ────────────────────────────── -->
+  {homepage?.posterImageTwo && (
+    <section class="poster">
+      <img src={homepage.posterImageTwo} alt="" class="poster__image" />
+    </section>
+  )}
+
+  <!-- ── 7. Get Involved ──────────────────────────────── -->
+  {getInvolved && (
+    <section class="home-section">
+      <div class="container_grid_one_row">
+        <div class="section__content">
+          <h2 class="heading_l">{getInvolved.title}</h2>
+          {getInvolved.description && (
+            <div class="portable_text">
+              <PortableTextRenderer body={getInvolved.description} client:load />
+            </div>
+          )}
+        </div>
+        <div class="cta-box">
+          <a href="/contact" class="btn btn--primary">Get Involved</a>
+        </div>
+      </div>
+    </section>
+  )}
+
 </Layout>
+
+<style>
+/* ── Hero ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-8);
+}
+
+.hero__text {
+  position: relative;
+  z-index: 2;
+  max-width: 60vw;
+}
+
+.hero__svg {
+  position: absolute;
+}
+
+.hero__svg--one {
+  top: 20%;
+  right: 10%;
+}
+
+.hero__svg--two {
+  top: 40%;
+  right: 15%;
+}
+
+.hero__svg img {
+  width: auto;
+  height: auto;
+}
+
+/* ── Fixed Scroll Bar ─────────────────────────────── */
+.scroll-bar {
+  position: fixed;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 50;
+  pointer-events: none;
+}
+
+.scroll-bar__svg--one {
+  height: 12rem;
+  width: auto;
+}
+
+.scroll-bar__svg--two {
+  width: 2rem;
+  height: auto;
+}
+
+/* ── Sections ─────────────────────────────────────── */
+.home-section {
+  padding: var(--space-24) 0;
+}
+
+.section__content {
+  grid-area: a-2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cta-box {
+  grid-area: a-2;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: var(--space-8);
+}
+
+/* ── Poster ───────────────────────────────────────── */
+.poster {
+  width: 100%;
+}
+
+.poster__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Slider ───────────────────────────────────────── */
+.home-slider {
+  padding: var(--space-8) 0;
+}
+</style>
