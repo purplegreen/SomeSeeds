@@ -6,6 +6,7 @@ import {tag} from './schemas/tag'
 import {navigation} from './schemas/navigation'
 import {exploration} from './schemas/exploration'
 import {activation} from './schemas/activation'
+import {homepage} from './schemas/homepage'
 
 export default defineConfig({
   name: 'default',
@@ -39,7 +40,12 @@ export default defineConfig({
               .child(
                 S.list()
                   .title('Pages')
-                  .items([S.documentTypeListItem('simple_page').title('Simple Pages')]),
+                  .items([
+                    S.listItem()
+                      .title('Homepage')
+                      .child(S.document().schemaType('homepage').documentId('homepage')),
+                    S.documentTypeListItem('simple_page').title('Simple Pages'),
+                  ]),
               ),
 
             S.divider(),
@@ -61,6 +67,6 @@ export default defineConfig({
   ],
 
   schema: {
-    types: [simple_page, category, tag, navigation, exploration, activation],
+    types: [simple_page, category, tag, navigation, exploration, activation, homepage],
   },
 })

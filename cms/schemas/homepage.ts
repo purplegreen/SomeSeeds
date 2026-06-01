@@ -16,14 +16,8 @@ export const homepage = defineType({
 
     // ── Hero SVGs ─────────────────────────────────────────
     defineField({
-      name: 'heroSvgOne',
-      title: 'Hero SVG 1',
-      type: 'image',
-    }),
-
-    defineField({
-      name: 'heroSvgTwo',
-      title: 'Hero SVG 2',
+      name: 'heroSvg',
+      title: 'Hero SVG',
       type: 'image',
     }),
 
@@ -40,6 +34,13 @@ export const homepage = defineType({
     defineField({
       name: 'posterImageOne',
       title: 'Poster Image 1',
+      type: 'image',
+      options: {hotspot: true},
+    }),
+
+    defineField({
+      name: 'posterImageOneOverlay',
+      title: 'Poster Image 1 Overlay',
       type: 'image',
       options: {hotspot: true},
     }),
@@ -67,6 +68,13 @@ export const homepage = defineType({
       options: {hotspot: true},
     }),
 
+    defineField({
+      name: 'posterImageTwoOverlay',
+      title: 'Poster Image 2 Overlay',
+      type: 'image',
+      options: {hotspot: true},
+    }),
+
     // ── Scroll Bar SVGs ───────────────────────────────────
     defineField({
       name: 'scrollBarSvgOne',
@@ -88,4 +96,9 @@ export const homepage = defineType({
       of: [{type: 'block'}],
     }),
   ],
+  preview: {
+    prepare() {
+      return {title: 'Homepage'}
+    },
+  },
 })

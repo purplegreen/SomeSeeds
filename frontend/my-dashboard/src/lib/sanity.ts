@@ -8,6 +8,37 @@ export const sanityClient = createClient({
   token: import.meta.env.SANITY_API_TOKEN,
 });
 
+// ── Homepage ──
+export async function getHomepage() {
+  return sanityClient.fetch(
+    `*[_type == "homepage" && _id == "homepage"][0]{
+      heroText,
+      "heroSvg": heroSvg.asset->url,
+      introText,
+      "posterImageOne": posterImageOne.asset->url,
+      "posterImageOneOverlay": posterImageOneOverlay.asset->url,
+      "featuredCards": featuredCards[]->{
+        _type,
+        title,
+        "slug": slug.current,
+        summary,
+        "coverImage": coverImage.asset->url,
+        type,
+        status,
+        startDate,
+        startTime,
+        endDate,
+        location,
+      },
+      "posterImageTwo": posterImageTwo.asset->url,
+      "posterImageTwoOverlay": posterImageTwoOverlay.asset->url,
+      "scrollBarSvgOne": scrollBarSvgOne.asset->url,
+      "scrollBarSvgTwo": scrollBarSvgTwo.asset->url,
+      getInvolvedText,
+    }`,
+  );
+}
+
 // ── Pages ──
 export async function getSimplePage(slug: string) {
   return sanityClient.fetch(
