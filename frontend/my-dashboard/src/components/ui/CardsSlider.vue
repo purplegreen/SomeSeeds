@@ -12,6 +12,7 @@
         class="cards-slider__slide"
         ref="slideRefs"
       >
+        <ExplorationCard v-if="item._type === 'exploration'" v-bind="item" />
         <ActivationCard v-bind="item" />
       </div>
     </div>
@@ -49,6 +50,7 @@
 <script setup>
 import { ref, computed, onMounted, nextTick, watch } from "vue";
 import ActivationCard from "./ActivationCard.vue";
+import ExplorationCard from "./ExplorationCard.vue";
 
 const props = defineProps({
   items: { type: Array, required: true },
