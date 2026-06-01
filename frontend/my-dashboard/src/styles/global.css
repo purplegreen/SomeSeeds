@@ -169,9 +169,9 @@ body {
 
 .heading_m_p {
   /* heading medium paragraph */
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
   font-weight: 560;
-  line-height: 1.48;
+  line-height: 1.36;
   letter-spacing: -0.02cap;
   display: block;
   margin-block-start: 1em;
@@ -339,8 +339,8 @@ svg {
   grid-template-columns: 22vw 1fr 22vw;
   grid-template-rows: auto;
   gap: 2rem;
-  grid-template-areas: "a-1  a-2 a-3";
-  padding: var(--space-24) var(--space-6);
+  grid-template-areas: "a-1 a-2 a-2";
+  padding: var(--space-24) var(--space-20);
 }
 
 .container_grid_two_rows {
@@ -349,9 +349,9 @@ svg {
   grid-template-rows: auto auto;
   gap: 2rem;
   grid-template-areas:
-    "a-1  a-2 a-3"
-    "a-4  a-5 a-6";
-  padding: var(--space-24) var(--space-6);
+    "a-1  a-2 a-2"
+    "a-3  a-4 a-4";
+  padding: var(--space-24) var(--space-20);
 }
 
 /* ============================================
