@@ -1,6 +1,9 @@
 ---
 import Welcome from '../components/sections/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { getHomepage } from '../lib/sanity'
+const homepage = await getHomepage()
+console.log("homepage:", JSON.stringify(homepage, null, 2))
 ---
 
 <Layout

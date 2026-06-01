@@ -13,10 +13,13 @@ export async function getHomepage() {
   return sanityClient.fetch(
     `*[_type == "homepage" && _id == "homepage"][0]{
       heroText,
-      "heroSvg": heroSvg.asset->url,
-      introText,
-      "posterImageOne": posterImageOne.asset->url,
-      "posterImageOneOverlay": posterImageOneOverlay.asset->url,
+      "heroSvgOne": heroSvgOne.asset->url,
+      "heroSvgTwo": heroSvgTwo.asset->url,
+      "sections": sections[]{
+        key,
+        title,
+        description
+      },
       "slider": slider[]->{
         _type,
         title,
@@ -28,13 +31,13 @@ export async function getHomepage() {
         startDate,
         startTime,
         endDate,
-        location,
+        location
       },
+      "posterImageOne": posterImageOne.asset->url,
       "posterImageTwo": posterImageTwo.asset->url,
-      "posterImageTwoOverlay": posterImageTwoOverlay.asset->url,
+      "posterImageThree": posterImageThree.asset->url,
       "scrollBarSvgOne": scrollBarSvgOne.asset->url,
       "scrollBarSvgTwo": scrollBarSvgTwo.asset->url,
-      getInvolvedText,
     }`,
   );
 }
