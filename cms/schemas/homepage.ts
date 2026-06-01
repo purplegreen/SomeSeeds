@@ -16,8 +16,14 @@ export const homepage = defineType({
 
     // ── Hero SVGs ─────────────────────────────────────────
     defineField({
-      name: 'heroSvg',
-      title: 'Hero SVG',
+      name: 'heroSvgOne',
+      title: 'Hero SVG 1',
+      type: 'image',
+    }),
+
+    defineField({
+      name: 'heroSvgTwo',
+      title: 'Hero SVG 2',
       type: 'image',
     }),
 
@@ -56,21 +62,6 @@ export const homepage = defineType({
       ],
     }),
 
-    // ── Poster Image ──────────────────────────────────────
-    defineField({
-      name: 'posterImageOne',
-      title: 'Poster Image 1',
-      type: 'image',
-      options: {hotspot: true},
-    }),
-
-    defineField({
-      name: 'posterImageOneOverlay',
-      title: 'Poster Image 1 Overlay',
-      type: 'image',
-      options: {hotspot: true},
-    }),
-
     // ── Slider ────────────────────────────────────
     defineField({
       name: 'slider',
@@ -86,17 +77,18 @@ export const homepage = defineType({
       ],
     }),
 
-    // ── Poster Image 2 ────────────────────────────────────
+    // ── Poster Image ──────────────────────────────────────
     defineField({
-      name: 'posterImageTwo',
-      title: 'Poster Image 2',
+      name: 'posterImageOne',
+      title: 'Poster Image 1',
       type: 'image',
       options: {hotspot: true},
     }),
 
+    // ── Poster Image 2 ────────────────────────────────────
     defineField({
-      name: 'posterImageTwoOverlay',
-      title: 'Poster Image 2 Overlay',
+      name: 'posterImageTwo',
+      title: 'Poster Image 2',
       type: 'image',
       options: {hotspot: true},
     }),
@@ -112,14 +104,6 @@ export const homepage = defineType({
       name: 'scrollBarSvgTwo',
       title: 'Scroll Bar SVG 2',
       type: 'image',
-    }),
-
-    // ── Get Involved ──────────────────────────────────────
-    defineField({
-      name: 'getInvolvedText',
-      title: 'Get Involved Text',
-      type: 'array',
-      of: [{type: 'block'}],
     }),
   ],
   preview: {
