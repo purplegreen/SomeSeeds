@@ -18,6 +18,10 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 
   <!-- ── 1. Hero ──────────────────────────────────────── -->
   <section class="hero">
+
+    {homepage?.heroText && (
+      <h1 class="hero__text">{homepage.heroText}</h1>
+    )}
     {homepage?.heroSvgOne && (
       <div class="hero__svg hero__svg--one">
         <img src={homepage.heroSvgOne} alt="" aria-hidden="true" />
@@ -28,9 +32,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
         <img src={homepage.heroSvgTwo} alt="" aria-hidden="true" />
       </div>
     )}
-    {homepage?.heroText && (
-      <h1 class="hero__text display_xl">{homepage.heroText}</h1>
-    )}
+  
   </section>
 
   <!-- ── Fixed Scroll Bar ─────────────────────────────── -->
@@ -129,10 +131,19 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   padding: var(--space-8);
 }
 
-.hero__text {
+
+h1 {
+  font-size: 16vh;
+  line-height: 0.9;
+
+}
+.hero__text{
   position: relative;
   z-index: 2;
-  max-width: 60vw;
+  max-width: 80vw;
+  align-self: center;
+  color: var(--color-primary);
+  padding-left: var(--space-10);
 }
 
 .hero__svg {
