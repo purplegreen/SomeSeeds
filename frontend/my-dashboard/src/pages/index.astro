@@ -90,9 +90,9 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 
   <!-- ── 5. Slider ────────────────────────────────────── -->
   {homepage?.slider && homepage.slider.length > 0 && (
-    <section class="home-slider">
+    <div class="home-slider">
       <CardsSlider items={homepage.slider} client:load />
-    </section>
+    </div>
   )}
 
   <!-- ── 6. Poster Image 2 ────────────────────────────── -->
@@ -237,6 +237,6 @@ h1 {
 }
 /* ── Slider ───────────────────────────────────────── */
 .home-slider {
-  padding: var(--space-8) 0;
+  padding: var(--space-12) 0;
 }
 </style>

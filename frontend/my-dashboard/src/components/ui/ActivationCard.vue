@@ -93,20 +93,16 @@ const locationDisplay = computed(() => {
   gap: 0;
   overflow: hidden;
   min-width: 0;
-  max-width: 48vw;
-  height: 80vh;
+  max-width: 40vw;
+  height: 94%;
   text-decoration: none;
-  border-radius: var(--radius-s);
+  border-radius: 4px;
   color: var(--color-primary);
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
 }
 
 .activation-card:hover {
   color: var(--color-primary);
-  box-shadow: 0 0.8rem 3.2rem var(--color-neutral-400);
-  transform: translate(-0.2%);
+  border: 0.5px solid var(--color-primary);
 }
 
 .activation-card__image {
@@ -138,7 +134,7 @@ const locationDisplay = computed(() => {
 }
 
 .activation-card__title {
-  font-size: var(--text-big);
+  font-size: var(--text-3xl);
   line-height: var(--line-height-tight);
   font-weight: 600;
   margin: 0;
@@ -146,7 +142,7 @@ const locationDisplay = computed(() => {
 
 .activation-card__date,
 .activation-card__location {
-  font-size: var(--text-m);
+  font-size: var(--text-big);
   color: var(--color-primary);
   margin: 0;
 }

@@ -13,7 +13,7 @@
         ref="slideRefs"
       >
         <ExplorationCard v-if="item._type === 'exploration'" v-bind="item" />
-        <ActivationCard v-bind="item" />
+        <ActivationCard v-else v-bind="item" />
       </div>
     </div>
 
@@ -148,22 +148,21 @@ const onTouchEnd = (e) => {
   position: relative;
   width: 100%;
   overflow: hidden;
-  height: 80vh;
+  height: 94vh;
 }
 
 .cards-slider__track {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
   height: 100%;
   will-change: transform;
-  gap: 2rem;
+  gap: 0.5rem;
 }
 
 .cards-slider__slide {
   flex-shrink: 0;
   height: 100%;
-  width: calc(48vw - 1rem); /* leaves ~ visible for next card */
+  width: calc(44vw - 2rem); /* leaves ~ visible for next card */
 }
 
 .cards-slider__arrow {
