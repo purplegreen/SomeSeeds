@@ -8,13 +8,11 @@
       <div class="activation-card__tags">
         <CategoryTag v-if="type" :label="type" />
       </div>
-
-      <h3 class="activation-card__title">{{ title }}</h3>
-
-      <p v-if="dateDisplay" class="activation-card__date">{{ dateDisplay }}</p>
       <p v-if="locationDisplay" class="activation-card__location">
         {{ locationDisplay }}
       </p>
+      <p v-if="dateDisplay" class="activation-card__date">{{ dateDisplay }}</p>
+      <h3 class="activation-card__title">{{ title }}</h3>
     </div>
   </a>
 </template>

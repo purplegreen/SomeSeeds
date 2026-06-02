@@ -15,6 +15,9 @@
   --color-primary-contra: #ff85de;
   --color-primary-contra-hover: #ffa2e6;
 
+  --color-secondary: #f794ba;
+  --color-secondary-hover: #ff8787;
+
   --color-neutral-200: #e5e4e4;
   --color-neutral-300: #c8c8c8;
   --color-neutral-400: #a9a9a9;
@@ -291,9 +294,9 @@ svg {
   display: inline-flex;
   align-items: center;
   font-size: var(--text-m);
-  font-weight: 300;
+  font-weight: 900;
   line-height: 0.8;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-decoration: none;
