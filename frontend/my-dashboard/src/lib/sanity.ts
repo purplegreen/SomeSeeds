@@ -31,7 +31,8 @@ export async function getHomepage() {
         startDate,
         startTime,
         endDate,
-        location
+        location,
+        "explorations": explorations[]->{ title, "slug": slug.current }
       },
       "posterImageOne": posterImageOne.asset->url,
       "posterImageTwo": posterImageTwo.asset->url,

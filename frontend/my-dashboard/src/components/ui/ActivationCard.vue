@@ -2,6 +2,25 @@
   <a :href="`/activations/${slug}`" class="activation-card">
     <div v-if="coverImage" class="activation-card__image">
       <img :src="coverImage" :alt="title" />
+      <div
+        v-if="explorations && explorations.length > 0"
+        class="activation-card__overlay"
+      >
+        <div class="activation-card__overlay-content">
+          <p class="activation-card__overlay-label">Part of</p>
+          <div class="activation-card__overlay-explorations">
+            <a
+              v-for="exploration in explorations"
+              :key="exploration.slug"
+              :href="`/explorations/${exploration.slug}`"
+              class="activation-card__overlay-item"
+              @click.stop
+            >
+              {{ exploration.title }}
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="activation-card__body">
@@ -31,6 +50,7 @@ const props = defineProps({
   endTime: String,
   location: Object,
   coverImage: String,
+  explorations: Array,
 });
 
 const formatDate = (dateStr) => {
@@ -105,6 +125,7 @@ const locationDisplay = computed(() => {
 }
 
 .activation-card__image {
+  position: relative;
   width: 100%;
   min-height: 0;
   flex: 1;
@@ -116,6 +137,65 @@ const locationDisplay = computed(() => {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.activation-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.activation-card:hover .activation-card__overlay {
+  opacity: 1;
+}
+
+.activation-card__overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.activation-card__overlay-label {
+  font-size: 22vw;
+  color: var(--color-white);
+  opacity: 0.7;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.activation-card__overlay-explorations {
+  width: 100%;
+  font-size: 3vw;
+  line-height: 1.2;
+  line-break: normal;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.activation-card__overlay-item {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--text-l);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+  background: white;
+  color: black;
+  text-align: center;
+}
+
+.activation-card__overlay-item:hover {
+  text-decoration: underline;
+  background-color: var(--color-white);
 }
 
 .activation-card__body {
