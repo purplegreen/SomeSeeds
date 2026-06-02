@@ -98,6 +98,7 @@ const locationDisplay = computed(() => {
   text-decoration: none;
   border-radius: 4px;
   color: var(--color-primary);
+  border: 0.5px solid var(--color-white);
 }
 
 .activation-card:hover {
