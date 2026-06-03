@@ -91,7 +91,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 5. Slider ────────────────────────────────────── -->
   {homepage?.slider && homepage.slider.length > 0 && (
     <div class="home-slider">
-      <CardsSlider items={homepage.slider} client:load />
+      <CardsSlider items={homepage.slider} gap={12} client:load />
     </div>
   )}
 
