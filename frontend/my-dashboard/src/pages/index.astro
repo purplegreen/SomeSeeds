@@ -148,20 +148,23 @@ h1 {
   align-self: center;
   color: var(--color-primary);
   padding-left: var(--space-10);
+  mix-blend-mode: normal;
 }
 
 .hero__svg {
-  position: absolute;
+  position: fixed;
 }
 
 .hero__svg--one {
   left: 10%;
   top: 40%;
+   mix-blend-mode: multiply;
 }
 
 .hero__svg--two {
   top: 10%;
  right: 15%;
+   mix-blend-mode: screen;
 }
 
 .hero__svg img {
@@ -240,3 +243,34 @@ h1 {
   padding: var(--space-12) 0;
 }
 </style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  // SVG one — rotates clockwise
+  gsap.to('.hero__svg--one img', {
+    rotation: 360,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: 'body',
+      start: 'top top',
+      end: '+=3000',
+      scrub: 1,
+    }
+  })
+
+  // SVG two — rotates counter-clockwise
+  gsap.to('.hero__svg--two img', {
+    rotation: -360,
+    ease: 'none',
+   scrollTrigger: {
+      trigger: 'body',
+      start: 'top top',
+      end: '+=3000',
+      scrub: 1,
+    }
+  })
+</script>
