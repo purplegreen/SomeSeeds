@@ -32,7 +32,13 @@ export async function getHomepage() {
         startTime,
         endDate,
         location,
-        "explorations": explorations[]->{ title, "slug": slug.current }
+        "partnerInstitutions": partnerInstitutions[]{
+          name,
+          "logo": logo.asset->url,
+          url
+        },
+        "explorations": explorations[]->{ title, "slug": slug.current },
+        
       },
       "posterImageOne": posterImageOne.asset->url,
       "posterImageTwo": posterImageTwo.asset->url,

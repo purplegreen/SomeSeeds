@@ -29,10 +29,24 @@
       <div class="activation-card__tags">
         <CategoryTag v-if="type" :label="type" />
       </div>
+      <div
+        v-if="partnerInstitutions && partnerInstitutions.length > 0"
+        class="activation-card__partners"
+      >
+        <template v-for="p in partnerInstitutions" :key="p.name">
+          <img
+            v-if="p && p.logo"
+            :src="p.logo"
+            :alt="p.name ?? ''"
+            class="activation-card__partner-logo"
+          />
+        </template>
+      </div>
+      <p v-if="dateDisplay" class="activation-card__date">{{ dateDisplay }}</p>
       <p v-if="locationDisplay" class="activation-card__location">
         {{ locationDisplay }}
       </p>
-      <p v-if="dateDisplay" class="activation-card__date">{{ dateDisplay }}</p>
+
       <h3 class="activation-card__title">{{ title }}</h3>
     </div>
   </a>
@@ -53,6 +67,7 @@ const props = defineProps({
   location: Object,
   coverImage: String,
   explorations: Array,
+  partnerInstitutions: Array,
 });
 
 const formatDate = (dateStr) => {
@@ -145,7 +160,7 @@ const locationDisplay = computed(() => {
 
 .activation-card__overlay {
   position: absolute;
-  bottom: 5%;
+  bottom: 25%;
   left: 5%;
   width: 12rem;
   height: 12rem;
@@ -232,8 +247,23 @@ const locationDisplay = computed(() => {
 .activation-card__date,
 .activation-card__location {
   font-size: var(--text-big);
+  line-height: var(--line-height-snug);
   color: var(--color-primary);
   margin: 0;
+}
+
+.activation-card__partners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  margin-top: var(--space-0);
+  padding-bottom: var(--space-4);
+}
+
+.activation-card__partner-logo {
+  height: 2rem;
+  width: auto;
 }
 
 @media (max-width: 768px) {
