@@ -7,7 +7,9 @@
         class="activation-card__overlay"
       >
         <div class="activation-card__overlay-content">
-          <p class="activation-card__overlay-label">Part of</p>
+          <p class="activation-card__overlay-label">
+            Contributing to the Exploration:
+          </p>
           <div class="activation-card__overlay-explorations">
             <a
               v-for="exploration in explorations"
@@ -114,14 +116,16 @@ const locationDisplay = computed(() => {
   max-width: 40vw;
   height: 94%;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: var(--radius-lg);
   color: var(--color-primary);
   border: 0.5px solid var(--color-white);
+  background-color: var(--color-white);
 }
 
 .activation-card:hover {
   color: var(--color-primary);
-  border: 0.5px solid var(--color-primary);
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
 .activation-card__image {
@@ -141,12 +145,18 @@ const locationDisplay = computed(() => {
 
 .activation-card__overlay {
   position: absolute;
-  inset: 0;
+  top: 25%;
+  left: 5%;
+  width: 12rem;
+  height: 12rem;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  background-color: white;
+  border-radius: 50%;
 }
 
 .activation-card:hover .activation-card__overlay {
@@ -156,25 +166,24 @@ const locationDisplay = computed(() => {
 .activation-card__overlay-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   gap: var(--space-4);
   padding: var(--space-6);
   text-align: center;
 }
 
 .activation-card__overlay-label {
-  font-size: 22vw;
-  color: var(--color-white);
+  font-size: var(--text-s);
+  line-height: var(--line-height-snug);
   opacity: 0.7;
   margin: 0;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .activation-card__overlay-explorations {
   width: 100%;
-  font-size: 3vw;
-  line-height: 1.2;
+  font-size: var(--text-m);
+  line-height: var(--line-height-snug);
   line-break: normal;
   display: flex;
   flex-direction: column;
