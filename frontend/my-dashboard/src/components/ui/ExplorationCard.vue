@@ -16,7 +16,7 @@
             font-weight="600"
             letter-spacing="4"
           >
-            <textPath href="#circle-text">EXPLORATION ·</textPath>
+            <textPath href="#circle-text">Exploration</textPath>
           </text>
         </svg>
       </div>
@@ -83,15 +83,15 @@ defineProps({
 
 .exploration-card__tag {
   position: absolute;
-  top: var(--space-3);
-  left: var(--space-3);
+  top: 5%;
+  right: 5%;
   width: 8rem;
   height: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
   z-index: 2;
 }

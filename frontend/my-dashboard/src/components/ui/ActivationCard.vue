@@ -145,7 +145,7 @@ const locationDisplay = computed(() => {
 
 .activation-card__overlay {
   position: absolute;
-  top: 25%;
+  bottom: 5%;
   left: 5%;
   width: 12rem;
   height: 12rem;
@@ -170,6 +170,7 @@ const locationDisplay = computed(() => {
   gap: var(--space-4);
   padding: var(--space-6);
   text-align: center;
+  transform: rotate(-20deg);
 }
 
 .activation-card__overlay-label {

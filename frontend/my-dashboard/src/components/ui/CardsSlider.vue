@@ -156,7 +156,7 @@ const onTouchEnd = (e) => {
   align-items: flex-start;
   height: 100%;
   will-change: transform;
-  gap: 0.5rem;
+  gap: 2rem;
 }
 
 .cards-slider__slide {
