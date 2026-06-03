@@ -48,14 +48,15 @@ defineProps({
   max-width: 40vw;
   height: 94%;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: var(--radius-lg);
   color: var(--color-primary);
-  border: 0.5px solid var(--color-white);
+  background-color: var(--color-white);
 }
 
 .exploration-card:hover {
   color: var(--color-primary);
-  border: 0.5px solid var(--color-primary);
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
 .exploration-card__image {
@@ -73,7 +74,7 @@ defineProps({
 }
 
 .exploration-card__image {
-  position: relative; /* needed for absolute positioning of badge */
+  position: relative;
   width: 100%;
   min-height: 0;
   flex: 1;
@@ -92,17 +93,7 @@ defineProps({
   color: var(--color-primary);
   background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
-  animation: spin 8s linear infinite;
   z-index: 2;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .exploration-card__body {
