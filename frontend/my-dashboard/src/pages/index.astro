@@ -50,7 +50,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   {approach && (
     <section class="home-section">
       <div class="container_grid_one_row">
-        <div class="section__content">
+        <div class="section__content bg_full">
           <h2 class="display_xl">{approach.title}</h2>
           {approach.description && (
             <div class="heading_m_p">
@@ -73,7 +73,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   {explorations && (
     <section class="home-section">
       <div class="container_grid_one_row">
-        <div class="section__content">
+        <div class="section__content bg_full">
           <h2 class="display_xl">{explorations.title}</h2>
           {explorations.description && (
             <div class="heading_m_p">
@@ -102,8 +102,8 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 7. Get Involved ──────────────────────────────── -->
   {getInvolved && (
     <section class="home-section">
-      <div class="container_grid_two_rows">
-        <div class="two_row__content">
+        <div class="container_grid_two_rows">
+        <div class="two_row__content bg_full">
           <h2 class="display_xl">{getInvolved.title}</h2>
           {getInvolved.description && (
             <div class="heading_m_p">
@@ -203,6 +203,14 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+}
+
+.bg_full {
+  background-color: white;
+  position: relative;
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+
 }
 
 
