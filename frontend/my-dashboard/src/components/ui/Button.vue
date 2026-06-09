@@ -85,12 +85,15 @@ defineEmits(["click"]);
   background-color: var(--color-accent);
   color: var(--color-primary);
   border-color: var(--color-primary);
+  background-color: var(--color-white);
+  position: relative;
 }
 
 .btn--primary:hover:not(.btn--disabled) {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  position: relative;
 }
 
 /* ── Secondary ── */
