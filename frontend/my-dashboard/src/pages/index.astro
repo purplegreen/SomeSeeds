@@ -24,16 +24,13 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
     {homepage?.heroText && (
       <h1 class="hero__text">{homepage.heroText}</h1>
     )}
-    {homepage?.heroSvgOne && (
-      <div class="hero__svg hero__svg--one">
-        <img src={homepage.heroSvgOne} alt="" aria-hidden="true" />
-      </div>
-    )}
-    {homepage?.heroSvgTwo && (
-      <div class="hero__svg hero__svg--two">
-        <img src={homepage.heroSvgTwo} alt="" aria-hidden="true" />
-      </div>
-    )}
+  <div class="hero__svg hero__svg--one">
+  <img src="/bacter.svg" alt="" aria-hidden="true" />
+</div>
+
+<div class="hero__svg hero__svg--two">
+  <img src="/moves.svg" alt="" aria-hidden="true" />
+</div>
   
   </section>
 
@@ -148,7 +145,7 @@ h1 {
   align-self: center;
   color: var(--color-primary);
   padding-left: var(--space-10);
-  mix-blend-mode: normal;
+  mix-blend-mode: multiply;
 }
 
 .hero__svg {
@@ -164,7 +161,7 @@ h1 {
 .hero__svg--two {
   top: 10%;
  right: 15%;
-   mix-blend-mode: screen;
+   mix-blend-mode: multiply;
 }
 
 .hero__svg img {
