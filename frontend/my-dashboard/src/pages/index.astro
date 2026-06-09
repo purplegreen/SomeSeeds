@@ -110,12 +110,13 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
               <PortableTextRenderer body={getInvolved.description} client:load />
             </div>
           )}
-        </div>
-        <div class="cta-box">
+              <div class="cta-box">
               <Button href="/contact" variant="primary" size="md" client:load>
           Get Involved
         </Button>
           </div>
+        </div>
+    
       </div>
     </section>
   )}
@@ -140,7 +141,7 @@ h1 {
 }
 .hero__text{
   position: relative;
-  z-index: 2;
+  z-index: 1;
   max-width: 80vw;
   align-self: center;
   color: var(--color-primary);
@@ -150,18 +151,20 @@ h1 {
 
 .hero__svg {
   position: fixed;
+  z-index: 2;
 }
 
 .hero__svg--one {
   left: 10%;
   top: 40%;
-   mix-blend-mode: multiply;
+  z-index: 2;
+  mix-blend-mode: hard-light;
 }
 
 .hero__svg--two {
   top: 10%;
  right: 15%;
-   mix-blend-mode: multiply;
+   mix-blend-mode: hard-light;
 }
 
 .hero__svg img {
@@ -210,7 +213,7 @@ h1 {
   position: relative;
   padding: var(--space-6);
   border-radius: var(--radius-lg);
-
+  z-index: 10;
 }
 
 
@@ -246,6 +249,7 @@ h1 {
 /* ── Slider ───────────────────────────────────────── */
 .home-slider {
   padding: var(--space-12) 0;
+  z-index: 10;
 }
 </style>
 
