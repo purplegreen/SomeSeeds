@@ -35,16 +35,16 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   </section>
 
   <!-- ── Fixed Scroll Bar ─────────────────────────────── -->
-  {(homepage?.scrollBarSvgOne || homepage?.scrollBarSvgTwo) && (
-    <div class="scroll-bar" aria-hidden="true">
-      {homepage?.scrollBarSvgOne && (
-        <img src={homepage.scrollBarSvgOne} alt="" class="scroll-bar__svg scroll-bar__svg--one" />
-      )}
-      {homepage?.scrollBarSvgTwo && (
-        <img src={homepage.scrollBarSvgTwo} alt="" class="scroll-bar__svg scroll-bar__svg--two" />
-      )}
-    </div>
+<div class="scroll-bar" aria-hidden="false">
+  {homepage?.scrollBarSvgOne && (
+    <img src={homepage.scrollBarSvgOne} alt="" class="scroll-bar__svg scroll-bar__svg--one" />
   )}
+  {homepage?.scrollBarSvgTwo && (
+    <a href="#top" aria-label="Back to top">
+      <img src={homepage.scrollBarSvgTwo} alt="Back to top" class="scroll-bar__svg scroll-bar__svg--two" />
+    </a>
+  )}
+</div>
 
   <!-- ── 2. Approach ──────────────────────────────────── -->
   {approach && (
@@ -173,9 +173,13 @@ h1 {
 }
 
 /* ── Fixed Scroll Bar ─────────────────────────────── */
-.scroll-bar {
+
+
+.scroll-bar__svg--one {
+  height: 106vh;
+  width: auto;
   position: fixed;
-  right: var(--space-4);
+  right: -1%;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -186,14 +190,14 @@ h1 {
   pointer-events: none;
 }
 
-.scroll-bar__svg--one {
-  height: 12rem;
-  width: auto;
-}
-
 .scroll-bar__svg--two {
-  width: 2rem;
+  width: 6rem;
   height: auto;
+  position: fixed;
+  right: 0%;
+ z-index: 60;
+  pointer-events: auto;
+  mix-blend-mode: exclusion;
 }
 
 /* ── Sections ─────────────────────────────────────── */
@@ -282,4 +286,19 @@ h1 {
       scrub: 1,
     }
   })
+
+  // scroll-bar svg two — moves from bottom to top as page scrolls
+gsap.fromTo('.scroll-bar__svg--two', 
+  { top: '85vh' },  // starts at bottom
+  {
+    top: '1vh',    // ends at top
+    ease: 'none',
+    scrollTrigger: {
+      trigger: 'body',
+      start: 'top top',
+      end: `+=${document.body.scrollHeight}`,
+      scrub: 1,
+    }
+  }
+)
 </script>
