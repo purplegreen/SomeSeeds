@@ -241,6 +241,7 @@ const locationDisplay = computed(() => {
   font-size: var(--text-3xl);
   line-height: var(--line-height-tight);
   font-weight: 600;
+  margin: 0;
   padding: var(--space-2) var(--space-0);
 }
 

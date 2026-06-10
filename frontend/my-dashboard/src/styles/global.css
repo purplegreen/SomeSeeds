@@ -175,7 +175,6 @@ body {
   font-size: var(--text-2xl);
   font-weight: 360;
   line-height: 1.36;
-  letter-spacing: -0.02cap;
   display: block;
   margin-block-start: 1em;
   margin-block-end: 1em;
