@@ -23,7 +23,7 @@
       :disabled="current === 0"
       aria-label="Previous"
     >
-      <img src="/icons/arrow_left.svg" alt="Previous" />
+      <img src="/icons/arrow-left.svg" alt="Previous" />
     </button>
     <button
       class="cards-slider__arrow cards-slider__arrow--next"
@@ -31,7 +31,7 @@
       :disabled="current === displayItems.length - 1"
       aria-label="Next"
     >
-      <img src="/icons/arrow_right.svg" alt="Next" />
+      <img src="/icons/arrow-right.svg" alt="Next" />
     </button>
 
     <div class="cards-slider__dots">

@@ -16,14 +16,14 @@
       @click="prev"
       aria-label="Previous image"
     >
-      <img src="/icons/arrow_left.svg" alt="Previous" />
+      <img src="/icons/arrow-left.svg" alt="Previous" />
     </button>
     <button
       class="slider__arrow slider__arrow--next"
       @click="next"
       aria-label="Next image"
     >
-      <img src="/icons/arrow_right.svg" alt="Next" />
+      <img src="/icons/arrow-right.svg" alt="Next" />
     </button>
 
     <div class="slider__dots">
