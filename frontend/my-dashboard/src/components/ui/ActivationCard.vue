@@ -226,7 +226,7 @@ const locationDisplay = computed(() => {
 .activation-card__body {
   display: flex;
   flex-direction: column;
-  padding: var(--space-3);
+  padding: var(--space-4) var(--space-4);
   flex-shrink: 0;
 }
 
@@ -241,7 +241,7 @@ const locationDisplay = computed(() => {
   font-size: var(--text-3xl);
   line-height: var(--line-height-tight);
   font-weight: 600;
-  margin: 0;
+  padding: var(--space-2) var(--space-0);
 }
 
 .activation-card__date,
