@@ -172,8 +172,8 @@ body {
 
 .heading_m_p {
   /* heading medium paragraph */
-  font-size: var(--text-3xl);
-  font-weight: 560;
+  font-size: var(--text-2xl);
+  font-weight: 360;
   line-height: 1.36;
   letter-spacing: -0.02cap;
   display: block;
@@ -268,8 +268,11 @@ a:not(.btn):hover {
 
 /* Selection */
 ::selection {
-  background-color: var(--color-accent);
-  color: #ffffff;
+  ::selection {
+    background-color: var(--color-primary);
+    color: white;
+    opacity: 0.8;
+  }
 }
 
 /* ============================================
