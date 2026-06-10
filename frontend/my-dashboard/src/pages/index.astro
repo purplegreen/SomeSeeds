@@ -87,7 +87,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 
   <!-- ── 5. Slider ────────────────────────────────────── -->
   {homepage?.slider && homepage.slider.length > 0 && (
-    <div class="home-slider">
+    <div class="home-slider" id="slider">
       <CardsSlider items={homepage.slider} gap={12} client:load />
     </div>
   )}
@@ -307,4 +307,12 @@ gsap.fromTo('.scroll-bar__svg--two',
     }
   }
 )
+ document.querySelector('.scroll-bar a')?.addEventListener('click', (e) => {
+    e.preventDefault()
+    const scrollY = window.scrollY
+    const target = scrollY < window.innerHeight 
+      ? '#slider'
+      : '#top'
+    document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' })
+  })
 </script>
