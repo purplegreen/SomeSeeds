@@ -108,21 +108,24 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 
 .dropdown__menu {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 4rem;
-  left: 0px;
-  width: 100%;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 100;
   padding: 1rem 2rem;
   background-color: var(--color-white);
   box-shadow: 0 0.2rem 0.2rem var(--color-neutral-200);
   transform: translate(-0.2%);
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .dropdown__menu.open {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .dropdown__items {
@@ -171,7 +174,6 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
   align-items: start;
   justify-content: start;
   gap: 4px;
-  border: 2px solid var(--color-primary);
 }
 
 .activation_dot {
@@ -188,9 +190,10 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 
 .dropdown__exploration-title:hover,
 .dropdown__activation-item:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-white);
+  text-decoration: underline;
+  color: var(--color-primary);
+  text-underline-offset: var(--space-0);
+  text-decoration-thickness: 3px;
 }
 
 .dropdown__menu ul {
