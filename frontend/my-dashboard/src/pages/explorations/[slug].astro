@@ -47,7 +47,7 @@ const jsonLd: Record<string, unknown> = {
   />
  <div class="container_grid_two_rows">
   {exploration.body && (
-        <div class="portable_text">
+        <div class="body_text heading_m_p">
         <PortableTextRenderer body={exploration.body} client:load />
         </div>
   )}
@@ -74,7 +74,7 @@ const jsonLd: Record<string, unknown> = {
 
 <style>
 
-  .portable_text {
+  .body_text {
      grid-area: a-2;
   }
 

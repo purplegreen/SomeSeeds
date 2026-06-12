@@ -17,9 +17,9 @@ const { research } = Astro.props
 
 <div class="container_grid">
     <h2 class="display_l">Research</h2>
-<div class="portable_text">
+<div class="body_text heading_m_p">
     {research.text && (
-        <PortableTextRenderer body={research.text} client:load /> 
+        <PortableTextRenderer body={research.text} client:load />
     )}
     </div>
 </div>
@@ -62,8 +62,8 @@ const { research } = Astro.props
   padding-left: var(--space-24);
 }
 
-.portable_text {
-  grid-area: a-5; 
+.body_text {
+  grid-area: a-5;
   padding-bottom: var(--space-16);
 }
 

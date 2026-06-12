@@ -43,7 +43,7 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
    
     <h2 class="display_l">{typeDisplay}</h2>
   
-    <div class="portable_text">{documentation.text && ( <PortableTextRenderer body={documentation.text} client:load />
+    <div class="body_text heading_m_p">{documentation.text && ( <PortableTextRenderer body={documentation.text} client:load />
     )}
     </div>
 </div>
@@ -64,8 +64,8 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
   padding-left: var(--space-24);
 }
 
-.portable_text {
-  grid-area: a-5; 
+.body_text {
+  grid-area: a-5;
   padding-bottom: var(--space-16);
 }
 
