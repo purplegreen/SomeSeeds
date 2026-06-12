@@ -28,3 +28,6 @@
 # Dotenv and similar local-only files
 *.local
 .env
+
+# claude
+.claude/settings.local.json
