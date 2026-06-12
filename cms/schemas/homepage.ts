@@ -113,6 +113,13 @@ export const homepage = defineType({
       title: 'Scroll Bar SVG 2',
       type: 'image',
     }),
+
+    // ── SEO ───────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+    }),
   ],
   preview: {
     prepare() {

@@ -7,8 +7,9 @@ const data = await getSimplePage("contact")
 ---
 
 <Layout
-  title={data?.title}
-  description={data?.description}
+  title={data?.seo?.metaTitle ?? data?.title}
+  description={data?.seo?.metaDescription ?? data?.description}
+  image={data?.seo?.ogImage}
 >
   <section class="container_grid">
     

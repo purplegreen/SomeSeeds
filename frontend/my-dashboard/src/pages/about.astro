@@ -7,9 +7,9 @@ const data = await getSimplePage("about")
 ---
 
 <Layout
-  title={data?.title}
-  description={data?.description}
-  image={data?.image}
+  title={data?.seo?.metaTitle ?? data?.title}
+  description={data?.seo?.metaDescription ?? data?.description}
+  image={data?.seo?.ogImage ?? data?.image}
 >
   <PageHeader
     title={data?.title}

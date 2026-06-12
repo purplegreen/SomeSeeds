@@ -14,8 +14,9 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 ---
 
 <Layout
-  title="SomeSeeds"
-  description="An interdisciplinary research initiative exploring restorative practices, regenerative principles, and modes of coexistence among life forms and their ecosystems."
+  title={homepage?.seo?.metaTitle ?? 'SomeSeeds'}
+  description={homepage?.seo?.metaDescription ?? 'An interdisciplinary research initiative exploring restorative practices, regenerative principles, and modes of coexistence among life forms and their ecosystems.'}
+  image={homepage?.seo?.ogImage}
 >
 
   <!-- ── 1. Hero ──────────────────────────────────────── -->

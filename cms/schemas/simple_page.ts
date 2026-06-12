@@ -92,5 +92,12 @@ export const simple_page = defineType({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
     }),
+
+    // ── SEO ───────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+    }),
   ],
 })

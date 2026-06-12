@@ -7,6 +7,7 @@ import {navigation} from './schemas/navigation'
 import {exploration} from './schemas/exploration'
 import {activation} from './schemas/activation'
 import {homepage} from './schemas/homepage'
+import {seo} from './schemas/seo'
 
 export default defineConfig({
   name: 'default',
@@ -67,6 +68,6 @@ export default defineConfig({
   ],
 
   schema: {
-    types: [simple_page, category, tag, navigation, exploration, activation, homepage],
+    types: [simple_page, category, tag, navigation, exploration, activation, homepage, seo],
   },
 })

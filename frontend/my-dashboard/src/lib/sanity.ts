@@ -45,6 +45,11 @@ export async function getHomepage() {
       "posterImageThree": posterImageThree.asset->url,
       "scrollBarSvgOne": scrollBarSvgOne.asset->url,
       "scrollBarSvgTwo": scrollBarSvgTwo.asset->url,
+      seo {
+        metaTitle,
+        metaDescription,
+        "ogImage": ogImage.asset->url
+      }
     }`,
   );
 }
@@ -58,7 +63,12 @@ export async function getSimplePage(slug: string) {
       body,
       "image": image.asset->url,
       "category": category->{ title, slug },
-      "tags": tags[]->{ title, slug }
+      "tags": tags[]->{ title, slug },
+      seo {
+        metaTitle,
+        metaDescription,
+        "ogImage": ogImage.asset->url
+      }
     }`,
     { slug },
   );
@@ -183,6 +193,7 @@ export async function getActivation(slug: string) {
       _id,
       title,
       "slug": slug.current,
+      summary,
       type,
       status,
       startDate,

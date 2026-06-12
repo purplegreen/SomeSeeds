@@ -43,7 +43,7 @@ const jsonLd: Record<string, unknown> = {
 
 <Layout
   title={activation.title}
-  description={activation.research?.text ? undefined : undefined}
+  description={activation.summary}
   image={activation.coverImage}
   seoType="article"
    jsonLd={jsonLd as Record<string, unknown>}

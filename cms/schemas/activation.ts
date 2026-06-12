@@ -26,6 +26,14 @@ export const activation = defineType({
     }),
 
     defineField({
+      name: 'summary',
+      title: 'Summary',
+      type: 'text',
+      rows: 3,
+      description: 'Short description for SEO and preview cards.',
+    }),
+
+    defineField({
       name: 'type',
       title: 'Type',
       type: 'string',
