@@ -99,8 +99,13 @@ const currentPath = rawPath.replace(/\/$/, "");
     font-size: var(--text-m);
     font-weight: 600;
     text-decoration: none;
-    transition: opacity 0.15s ease; 
+    transition: opacity 0.15s ease;
     align-items: center;
+    position: relative;
+    z-index: 210;
+  }
+
+  .navbar__links :global(.btn) {
     position: relative;
     z-index: 210;
   }
