@@ -7,7 +7,8 @@
       {{ label }}
     </button>
 
-    <div class="dropdown__menu" :class="{ open: isOpen }">
+    <Transition name="dropdown">
+    <div class="dropdown__menu" v-if="isOpen">
       <div class="dropdown__items">
         <div
           v-for="exploration in explorations"
@@ -51,6 +52,7 @@
         </div>
       </div>
     </div>
+    </Transition>
   </div>
 </template>
 
@@ -107,25 +109,36 @@ const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 }
 
 .dropdown__menu {
-  display: none;
+  display: flex;
   position: fixed;
   top: 4rem;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 4rem);
   z-index: 100;
   padding: 1rem 2rem;
   background-color: var(--color-white);
   box-shadow: 0 0.2rem 0.2rem var(--color-neutral-200);
-  transform: translate(-0.2%);
   align-items: flex-start;
   justify-content: flex-start;
+  overflow-y: auto;
 }
 
-.dropdown__menu.open {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.dropdown-enter-to,
+.dropdown-leave-from {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .dropdown__items {
