@@ -52,7 +52,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
       <div class="container_grid">
         <h2 class="display_l">{approach.title}</h2>
         {approach.description && (
-          <div class="heading_m_p">
+          <div class="p_medium">
             <PortableTextRenderer body={approach.description} client:load />
           </div>
         )}
@@ -73,7 +73,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
       <div class="container_grid">
         <h2 class="display_l">{explorations.title}</h2>
         {explorations.description && (
-          <div class="heading_m_p">
+          <div class="p_medium">
             <PortableTextRenderer body={explorations.description} client:load />
           </div>
         )}
@@ -102,7 +102,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
         <h2 class="display_l">{getInvolved.title}</h2>
         <div class="section__body">
           {getInvolved.description && (
-            <div class="heading_m_p">
+            <div class="p_medium">
               <PortableTextRenderer body={getInvolved.description} client:load />
             </div>
           )}
@@ -208,7 +208,7 @@ h1 {
   padding-left: var(--space-24);
 }
 
-.heading_m_p {
+.p_medium {
   grid-area: a-5;
 }
 

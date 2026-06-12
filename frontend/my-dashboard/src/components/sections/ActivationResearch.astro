@@ -17,7 +17,7 @@ const { research } = Astro.props
 
 <div class="container_grid">
     <h2 class="display_l">Research</h2>
-<div class="body_text heading_m_p">
+<div class="body_text p_medium">
     {research.text && (
         <PortableTextRenderer body={research.text} client:load />
     )}

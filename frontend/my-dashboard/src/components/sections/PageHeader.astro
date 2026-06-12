@@ -23,7 +23,7 @@ const { title, description, image, body } = Astro.props
 
   <div class="container_grid">
   <h1 class="display_l">{title}</h1>
-  <div class="heading_m_p">
+  <div class="p_medium">
   {description}
  </div>
 </div>
@@ -34,7 +34,7 @@ const { title, description, image, body } = Astro.props
 </section>
 
   <div class="container_grid">
-  <div class="heading_m_p">
+  <div class="p_medium">
   <PortableTextRenderer body={body} client:load />
   </div>
 </div>
@@ -45,7 +45,7 @@ const { title, description, image, body } = Astro.props
 .display_l {
    grid-area: a-1;
 }
-  .heading_m_p {
+  .p_medium {
     grid-area: a-5;
   }
 

@@ -43,7 +43,7 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
    
     <h2 class="display_l">{typeDisplay}</h2>
   
-    <div class="body_text heading_m_p">{documentation.text && ( <PortableTextRenderer body={documentation.text} client:load />
+    <div class="body_text p_medium">{documentation.text && ( <PortableTextRenderer body={documentation.text} client:load />
     )}
     </div>
 </div>

@@ -170,8 +170,8 @@ body {
   line-height: var(--line-height-tight); /* m */
 }
 
-.heading_m_p {
-  /* heading medium paragraph */
+.p_medium {
+  /* medium paragraph */
   font-size: var(--text-2xl);
   font-weight: 360;
   line-height: 1.36;
