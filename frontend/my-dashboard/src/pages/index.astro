@@ -49,15 +49,13 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 2. Approach ──────────────────────────────────── -->
   {approach && (
     <section class="home-section">
-      <div class="container_grid_one_row">
-        <div class="section__content bg_full">
-          <h2 class="display_xl">{approach.title}</h2>
-          {approach.description && (
-            <div class="heading_m_p">
-              <PortableTextRenderer body={approach.description} client:load />
-            </div>
-          )}
-        </div>
+      <div class="container_grid">
+        <h2 class="display_l">{approach.title}</h2>
+        {approach.description && (
+          <div class="heading_m_p">
+            <PortableTextRenderer body={approach.description} client:load />
+          </div>
+        )}
       </div>
     </section>
   )}
@@ -72,15 +70,13 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 4. Explorations ──────────────────────────────── -->
   {explorations && (
     <section class="home-section">
-      <div class="container_grid_one_row">
-        <div class="section__content bg_full">
-          <h2 class="display_xl">{explorations.title}</h2>
-          {explorations.description && (
-            <div class="heading_m_p">
-              <PortableTextRenderer body={explorations.description} client:load />
-            </div>
-          )}
-        </div>
+      <div class="container_grid">
+        <h2 class="display_l">{explorations.title}</h2>
+        {explorations.description && (
+          <div class="heading_m_p">
+            <PortableTextRenderer body={explorations.description} client:load />
+          </div>
+        )}
       </div>
     </section>
   )}
@@ -102,21 +98,20 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 7. Get Involved ──────────────────────────────── -->
   {getInvolved && (
     <section class="home-section">
-        <div class="container_grid_two_rows">
-        <div class="two_row__content bg_full">
-          <h2 class="display_xl">{getInvolved.title}</h2>
+      <div class="container_grid">
+        <h2 class="display_l">{getInvolved.title}</h2>
+        <div class="section__body">
           {getInvolved.description && (
             <div class="heading_m_p">
               <PortableTextRenderer body={getInvolved.description} client:load />
             </div>
           )}
-              <div class="cta-box">
-              <Button href="/contact" variant="primary" size="md" client:load>
-          Get In Touch
-        </Button>
+          <div class="cta-box">
+            <Button href="/contact" variant="primary" size="md" client:load>
+              Get In Touch
+            </Button>
           </div>
         </div>
-    
       </div>
     </section>
   )}
@@ -208,35 +203,25 @@ h1 {
   padding: var(--space-2) 0;
 }
 
-.section__content {
-  grid-area: a-2;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+.display_l {
+  grid-area: a-1;
+  padding-left: var(--space-24);
 }
 
-.bg_full {
-  background-color: white;
-  position: relative;
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  z-index: 10;
+.heading_m_p {
+  grid-area: a-5;
 }
 
-
-.two_row__content {
-  grid-area: a-2;
+.section__body {
+  grid-area: a-5;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
 }
 
 .cta-box {
-  grid-area: a-4;
   display: flex;
   justify-content: flex-start;
-  margin-top: var(--space-0);
-  justify-self: center;
 }
 
 /* ── Poster ───────────────────────────────────────── */
