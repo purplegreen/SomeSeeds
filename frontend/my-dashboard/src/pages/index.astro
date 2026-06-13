@@ -52,7 +52,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   {approach && (
     <section class="home-section">
       <div class="container_grid">
-        <h2 class="display_l">{approach.title}</h2>
+        <h2 class="display_xl">{approach.title}</h2>
         {approach.description && (
           <div class="p_medium">
             <PortableTextRenderer body={approach.description} client:load />
@@ -73,7 +73,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   {explorations && (
     <section class="home-section">
       <div class="container_grid">
-        <h2 class="display_l">{explorations.title}</h2>
+        <h2 class="display_xl">{explorations.title}</h2>
         {explorations.description && (
           <div class="p_medium">
             <PortableTextRenderer body={explorations.description} client:load />
@@ -101,7 +101,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   {getInvolved && (
     <section class="home-section">
       <div class="container_grid">
-        <h2 class="display_l">{getInvolved.title}</h2>
+        <h2 class="display_xl">{getInvolved.title}</h2>
         <div class="section__body">
           {getInvolved.description && (
             <div class="p_medium">
@@ -133,8 +133,8 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 
 h1 {
   font-size: 20vh;
-  line-height: 0.79;
-  font-weight: 800;
+  line-height: 0.76;
+  font-weight: 490;
 
 }
 .hero__text{
@@ -142,7 +142,7 @@ h1 {
   z-index: 1;
   max-width: 90vw;
   align-self: center;
-  color: var(--color-primary);
+  color: var(--text-primary);
   padding-left: var(--space-10);
   mix-blend-mode: multiply;
 }
@@ -197,7 +197,7 @@ h1 {
   right: 0%;
   z-index: 160;
   pointer-events: auto;
-  mix-blend-mode: exclusion;
+  mix-blend-mode: color-dodge;
   will-change: transform;
 }
 
@@ -206,7 +206,7 @@ h1 {
   padding: var(--space-2) 0;
 }
 
-.display_l {
+.display_xl {
   grid-area: a-1;
   padding-left: var(--space-24);
 }
