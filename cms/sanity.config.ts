@@ -7,6 +7,7 @@ import {navigation} from './schemas/navigation'
 import {exploration} from './schemas/exploration'
 import {activation} from './schemas/activation'
 import {homepage} from './schemas/homepage'
+import {contact_page} from './schemas/contact_page'
 import {seo} from './schemas/seo'
 
 export default defineConfig({
@@ -45,6 +46,9 @@ export default defineConfig({
                     S.listItem()
                       .title('Homepage')
                       .child(S.document().schemaType('homepage').documentId('homepage')),
+                    S.listItem()
+                      .title('Contact Page')
+                      .child(S.document().schemaType('contact_page').documentId('contact_page')),
                     S.documentTypeListItem('simple_page').title('Simple Pages'),
                   ]),
               ),
@@ -68,6 +72,6 @@ export default defineConfig({
   ],
 
   schema: {
-    types: [simple_page, category, tag, navigation, exploration, activation, homepage, seo],
+    types: [simple_page, category, tag, navigation, exploration, activation, homepage, contact_page, seo],
   },
 })

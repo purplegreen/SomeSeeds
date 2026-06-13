@@ -5,6 +5,7 @@ import {tag} from './tag'
 import {exploration} from './exploration'
 import {activation} from './activation'
 import {homepage} from './homepage'
+import {contact_page} from './contact_page'
 
 export const schemaTypes = [
   simple_page,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   exploration,
   activation,
   homepage,
+  contact_page,
 ]

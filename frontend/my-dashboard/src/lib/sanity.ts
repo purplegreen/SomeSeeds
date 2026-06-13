@@ -54,6 +54,32 @@ export async function getHomepage() {
   );
 }
 
+// ── Contact Page ──
+export async function getContactPage() {
+  return sanityClient.fetch(
+    `*[_type == "contact_page" && _id == "contact_page"][0]{
+      title,
+      description,
+      body,
+      destinationEmail,
+      formFields[]{
+        label,
+        "fieldKey": fieldKey.current,
+        fieldType,
+        placeholder,
+        required
+      },
+      submitButtonLabel,
+      successMessage,
+      seo {
+        metaTitle,
+        metaDescription,
+        "ogImage": ogImage.asset->url
+      }
+    }`,
+  );
+}
+
 // ── Pages ──
 export async function getSimplePage(slug: string) {
   return sanityClient.fetch(

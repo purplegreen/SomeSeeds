@@ -1,9 +1,11 @@
 ---
-import { getSimplePage } from "../lib/sanity"
+export const prerender = false
+import { getContactPage } from "../lib/sanity"
 import Layout from "../layouts/Layout.astro"
 import PortableTextRenderer from "../components/ui/PortableTextRenderer.vue"
+import ContactForm from "../components/ui/ContactForm.vue"
 
-const data = await getSimplePage("contact")
+const data = await getContactPage()
 ---
 
 <Layout
@@ -12,7 +14,7 @@ const data = await getSimplePage("contact")
   image={data?.seo?.ogImage}
 >
   <section class="container_grid">
-    
+
     <h1 class="display_xl title">{data?.title}</h1>
 
     {data?.body && (
@@ -21,9 +23,18 @@ const data = await getSimplePage("contact")
       </div>
     )}
 
+    {data?.formFields?.length > 0 && (
+      <div class="form_area">
+        <ContactForm
+          formFields={data.formFields}
+          submitButtonLabel={data.submitButtonLabel}
+          successMessage={data.successMessage}
+          client:load
+        />
+      </div>
+    )}
+
   </section>
-
-
 </Layout>
 
 <style>
@@ -36,5 +47,8 @@ const data = await getSimplePage("contact")
   margin-top: var(--space-6);
 }
 
-
+.form_area {
+  grid-area: a-5;
+  margin-top: var(--space-8);
+}
 </style>
