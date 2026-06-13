@@ -13,7 +13,7 @@ const data = await getContactPage()
   description={data?.seo?.metaDescription ?? data?.description}
   image={data?.seo?.ogImage}
 >
-  <section class="container_grid">
+  <section class="container_grid_three_rows">
 
     <h1 class="display_xl title">{data?.title}</h1>
 
@@ -43,12 +43,12 @@ const data = await getContactPage()
 }
 
 .portable_text {
-  grid-area: a-5;
+  grid-area: a-4;
   margin-top: var(--space-6);
 }
 
 .form_area {
-  grid-area: a-5;
+  grid-area: a-6;
   margin-top: var(--space-8);
 }
 </style>
