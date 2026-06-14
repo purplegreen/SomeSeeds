@@ -316,6 +316,7 @@ svg {
   height: auto;
   max-height: 85vh;
   object-fit: cover;
+  object-position: center;
 }
 
 /* ============================================
@@ -461,6 +462,16 @@ svg {
 }
 
 @media (max-width: 768px) {
+  .container_grid,
+  .container_grid_one_row,
+  .container_grid_two_rows,
+  .container_grid_three_rows {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    padding: var(--space-8) 0;
+    border: 1px solid red;
+  }
 }
 @media (max-width: 480px) {
 }
