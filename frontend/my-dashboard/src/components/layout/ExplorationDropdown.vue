@@ -134,21 +134,24 @@ onUnmounted(() => {
   overflow-y: auto;
 }
 
-.dropdown-enter-active,
+/* Panel is anchored under the navbar and unrolls top -> bottom (clip-path
+   reveal), so it never overlaps the navbar it lives inside. */
+.dropdown-enter-active {
+  transition: clip-path 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .dropdown-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: clip-path 0.32s cubic-bezier(0.55, 0, 1, 0.45);
 }
 
 .dropdown-enter-from,
 .dropdown-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
+  clip-path: inset(0 0 100% 0);
 }
 
 .dropdown-enter-to,
 .dropdown-leave-from {
-  opacity: 1;
-  transform: translateY(0);
+  clip-path: inset(0 0 0 0);
 }
 
 .dropdown__items {

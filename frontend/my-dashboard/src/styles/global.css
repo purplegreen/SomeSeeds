@@ -125,6 +125,9 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Always reserve the scrollbar gutter so locking scroll (overflow: hidden)
+     when the dropdown opens doesn't widen the page and shift everything. */
+  scrollbar-gutter: stable;
 }
 
 body {
