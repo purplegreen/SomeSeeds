@@ -79,8 +79,8 @@ const close = () => (isOpen.value = false);
 
 const isActive = computed(() => props.currentPath.startsWith("/explorations"));
 
-// Lock page scroll while the dropdown is open so the navbar stays fixed in place
-// under the full-viewport overlay instead of drifting away on scroll.
+// Pin the navbar in place while the dropdown is open (via the .nav-dropdown-open
+// class) so it doesn't drift away on scroll under the full-viewport overlay.
 watch(isOpen, (open) => {
   document.documentElement.classList.toggle("nav-dropdown-open", open);
 });

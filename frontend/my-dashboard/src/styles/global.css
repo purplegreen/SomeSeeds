@@ -1,6 +1,9 @@
-/* Lock page scroll while the Explorations dropdown overlay is open */
-html.nav-dropdown-open {
-  overflow: hidden;
+/* Pin the navbar in place while the Explorations dropdown overlay is open so it
+   doesn't drift away on scroll. Uses sticky (not fixed) to avoid a layout jump,
+   and avoids touching overflow so the scrollbar never disappears / shifts the page. */
+html.nav-dropdown-open .navbar {
+  position: sticky;
+  top: 0;
 }
 
 /* ============================================
@@ -125,9 +128,6 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  /* Always reserve the scrollbar gutter so locking scroll (overflow: hidden)
-     when the dropdown opens doesn't widen the page and shift everything. */
-  scrollbar-gutter: stable;
 }
 
 body {
