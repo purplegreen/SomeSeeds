@@ -1,3 +1,8 @@
+/* Lock page scroll while the Explorations dropdown overlay is open */
+html.nav-dropdown-open {
+  overflow: hidden;
+}
+
 /* ============================================
    CSS CUSTOM PROPERTIES
    ============================================ */
@@ -170,6 +175,19 @@ body {
   font-size: var(--text-3xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight); /* m */
+}
+
+.p_lead {
+  /* highlight paragraph */
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.36;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
 }
 
 .p_medium {
