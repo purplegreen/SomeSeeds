@@ -14,7 +14,7 @@ const { activations } = Astro.props
     <p class="no-content">No activations yet.</p>
   </section>
 ) : activations.length === 1 ? (
-  <section class="section">
+  <section class="section section--centered">
     <ActivationCard {...activations[0]} />
   </section>
 ) : (
@@ -27,5 +27,10 @@ const { activations } = Astro.props
 .no-content {
   opacity: 0.4;
   font-size: var(--text-m);
+}
+
+.section--centered {
+  display: flex;
+  justify-content: center;
 }
 </style>
