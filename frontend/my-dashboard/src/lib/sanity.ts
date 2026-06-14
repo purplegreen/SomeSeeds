@@ -171,9 +171,11 @@ export async function getExploration(slug: string) {
       "coverImage": coverImage.asset->url,
       "category": category->{ title, slug },
       "tags": tags[]->{ title, slug },
-       "collaborators": collaborators[]{
+       activationsTitle,
+      activationsDescription,
+      "collaborators": collaborators[]{
         name,
-        "logo": logo.asset->url,  // ← this resolves the URL
+        "logo": logo.asset->url,
         url
       }
     }`,

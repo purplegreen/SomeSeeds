@@ -70,11 +70,16 @@ const jsonLd: Record<string, unknown> = {
     </div>
   )}
  </div>
+  {(exploration.activationsTitle || exploration.activationsDescription) && (
+    <div class="container_grid_two_rows">
+      {exploration.activationsTitle && <h2 class="display_l">{exploration.activationsTitle}</h2>}
+      {exploration.activationsDescription && <p class="body_s">{exploration.activationsDescription}</p>}
+    </div>
+  )}
   <ActivationsList activations={activations} />
 </Layout>
 
 <style>
-
   .body_text {
      grid-area: a-2;
   }
@@ -102,4 +107,14 @@ const jsonLd: Record<string, unknown> = {
   height: 2rem;
   width: auto;
 }
+
+.display_l{
+ grid-area: a-1;
+}
+
+.body_s {
+ grid-area: a-4;
+}
+
+
 </style>

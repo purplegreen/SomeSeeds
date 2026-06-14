@@ -79,6 +79,22 @@ export const exploration = defineType({
       ],
     }),
 
+    // ── Activations Section ───────────────────────────────────
+    defineField({
+      name: 'activationsTitle',
+      title: 'Activations Section Title',
+      description: 'Heading displayed above the list of Activations on this Exploration page.',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'activationsDescription',
+      title: 'Activations Section Description',
+      description: 'Short text displayed below the Activations section title.',
+      type: 'text',
+      rows: 2,
+    }),
+
     // ── Collaborators ─────────────────────────────────────────
     defineField({
       name: 'collaborators',
