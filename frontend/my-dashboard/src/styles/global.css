@@ -311,6 +311,13 @@ svg {
   height: 100%;
 }
 
+.poster {
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  object-fit: cover;
+}
+
 /* ============================================
   TAGS & CATEGORIES
    ============================================ */

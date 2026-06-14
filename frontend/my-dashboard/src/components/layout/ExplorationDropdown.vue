@@ -8,54 +8,56 @@
     </button>
 
     <Transition name="dropdown">
-    <div class="dropdown__menu" v-if="isOpen">
-      <div class="dropdown__items">
-        <div
-          v-for="exploration in explorations"
-          :key="exploration.slug"
-          class="dropdown__exploration"
-        >
-          <a
-            :href="`/explorations/${exploration.slug}`"
-            class="dropdown__exploration-title"
-            :class="{
-              'navbar__link--active':
-                currentPath === `/explorations/${exploration.slug}`,
-            }"
-            @click="close"
+      <div class="dropdown__menu" v-if="isOpen">
+        <div class="dropdown__items">
+          <div
+            v-for="exploration in explorations"
+            :key="exploration.slug"
+            class="dropdown__exploration"
           >
-            {{ exploration.title }}
-          </a>
-
-          <ul
-            v-if="exploration.activations && exploration.activations.length > 0"
-            class="dropdown__activations"
-          >
-            <li
-              v-for="activation in exploration.activations"
-              :key="activation.slug"
+            <a
+              :href="`/explorations/${exploration.slug}`"
+              class="dropdown__exploration-title"
+              :class="{
+                'navbar__link--active':
+                  currentPath === `/explorations/${exploration.slug}`,
+              }"
+              @click="close"
             >
-              <a
-                :href="`/activations/${activation.slug}`"
-                class="dropdown__activation-item"
-                :class="{
-                  'navbar__link--active':
-                    currentPath === `/activations/${activation.slug}`,
-                }"
-                @click="close"
+              {{ exploration.title }}
+            </a>
+
+            <ul
+              v-if="
+                exploration.activations && exploration.activations.length > 0
+              "
+              class="dropdown__activations"
+            >
+              <li
+                v-for="activation in exploration.activations"
+                :key="activation.slug"
               >
-                <span class="activation_dot"
-                  ><img src="/activation_dot.svg" alt="description"
-                /></span>
-                <span class="dropdown__activation-title">{{
-                  activation.title
-                }}</span>
-              </a>
-            </li>
-          </ul>
+                <a
+                  :href="`/activations/${activation.slug}`"
+                  class="dropdown__activation-item"
+                  :class="{
+                    'navbar__link--active':
+                      currentPath === `/activations/${activation.slug}`,
+                  }"
+                  @click="close"
+                >
+                  <span class="activation_dot"
+                    ><img src="/activation_dot.svg" alt="description"
+                  /></span>
+                  <span class="dropdown__activation-title">{{
+                    activation.title
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
     </Transition>
   </div>
 </template>
@@ -84,7 +86,7 @@ const close = () => (isOpen.value = false);
 const isActive = computed(
   () =>
     props.currentPath.startsWith("/explorations") ||
-    props.currentPath.startsWith("/activations")
+    props.currentPath.startsWith("/activations"),
 );
 
 // Pin the navbar in place while the dropdown is open (via the .nav-dropdown-open
