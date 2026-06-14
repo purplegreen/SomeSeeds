@@ -38,6 +38,10 @@
               <a
                 :href="`/activations/${activation.slug}`"
                 class="dropdown__activation-item"
+                :class="{
+                  'navbar__link--active':
+                    currentPath === `/activations/${activation.slug}`,
+                }"
                 @click="close"
               >
                 <span class="activation_dot"
@@ -77,7 +81,11 @@ const isOpen = ref(false);
 const open = () => (isOpen.value = true);
 const close = () => (isOpen.value = false);
 
-const isActive = computed(() => props.currentPath.startsWith("/explorations"));
+const isActive = computed(
+  () =>
+    props.currentPath.startsWith("/explorations") ||
+    props.currentPath.startsWith("/activations")
+);
 
 // Pin the navbar in place while the dropdown is open (via the .nav-dropdown-open
 // class) so it doesn't drift away on scroll under the full-viewport overlay.
@@ -215,7 +223,8 @@ onUnmounted(() => {
 }
 
 .dropdown__exploration-title:hover,
-.dropdown__activation-item:hover {
+.dropdown__activation-item:hover,
+.dropdown__activation-item.navbar__link--active {
   text-decoration: underline;
   color: var(--color-primary);
   text-underline-offset: var(--space-0);

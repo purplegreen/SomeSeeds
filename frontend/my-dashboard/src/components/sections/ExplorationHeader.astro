@@ -33,7 +33,7 @@ const { title, description, image, category, tags, body } = Astro.props
 
 {(description) && (
   <div class="container_grid_one_row">
-    {description && <p class="p_medium">{description}</p>}
+    {description && <p class="p_lead">{description}</p>}
   </div>
 )}
  
@@ -85,7 +85,7 @@ const { title, description, image, category, tags, body } = Astro.props
   margin-top: var(--space-2);
 }
 
-  .p_medium {
+  .p_lead {
     grid-column: 2;
   }
 
