@@ -47,19 +47,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from "vue";
 import ActivationCard from "./ActivationCard.vue";
 import ExplorationCard from "./ExplorationCard.vue";
 
-const props = defineProps({
-  items: { type: Array, required: true },
-  gap: { type: Number, default: 12 },
+interface Props {
+  items: Record<string, unknown>[];
+  gap?: number;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  gap: 12,
 });
 
-const sliderRef = ref(null);
-const slideRefs = ref([]);
-const slideWidths = ref([]);
+const sliderRef = ref<HTMLDivElement | null>(null);
+const slideRefs = ref<HTMLElement[]>([]);
+const slideWidths = ref<number[]>([]);
 const sliderWidth = ref(0);
 const current = ref(0);
 
@@ -104,7 +108,7 @@ onMounted(() => {
 
 watch(current, (val) => {
   if (val >= props.items.length) {
-    const track = sliderRef.value?.querySelector(".cards-slider__track");
+    const track = sliderRef.value?.querySelector<HTMLElement>(".cards-slider__track");
     track?.addEventListener(
       "transitionend",
       () => {
@@ -127,15 +131,15 @@ const prev = () => {
 const next = () => {
   if (current.value < displayItems.value.length - 1) current.value++;
 };
-const goTo = (index) => {
+const goTo = (index: number) => {
   current.value = index;
 };
 
 let touchStartX = 0;
-const onTouchStart = (e) => {
+const onTouchStart = (e: TouchEvent) => {
   touchStartX = e.touches[0].clientX;
 };
-const onTouchEnd = (e) => {
+const onTouchEnd = (e: TouchEvent) => {
   const diff = touchStartX - e.changedTouches[0].clientX;
   if (Math.abs(diff) > 50) {
     diff > 0 ? next() : prev();
