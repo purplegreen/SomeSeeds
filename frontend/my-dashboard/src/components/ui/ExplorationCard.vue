@@ -118,10 +118,9 @@ defineProps({
 }
 
 @media (max-width: 768px) {
-  a.activation-card {
+  a.exploration-card {
     width: 100%;
-  }
-  @media (max-width: 480px) {
+    max-width: 100%;
   }
 }
 </style>

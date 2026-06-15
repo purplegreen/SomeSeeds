@@ -86,7 +86,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 5. Slider ────────────────────────────────────── -->
   {homepage?.slider && homepage.slider.length > 0 && (
     <div class="home-slider" id="slider">
-      <CardsSlider items={homepage.slider} gap={12} client:load />
+      <CardsSlider items={homepage.slider} gap={32} client:load />
     </div>
   )}
 
@@ -257,15 +257,6 @@ h1 {
 
 /* ── Mobile ───────────────────────────────────────── */
 @media (max-width: 768px) {
-
-  .hero {
-  position: relative;
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
- justify-content: center;
- border: 1px solid red;
-}
   .hero__text {
     padding-left: var(--space-4);
   }
@@ -312,15 +303,16 @@ h1 {
   justify-content: center;
 }
 
+  :global(.cards-slider__arrow--next) {
+    margin-right: var(--space-4);
+  }
+
 }
 
 @media (max-width: 480px) {
 
   .scroll-bar__svg--one {
   right: -11%;
-}
-    .hero {
- border: 1px solid rgb(74, 4, 226);
 }
 }
 

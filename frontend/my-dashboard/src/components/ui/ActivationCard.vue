@@ -270,8 +270,17 @@ const locationDisplay = computed(() => {
 @media (max-width: 768px) {
   a.activation-card {
     width: 100%;
+    max-width: 100%;
   }
-  @media (max-width: 480px) {
+
+  .activation-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4) var(--space-4);
+    flex-shrink: 0;
+    width: 100%;
   }
+}
+@media (max-width: 480px) {
 }
 </style>

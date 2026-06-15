@@ -58,7 +58,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  gap: 12,
+  gap: 32,
 });
 
 const sliderRef = ref<HTMLDivElement | null>(null);
@@ -66,6 +66,7 @@ const slideRefs = ref<HTMLElement[]>([]);
 const slideWidths = ref<number[]>([]);
 const sliderWidth = ref(0);
 const current = ref(0);
+const isMobile = ref(false);
 
 const displayItems = computed(() => [...props.items, ...props.items]);
 
@@ -75,13 +76,18 @@ const currentOffset = computed(() => {
   for (let i = 0; i < current.value; i++) {
     offset += (slideWidths.value[i] ?? 0) + props.gap;
   }
-  // no centering — align left with a small padding
+  if (isMobile.value) {
+    const cardWidth = slideWidths.value[current.value] ?? 0;
+    return offset - (sliderWidth.value - cardWidth) / 2; // center active card
+  }
+  // desktop: align left with a small padding
   return offset - 24; // 24px left padding so first card doesn't hug the edge
 });
 
 const trackStyle = computed(() => ({
   transform: `translateX(${-currentOffset.value}px)`,
   transition: "transform 0.3s ease",
+  gap: `${props.gap}px`,
 }));
 
 const measureSlides = async () => {
@@ -99,6 +105,7 @@ const measureSlides = async () => {
   );
   slideWidths.value = slideRefs.value.map((slide) => slide.offsetWidth);
   sliderWidth.value = sliderRef.value?.offsetWidth ?? 0;
+  isMobile.value = window.matchMedia("(max-width: 768px)").matches;
 };
 
 onMounted(() => {
@@ -108,7 +115,9 @@ onMounted(() => {
 
 watch(current, (val) => {
   if (val >= props.items.length) {
-    const track = sliderRef.value?.querySelector<HTMLElement>(".cards-slider__track");
+    const track = sliderRef.value?.querySelector<HTMLElement>(
+      ".cards-slider__track",
+    );
     track?.addEventListener(
       "transitionend",
       () => {
@@ -160,7 +169,6 @@ const onTouchEnd = (e: TouchEvent) => {
   align-items: flex-start;
   height: 100%;
   will-change: transform;
-  gap: 2rem;
 }
 
 .cards-slider__slide {
@@ -225,7 +233,13 @@ const onTouchEnd = (e: TouchEvent) => {
 
 @media (max-width: 768px) {
   .cards-slider__slide {
-    width: 85vw;
+    width: 87vw;
+  }
+
+  .cards-slider__arrow {
+    width: 3.5rem;
+    height: auto;
+    padding: var(--space-2, 1rem);
   }
 }
 </style>
