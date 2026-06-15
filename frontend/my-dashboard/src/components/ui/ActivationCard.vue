@@ -1,5 +1,5 @@
 <template>
-  <a :href="`/activations/${slug}`" class="activation-card">
+  <a :href="`/activations/${slug}`" class="activation-card" :class="{ 'is-active': active }">
     <div v-if="coverImage" class="activation-card__image">
       <img :src="coverImage" :alt="title" />
       <div
@@ -68,6 +68,7 @@ const props = defineProps({
   coverImage: String,
   explorations: Array,
   partnerInstitutions: Array,
+  active: Boolean,
 });
 
 const formatDate = (dateStr) => {
@@ -135,12 +136,21 @@ const locationDisplay = computed(() => {
   color: var(--color-primary);
   border: 0.5px solid var(--color-white);
   background-color: var(--color-white);
+  transition: filter 0.3s ease;
 }
 
-.activation-card:hover {
-  color: var(--color-primary);
-  transition: opacity 0.3s ease;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+/* Mouse devices: reveal on hover */
+@media (hover: hover) {
+  .activation-card:hover {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  }
+}
+
+/* Touch devices: reveal on the active/centered slide */
+@media (hover: none) {
+  .activation-card.is-active {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  }
 }
 
 .activation-card__image {
@@ -168,14 +178,25 @@ const locationDisplay = computed(() => {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: scale(0.9);
+  transition: opacity 0.45s ease, transform 0.45s ease;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
   background-color: white;
   border-radius: 50%;
 }
 
-.activation-card:hover .activation-card__overlay {
-  opacity: 1;
+@media (hover: hover) {
+  .activation-card:hover .activation-card__overlay {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (hover: none) {
+  .activation-card.is-active .activation-card__overlay {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .activation-card__overlay-content {

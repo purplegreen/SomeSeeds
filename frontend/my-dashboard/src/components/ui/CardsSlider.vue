@@ -12,8 +12,8 @@
         class="cards-slider__slide"
         ref="slideRefs"
       >
-        <ExplorationCard v-if="item._type === 'exploration'" v-bind="item" />
-        <ActivationCard v-else v-bind="item" />
+        <ExplorationCard v-if="item._type === 'exploration'" v-bind="item" :active="index === current" />
+        <ActivationCard v-else v-bind="item" :active="index === current" />
       </div>
     </div>
 

@@ -1,5 +1,5 @@
 <template>
-  <a :href="`/explorations/${slug}`" class="exploration-card">
+  <a :href="`/explorations/${slug}`" class="exploration-card" :class="{ 'is-active': active }">
     <div v-if="coverImage" class="exploration-card__image">
       <img :src="coverImage" :alt="title" />
       <div class="exploration-card__tag">
@@ -35,6 +35,7 @@ defineProps({
   slug: String,
   summary: String,
   coverImage: String,
+  active: Boolean,
 });
 </script>
 
@@ -51,12 +52,21 @@ defineProps({
   border-radius: var(--radius-lg);
   color: var(--color-primary);
   background-color: var(--color-white);
+  transition: filter 0.3s ease;
 }
 
-.exploration-card:hover {
-  color: var(--color-primary);
-  transition: opacity 0.3s ease;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+/* Mouse devices: reveal on hover */
+@media (hover: hover) {
+  .exploration-card:hover {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  }
+}
+
+/* Touch devices: reveal on the active/centered slide */
+@media (hover: none) {
+  .exploration-card.is-active {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  }
 }
 
 .exploration-card__image {
@@ -97,8 +107,16 @@ defineProps({
   transition: transform 0.6s ease;
 }
 
-.exploration-card:hover .exploration-card__tag {
-  transform: rotate(360deg);
+@media (hover: hover) {
+  .exploration-card:hover .exploration-card__tag {
+    transform: rotate(360deg);
+  }
+}
+
+@media (hover: none) {
+  .exploration-card.is-active .exploration-card__tag {
+    transform: rotate(360deg);
+  }
 }
 
 .exploration-card__body {
