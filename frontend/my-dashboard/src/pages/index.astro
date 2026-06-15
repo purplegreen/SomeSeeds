@@ -134,7 +134,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 
 
 h1 {
-  font-size: 20vh;
+  font-size: clamp(2.75rem, 13vw, 20vh);
   line-height: 0.76;
   font-weight: 490;
 
@@ -147,6 +147,7 @@ h1 {
   color: var(--text-primary);
   padding-left: var(--space-10);
   mix-blend-mode: multiply;
+  overflow-wrap: break-word;
 }
 
 .hero__svg {
@@ -254,6 +255,32 @@ h1 {
     margin-right: 9vw;
   }
 
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero__text {
+    padding-left: var(--space-4);
+  }
+
+  .hero__svg img {
+    width: 55vw;
+  }
+
+  .hero__svg--one {
+    left: 5%;
+  }
+
+  .hero__svg--two {
+    right: 5%;
+  }
+
+  .poster {
+    width: 100%;
+  }
+
+  .display_xl {
+    padding-left: 0;
+  }
+}
 
 </style>
 
