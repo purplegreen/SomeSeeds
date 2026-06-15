@@ -1,5 +1,9 @@
 <template>
-  <a :href="`/explorations/${slug}`" class="exploration-card" :class="{ 'is-active': active }">
+  <a
+    :href="`/explorations/${slug}`"
+    class="exploration-card"
+    :class="{ 'is-active': active }"
+  >
     <div v-if="coverImage" class="exploration-card__image">
       <img :src="coverImage" :alt="title" />
       <div class="exploration-card__tag">
@@ -59,6 +63,7 @@ defineProps({
 @media (hover: hover) {
   .exploration-card:hover {
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    color: var(--color-text-primary);
   }
 }
 

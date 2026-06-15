@@ -143,6 +143,7 @@ const locationDisplay = computed(() => {
 @media (hover: hover) {
   .activation-card:hover {
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    color: var(--color-text-primary);
   }
 }
 
@@ -270,7 +271,6 @@ const locationDisplay = computed(() => {
 .activation-card__location {
   font-size: var(--text-big);
   line-height: var(--line-height-snug);
-  color: var(--color-primary);
   margin: 0;
 }
 
