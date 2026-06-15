@@ -4,14 +4,15 @@ import CardsSlider from '../ui/CardsSlider.vue'
 
 interface Props {
   activations: any[]
+  emptyMessage?: string
 }
 
-const { activations } = Astro.props
+const { activations, emptyMessage } = Astro.props
 ---
 
 {activations.length === 0 ? (
-  <section class="section">
-    <p class="no-content">No activations yet.</p>
+  <section class="section section--centered">
+    <p class="no-content">{emptyMessage ?? 'No activations yet.'}</p>
   </section>
 ) : activations.length === 1 ? (
   <section class="section section--centered">
@@ -25,8 +26,8 @@ const { activations } = Astro.props
 
 <style>
 .no-content {
-  opacity: 0.4;
-  font-size: var(--text-m);
+  font-size: var(--text-2xl);
+  font-weight: 630;
 }
 
 .section--centered {

@@ -173,6 +173,7 @@ export async function getExploration(slug: string) {
       "tags": tags[]->{ title, slug },
        activationsTitle,
       activationsDescription,
+      emptyActivationsMessage,
       "collaborators": collaborators[]{
         name,
         "logo": logo.asset->url,

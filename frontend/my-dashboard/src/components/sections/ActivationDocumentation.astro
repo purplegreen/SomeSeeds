@@ -39,8 +39,8 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : 'Documentation'
       </div>
     )}
 
-<div class="container_grid">
-   
+<div class="container_grid grid_pad_comfort">
+
     <h2 class="display_l">{typeDisplay}</h2>
   
     <div class="body_text p_medium">{documentation.text && ( <PortableTextRenderer body={documentation.text} client:load />

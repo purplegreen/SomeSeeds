@@ -381,7 +381,7 @@ svg {
   grid-template-rows: auto;
   gap: 2rem;
   grid-template-areas: "a-1 a-2 a-3";
-  padding: var(--space-24) var(--space-20);
+  padding: var(--space-24) var(--space-6);
   background-color: var(--color-white);
   position: relative;
   z-index: 3;
@@ -395,7 +395,7 @@ svg {
   grid-template-areas:
     "a-1  a-2 ."
     "a-3  a-4 .";
-  padding: var(--space-24) var(--space-20);
+  padding: var(--space-24) var(--space-6);
   position: relative;
 }
 
@@ -408,8 +408,19 @@ svg {
     "a-1  a-2 ."
     "a-3  a-4 ."
     "a-5  a-6 .";
-  padding: var(--space-24) var(--space-20);
+  padding: var(--space-24) var(--space-6);
   position: relative;
+}
+
+/* ── Grid padding modifiers ──────────────────────────────
+   Grid classes above carry the default (index) padding.
+   Apply a modifier per page type to adapt horizontal spacing. */
+.grid_pad_comfort {
+  padding: var(--space-24) var(--space-16); /* 64px — Activations, Simple pages */
+}
+
+.grid_pad_wide {
+  padding: var(--space-24) var(--space-20); /* 80px — Explorations, Contact */
 }
 
 /* ============================================

@@ -46,7 +46,7 @@ const jsonLd: Record<string, unknown> = {
     category={exploration.category}
     tags={exploration.tags}
   />
- <div class="container_grid_two_rows">
+ <div class="container_grid_two_rows grid_pad_wide">
   {exploration.body && (
         <div class="body_text p_medium">
         <PortableTextRenderer body={exploration.body} client:load />
@@ -71,12 +71,12 @@ const jsonLd: Record<string, unknown> = {
   )}
  </div>
   {(exploration.activationsTitle || exploration.activationsDescription) && (
-    <div class="container_grid_two_rows activations_header">
+    <div class="container_grid_two_rows grid_pad_wide activations_header">
       {exploration.activationsTitle && <h2 class="display_l activations_title">{exploration.activationsTitle}</h2>}
       {exploration.activationsDescription && <p class="body_s activations_desc">{exploration.activationsDescription}</p>}
     </div>
   )}
-  <ActivationsList activations={activations} />
+  <ActivationsList activations={activations} emptyMessage={exploration.emptyActivationsMessage} />
 </Layout>
 
 <style>

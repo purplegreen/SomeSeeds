@@ -95,6 +95,13 @@ export const exploration = defineType({
       rows: 2,
     }),
 
+    defineField({
+      name: 'emptyActivationsMessage',
+      title: 'Empty Activations Message',
+      description: 'Shown on this Exploration page when it has no Activations yet.',
+      type: 'string',
+    }),
+
     // ── Collaborators ─────────────────────────────────────────
     defineField({
       name: 'collaborators',
