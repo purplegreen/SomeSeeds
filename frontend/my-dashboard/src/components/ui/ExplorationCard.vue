@@ -94,6 +94,11 @@ defineProps({
   background: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
   z-index: 2;
+  transition: transform 0.6s ease;
+}
+
+.exploration-card:hover .exploration-card__tag {
+  transform: rotate(360deg);
 }
 
 .exploration-card__body {
