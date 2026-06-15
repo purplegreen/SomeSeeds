@@ -21,7 +21,7 @@ const { title, description, image, body } = Astro.props
 
 <section>
 
-  <div class="container_grid grid_pad_comfort">
+  <div class="container_grid">
   <h1 class="display_xl">{title}</h1>
   <div class="p_lead">
   {description}
@@ -33,7 +33,7 @@ const { title, description, image, body } = Astro.props
  <div class="image_wrapper">{image && <img src={image} alt={title} />    }</div>
 </section>
 
-  <div class="container_grid grid_pad_comfort">
+  <div class="container_grid">
   <div class="p_medium">
   <PortableTextRenderer body={body} client:load />
   </div>
