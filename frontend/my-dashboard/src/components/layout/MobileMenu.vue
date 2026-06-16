@@ -12,43 +12,71 @@
     </button>
 
     <nav class="mobile-menu" :class="{ open: isOpen }">
-      <ul>
-        <li v-for="link in regularLinks" :key="link.href">
-          <a :href="link.href" @click="close">{{ link.label }}</a>
-        </li>
-        <!-- Explorations submenu -->
-        <li v-if="explorations.length > 0">
-          <ul class="mobile-submenu" :class="{ open: explorationsOpen }">
-            <li v-for="exploration in explorations" :key="exploration.slug">
-              <a :href="`/explorations/${exploration.slug}`" @click="close">
-                {{ exploration.title }}
-              </a>
-              <!-- Activations nested under each exploration -->
-              <ul
-                v-if="
-                  exploration.activations && exploration.activations.length > 0
-                "
-                class="mobile-submenu mobile-submenu--nested"
+      <!-- 1. Fixed top: regular links + Explorations heading -->
+      <div class="mobile-menu__top">
+        <ul class="mobile-menu__links">
+          <li v-for="link in regularLinks" :key="link.href">
+            <a :href="link.href" @click="close">{{ link.label }}</a>
+          </li>
+        </ul>
+        <p v-if="explorations.length > 0" class="mobile-menu__heading">
+          Explorations
+        </p>
+      </div>
+
+      <!-- 2. Scrollable middle: explorations + activations (always expanded) -->
+      <ul v-if="explorations.length > 0" class="mobile-menu__list">
+        <li
+          v-for="exploration in explorations"
+          :key="exploration.slug"
+          class="mobile-exploration"
+        >
+          <a
+            :href="`/explorations/${exploration.slug}`"
+            class="mobile-exploration__title"
+            @click="close"
+          >
+            {{ exploration.title }}
+          </a>
+          <!-- Activations indented under each exploration -->
+          <ul
+            v-if="exploration.activations && exploration.activations.length > 0"
+            class="mobile-activations"
+          >
+            <li
+              v-for="activation in exploration.activations"
+              :key="activation.slug"
+            >
+              <a
+                :href="`/activations/${activation.slug}`"
+                class="mobile-activation"
+                @click="close"
               >
-                <li
-                  v-for="activation in exploration.activations"
-                  :key="activation.slug"
-                >
-                  <a :href="`/activations/${activation.slug}`" @click="close">
-                    {{ activation.title }}
-                  </a>
-                </li>
-              </ul>
+                <span class="activation_dot"
+                  ><img src="/activation_dot.svg" alt=""
+                /></span>
+                <span>{{ activation.title }}</span>
+              </a>
             </li>
           </ul>
         </li>
       </ul>
+
+      <!-- 3. Pinned bottom CTA -->
+      <a
+        v-if="ctaLink"
+        :href="ctaLink.href"
+        class="mobile-menu__cta"
+        @click="close"
+      >
+        {{ ctaLink.label }}
+      </a>
     </nav>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch, onUnmounted } from "vue";
 
 const props = defineProps({
   links: {
@@ -63,6 +91,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  ctaLink: {
+    type: Object,
+    default: null,
+  },
 });
 
 // filter out /explorations from regular links to avoid duplication
@@ -71,15 +103,19 @@ const regularLinks = computed(() =>
 );
 
 const isOpen = ref(false);
-const explorationsOpen = ref(false);
 
 const toggle = () => (isOpen.value = !isOpen.value);
-const close = () => {
-  isOpen.value = false;
-  explorationsOpen.value = false;
-};
-const toggleExplorations = () =>
-  (explorationsOpen.value = !explorationsOpen.value);
+const close = () => (isOpen.value = false);
+
+// Pin the navbar (logo + close button) in place while the drawer is open so it
+// stays visible on top of the full-screen overlay even when the page is scrolled.
+watch(isOpen, (open) => {
+  document.documentElement.classList.toggle("mobile-menu-open", open);
+});
+
+onUnmounted(() => {
+  document.documentElement.classList.remove("mobile-menu-open");
+});
 </script>
 
 <style scoped>
@@ -119,7 +155,11 @@ const toggleExplorations = () =>
   inset: 0;
   background: #ffffff;
   z-index: 99;
-  padding: 5rem 2rem 2rem;
+  /* Top padding = navbar height (4.5rem: 4rem logo + 2×0.25rem padding) + 1.5rem
+     so the gap below the logo matches the gap between nav items. */
+  padding: 6rem 2rem 2rem;
+  /* The drawer itself doesn't scroll — only the middle list zone does. */
+  flex-direction: column;
   transform: translateX(100%);
   transition: transform 0.3s ease;
 }
@@ -149,43 +189,87 @@ const toggleExplorations = () =>
   opacity: 0.5;
 }
 
-.mobile-submenu__trigger {
-  background: none;
-  border: none;
-  cursor: pointer;
+/* 1. Fixed top zone: regular links + Explorations heading */
+.mobile-menu__top {
+  flex: 0 0 auto;
+}
+
+.mobile-menu__heading {
+  margin: 1.5rem 0 0;
   font-size: 1.5rem;
-  color: #1a1a1a;
   font-weight: 500;
-  padding: 0;
-  font-family: inherit;
+  color: #1a1a1a;
   letter-spacing: -0.3px;
+}
+
+/* 2. Scrollable middle zone: explorations + activations */
+.mobile-menu__list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  gap: 1.25rem !important;
+  margin-top: 1.25rem !important;
+  padding-left: 0.5rem !important;
+}
+
+.mobile-exploration {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.mobile-submenu__arrow {
-  display: inline-block;
-  transition: transform 0.2s ease;
-  font-style: normal;
-}
-
-.mobile-submenu__arrow.open {
-  transform: rotate(180deg);
-}
-
-.mobile-submenu {
-  display: none;
-  padding-left: 1rem !important;
-  gap: 1rem !important;
-  margin-top: 0.75rem;
-}
-.mobile-submenu.open {
-  display: flex;
-}
-
-.mobile-submenu a {
+.mobile-menu .mobile-exploration__title {
   font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Activations: indented, always visible under their exploration */
+.mobile-activations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem !important;
+  padding-left: 1rem !important;
+}
+
+.mobile-activation {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1rem !important;
+  font-weight: 500;
+  color: var(--color-neutral-700);
+}
+
+.mobile-activation .activation_dot {
+  flex: 0 0 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-activation .activation_dot img {
+  width: 0.9rem;
+  height: auto;
+}
+
+/* 3. Pinned bottom CTA — a pill button kept at the foot of the drawer */
+.mobile-menu .mobile-menu__cta {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border: 2px solid #1a1a1a;
+  border-radius: var(--radius-xl);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mobile-menu .mobile-menu__cta:hover {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -193,7 +277,7 @@ const toggleExplorations = () =>
     display: flex;
   }
   .mobile-menu {
-    display: block;
+    display: flex;
   }
 }
 </style>

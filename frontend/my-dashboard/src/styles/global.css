@@ -1,9 +1,21 @@
-/* Pin the navbar in place while the Explorations dropdown overlay is open so it
-   doesn't drift away on scroll. Uses sticky (not fixed) to avoid a layout jump,
-   and avoids touching overflow so the scrollbar never disappears / shifts the page. */
+/* Pin the navbar in place while the Explorations dropdown overlay OR the mobile
+   menu drawer is open so it doesn't drift away on scroll — this keeps the logo
+   and the close (X) button visible on top of the full-screen overlay. Uses
+   sticky (not fixed) to avoid a layout jump, and avoids touching overflow so the
+   scrollbar never disappears / shifts the page. */
 html.nav-dropdown-open .navbar {
   position: sticky;
   top: 0;
+}
+
+/* The mobile menu drawer is a full-screen fixed overlay; pin the navbar (logo +
+   close button) to the viewport with fixed so it can't scroll away behind it.
+   The content jump from taking the navbar out of flow is hidden by the drawer. */
+html.mobile-menu-open .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 /* ============================================

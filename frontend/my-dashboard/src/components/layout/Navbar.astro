@@ -50,7 +50,7 @@ const currentPath = rawPath.replace(/\/$/, "");
 </nav>
 
 <!-- Mobile menu -->
-<MobileMenu client:load links={links} explorations={explorations} currentPath={currentPath} />
+<MobileMenu client:load links={links} explorations={explorations} currentPath={currentPath} ctaLink={ctaLink} />
 
   </div>
 </header>
@@ -78,9 +78,16 @@ const currentPath = rawPath.replace(/\/$/, "");
   padding-right: var(--space-8)
 }
 
+.navbar__logo {
+  position: relative;
+  /* Keep the logo above the mobile menu drawer (z-index 99), which is a sibling
+     inside .navbar__inner — otherwise the open drawer paints over it. */
+  z-index: 200;
+}
+
 .navbar__logo img {
   width: auto;
-  height: 4 rem;
+  height: 4rem;
   padding-top: 0;
 }
 
