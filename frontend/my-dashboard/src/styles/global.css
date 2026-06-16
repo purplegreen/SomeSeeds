@@ -484,6 +484,7 @@ svg {
     display: flex;
     flex-direction: column;
     width: 90vw;
+    margin-inline: auto;
     padding: var(--space-8) 0;
   }
   .poster {
@@ -502,6 +503,7 @@ svg {
     display: flex;
     flex-direction: column;
     width: 90vw;
+    margin-inline: auto;
     padding: var(--space-8) 0;
   }
 }

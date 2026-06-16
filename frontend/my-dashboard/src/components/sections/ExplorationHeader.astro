@@ -97,5 +97,36 @@ const { title, description, image, category, tags, body } = Astro.props
   .display_l {
     padding-left: var(--space-1);
   }
+
+  /* Stack title above image, both at the same 90vw as the body text below */
+  .first_wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 90vw;
+    margin-inline: auto;
+    padding: var(--space-8) 0;
+    gap: var(--space-8);
+  }
+
+  .container {
+    width: 100%;
+    gap: var(--space-8);
+  }
+
+  .image_wrapper {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .image_wrapper img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+  }
+
+  /* Lead paragraph spans the full 90vw (drop the side padding) to match */
+  :global(.container_grid_one_row) {
+    padding: var(--space-8) 0;
+  }
 }
 </style>
