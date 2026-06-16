@@ -19,13 +19,22 @@
             <a :href="link.href" @click="close">{{ link.label }}</a>
           </li>
         </ul>
-        <p v-if="explorations.length > 0" class="mobile-menu__heading">
+        <button
+          v-if="explorations.length > 0"
+          class="mobile-menu__heading"
+          :aria-pressed="explorationsActive"
+          @click="toggleExplorations"
+        >
           Explorations
-        </p>
+        </button>
       </div>
 
       <!-- 2. Scrollable middle: explorations + activations (always expanded) -->
-      <ul v-if="explorations.length > 0" class="mobile-menu__list">
+      <ul
+        v-if="explorations.length > 0"
+        class="mobile-menu__list"
+        :class="{ 'is-active': explorationsActive }"
+      >
         <li
           v-for="exploration in explorations"
           :key="exploration.slug"
@@ -103,9 +112,16 @@ const regularLinks = computed(() =>
 );
 
 const isOpen = ref(false);
+// Tapping the "Explorations" heading darkens the whole list (gray -> black).
+const explorationsActive = ref(false);
 
 const toggle = () => (isOpen.value = !isOpen.value);
-const close = () => (isOpen.value = false);
+const close = () => {
+  isOpen.value = false;
+  explorationsActive.value = false;
+};
+const toggleExplorations = () =>
+  (explorationsActive.value = !explorationsActive.value);
 
 // Pin the navbar (logo + close button) in place while the drawer is open so it
 // stays visible on top of the full-screen overlay even when the page is scrolled.
@@ -183,10 +199,38 @@ onUnmounted(() => {
   text-decoration: none;
   font-weight: 500;
   letter-spacing: -0.3px;
+  /* avoid the grey iOS tap flash competing with our underline feedback */
+  -webkit-tap-highlight-color: transparent;
 }
 
-.mobile-menu a:hover {
-  opacity: 0.5;
+/* Hover only on real pointer devices so it doesn't misfire / stick on touch */
+@media (hover: hover) {
+  .mobile-menu a:hover {
+    opacity: 0.5;
+  }
+}
+
+/* Press feedback for touch: underline (mirrors the desktop hover affordance) */
+.mobile-menu a:active {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: var(--space-2);
+  text-decoration-thickness: 3px;
+}
+
+.mobile-menu .mobile-exploration__title:active {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: var(--space-2);
+  text-decoration-thickness: 3px;
+}
+
+.mobile-activation:active {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: var(--space-2);
+  text-decoration-thickness: 3px;
 }
 
 /* 1. Fixed top zone: regular links + Explorations heading */
@@ -195,11 +239,19 @@ onUnmounted(() => {
 }
 
 .mobile-menu__heading {
+  display: block;
   margin: 1.5rem 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
   font-size: 1.5rem;
   font-weight: 500;
   color: #1a1a1a;
   letter-spacing: -0.3px;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* 2. Scrollable middle zone: explorations + activations */
@@ -221,6 +273,8 @@ onUnmounted(() => {
 .mobile-menu .mobile-exploration__title {
   font-size: 1.2rem;
   font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color 0.25s ease;
 }
 
 /* Activations: indented, always visible under their exploration */
@@ -231,13 +285,20 @@ onUnmounted(() => {
   padding-left: 1rem !important;
 }
 
-.mobile-activation {
+.mobile-menu .mobile-activation {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   font-size: 1rem !important;
   font-weight: 500;
-  color: var(--color-neutral-700);
+  color: var(--color-text-muted);
+  transition: color 0.25s ease;
+}
+
+/* Tapping the "Explorations" heading darkens the whole list: gray -> black */
+.mobile-menu__list.is-active .mobile-exploration__title,
+.mobile-menu__list.is-active .mobile-activation {
+  color: var(--color-text-primary);
 }
 
 .mobile-activation .activation_dot {
@@ -266,7 +327,16 @@ onUnmounted(() => {
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.mobile-menu .mobile-menu__cta:hover {
+@media (hover: hover) {
+  .mobile-menu .mobile-menu__cta:hover {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    opacity: 1;
+  }
+}
+
+/* Pressed state on touch — same fill as the desktop hover */
+.mobile-menu .mobile-menu__cta:active {
   background-color: #1a1a1a;
   color: #ffffff;
   opacity: 1;
