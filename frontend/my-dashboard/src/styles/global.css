@@ -369,7 +369,6 @@ svg {
   grid-template-areas:
     "a-1  a-1 a-3"
     "a-4  a-5 a-6";
-  padding: var(--space-24) var(--space-6);
   background-color: var(--color-white);
   position: relative;
   z-index: 3;
@@ -381,7 +380,6 @@ svg {
   grid-template-rows: auto;
   gap: 2rem;
   grid-template-areas: "a-1 a-2 a-3";
-  padding: var(--space-24) var(--space-20);
   background-color: var(--color-white);
   position: relative;
   z-index: 3;
@@ -395,7 +393,6 @@ svg {
   grid-template-areas:
     "a-1  a-2 ."
     "a-3  a-4 .";
-  padding: var(--space-24) var(--space-20);
   position: relative;
 }
 
@@ -408,8 +405,14 @@ svg {
     "a-1  a-2 ."
     "a-3  a-4 ."
     "a-5  a-6 .";
-  padding: var(--space-24) var(--space-20);
   position: relative;
+}
+
+.container_grid,
+.container_grid_one_row,
+.container_grid_two_rows,
+.container_grid_three_rows {
+  padding: var(--space-24) var(--space-8);
 }
 
 /* ============================================
