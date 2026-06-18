@@ -215,7 +215,7 @@ body {
   /* highlight paragraph */
   font-size: var(--text-3xl);
   font-weight: 468;
-  line-height: 1.33;
+  line-height: 1.26;
   display: block;
   margin-block-start: 1em;
   margin-block-end: 1em;
