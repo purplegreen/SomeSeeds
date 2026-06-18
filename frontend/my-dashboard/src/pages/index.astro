@@ -51,10 +51,10 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 2. Approach ──────────────────────────────────── -->
   {approach && (
     <section class="home-section">
-      <div class="container_grid">
-        <h2 class="display_xl">{approach.title}</h2>
+      <div class="container_grid_two_cols">
+        <h2 class="heading_s_a">{approach.title}</h2>
         {approach.description && (
-          <div class="p_medium">
+          <div class="p_lead">
             <PortableTextRenderer body={approach.description} client:load />
           </div>
         )}
@@ -72,10 +72,10 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 4. Explorations ──────────────────────────────── -->
   {explorations && (
     <section class="home-section">
-      <div class="container_grid">
-        <h2 class="display_xl">{explorations.title}</h2>
+      <div class="container_grid_two_cols">
+        <h2 class="heading_s_a">{explorations.title}</h2>
         {explorations.description && (
-          <div class="p_medium">
+          <div class="p_lead">
             <PortableTextRenderer body={explorations.description} client:load />
           </div>
         )}
@@ -95,19 +95,17 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 6. Get Involved ──────────────────────────────── -->
   {getInvolved && (
     <section class="home-section">
-      <div class="container_grid">
-        <h2 class="display_xl">{getInvolved.title}</h2>
-        <div class="section__body">
-          {getInvolved.description && (
-            <div class="p_medium">
-              <PortableTextRenderer body={getInvolved.description} client:load />
-            </div>
-          )}
-          <div class="cta-box">
-            <Button href="/contact" variant="primary" size="md" client:load>
-              Get In Touch
-            </Button>
+      <div class="container_grid_two_cols_3">
+        <h2 class="heading_s_a">{getInvolved.title}</h2>
+        {getInvolved.description && (
+          <div class="p_lead">
+            <PortableTextRenderer body={getInvolved.description} client:load />
           </div>
+        )}
+        <div class="cta-box">
+          <Button href="/contact" variant="primary" size="md" client:load>
+            Get In Touch
+          </Button>
         </div>
       </div>
     </section>
@@ -126,7 +124,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
 /* ── Hero ─────────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 90vh;
+  min-height: 86vh;
   display: flex;
   align-items: center;
  justify-content: center;
@@ -142,10 +140,10 @@ h1 {
 .hero__text{
   position: relative;
   z-index: 1;
-  max-width: 90vw;
+  max-width: 96vw;
   align-self: center;
   color: var(--color-primary-at);
-  padding-left: var(--space-10);
+  padding-left: var(--space-8);
   mix-blend-mode: multiply;
   overflow-wrap: break-word;
 }
@@ -200,7 +198,7 @@ h1 {
   right: 0%;
   z-index: 160;
   pointer-events: auto;
-  mix-blend-mode: exclusion;
+  mix-blend-mode: multiply;
   will-change: transform;
 }
 
@@ -214,21 +212,36 @@ h1 {
   padding-left: var(--space-24);
 }
 
+.heading_s_a {
+  grid-area: a-1;
+}
+
+.p_lead {
+  grid-area: a-2;
+}
+
 .p_medium {
   grid-area: a-5;
 }
 
-.section__body {
-  grid-area: a-5;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+.container_grid_two_cols_3 .p_lead {
+  grid-area: a-4;
+}
+
+.container_grid_two_cols_3 .cta-box {
+  grid-area: a-6;
 }
 
 .cta-box {
   display: flex;
   justify-content: flex-start;
 }
+
+.container_grid_two_cols,
+.container_grid_two_cols_3 {
+  padding: var(--space-20) var(--space-24) var(--space-20) var(--space-16);
+}
+
 
 /* ── Poster ───────────────────────────────────────── */
 .poster {
