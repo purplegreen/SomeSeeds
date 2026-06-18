@@ -214,7 +214,7 @@ body {
 .p_lead {
   /* highlight paragraph */
   font-size: var(--text-3xl);
-  font-weight: 560;
+  font-weight: 468;
   line-height: 1.33;
   display: block;
   margin-block-start: 1em;
