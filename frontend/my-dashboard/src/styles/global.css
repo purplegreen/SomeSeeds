@@ -506,7 +506,9 @@ svg {
   .container_grid,
   .container_grid_one_row,
   .container_grid_two_rows,
-  .container_grid_three_rows {
+  .container_grid_three_rows,
+  .container_grid_two_cols,
+  .container_grid_two_cols_3 {
     display: flex;
     flex-direction: column;
     width: 90vw;
@@ -525,7 +527,9 @@ svg {
   .container_grid,
   .container_grid_one_row,
   .container_grid_two_rows,
-  .container_grid_three_rows {
+  .container_grid_three_rows,
+  .container_grid_two_cols,
+  .container_grid_two_cols_3 {
     display: flex;
     flex-direction: column;
     width: 90vw;
