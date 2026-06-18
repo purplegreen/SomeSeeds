@@ -21,8 +21,8 @@ const { title, description, image, body } = Astro.props
 
 <section>
 
-  <div class="container_grid">
-  <h1 class="display_xl">{title}</h1>
+  <div class="container_grid_two_cols">
+  <h1 class="heading_s_a">{title}</h1>
   <div class="p_lead">
   {description}
  </div>
@@ -42,11 +42,11 @@ const { title, description, image, body } = Astro.props
 
 <style>
 
-.display_l {
+.heading_s_a {
    grid-area: a-1;
 }
   .p_lead {
-    grid-area: a-5;
+    grid-area: a-4;
   }
 
    .p_medium {
@@ -85,12 +85,12 @@ img .image_wrapper{
 }
 
   @media (max-width: 768px) {
-  .display_l {
+  .heading_s_a {
   padding-left: var(--space-1);
 }
 
 
-  .container_grid{
+  .container_grid_two_cols{
     padding: 1.5rem;
     width: 98vw;
 }
