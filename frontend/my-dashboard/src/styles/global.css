@@ -186,6 +186,7 @@ body {
   line-height: var(--line-height-tight); /* s */
 }
 
+/* Also applied to Portable Text H2s via PortableTextRenderer.vue (block.h2 override) */
 .heading_s_a {
   font-size: var(--text-5xl);
   font-weight: 200;
