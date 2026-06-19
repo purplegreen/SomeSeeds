@@ -74,6 +74,7 @@ html.mobile-menu-open .navbar {
   --text-big: clamp(1.05rem, 0.38vw + 0.98rem, 1.25rem);
   --text-2xl: clamp(1.25rem, 0.59vw + 1.14rem, 1.563rem);
   --text-3xl: clamp(1.5rem, 0.85vw + 1.34rem, 1.953rem);
+  --text-3-5xl: clamp(1.65rem, 1.03vw + 1.46rem, 2.197rem);
   --text-4xl: clamp(1.8rem, 1.2vw + 1.58rem, 2.441rem);
   --text-5xl: clamp(2.15rem, 1.69vw + 1.83rem, 3.052rem);
   --text-6xl: clamp(2.6rem, 2.28vw + 2.17rem, 3.815rem);
@@ -186,13 +187,6 @@ body {
   line-height: var(--line-height-tight); /* s */
 }
 
-/* Also applied to Portable Text H2s via PortableTextRenderer.vue (block.h2 override) */
-.heading_s_a {
-  font-size: var(--text-5xl);
-  font-weight: 200;
-  line-height: var(--line-height-tight); /* s */
-}
-
 .heading_m {
   font-size: var(--text-3xl);
   font-weight: var(--font-weight-bold);
@@ -205,6 +199,13 @@ body {
   line-height: var(--line-height-tight); /* l */
 }
 
+/* Also applied to Portable Text H2s via PortableTextRenderer.vue (block.h2 override) */
+.heading_s_a {
+  font-size: var(--text-5xl);
+  font-weight: 460;
+  line-height: 1.4; /* s */
+}
+
 .display_xl {
   font-size: var(--text-6xl);
   font-weight: 430;
@@ -213,8 +214,8 @@ body {
 
 .p_lead {
   /* highlight paragraph */
-  font-size: var(--text-3xl);
-  font-weight: 468;
+  font-size: var(--text-3-5xl);
+  font-weight: 300;
   line-height: 1.26;
   display: block;
   margin-block-start: 1em;
