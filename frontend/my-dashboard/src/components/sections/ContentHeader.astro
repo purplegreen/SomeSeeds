@@ -219,6 +219,10 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : null
   .container {
     width: 100%;
     gap: var(--space-8);
+    /* Cancel the 24px padding-inline leaked in by the global `.container`
+       utility (class-name collision) so the title lines up at the 90vw left
+       edge with the description and body sections. */
+    padding-inline: 0;
   }
 
   .image_box {

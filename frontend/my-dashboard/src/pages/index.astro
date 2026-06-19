@@ -307,7 +307,8 @@ h1 {
   padding: 1rem;
 }
 .home-dropcap {
-  padding: var(--space-8) 0;
+  /* Extra right padding so the text clears the fixed scroll-bar svg. */
+  padding: var(--space-8) var(--space-4) var(--space-8) 0;
 }
 .home-dropcap__title {
   float: none;
@@ -315,7 +316,7 @@ h1 {
   margin: 0 0 var(--space-4) 0;
 }
 .scroll-bar__svg--one {
-  right: -6%;
+  right: -10%;
 }
 .scroll-bar__svg--two {
   width: 3rem;
