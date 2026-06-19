@@ -61,9 +61,6 @@
                 class="mobile-activation"
                 @click="close"
               >
-                <span class="activation_dot"
-                  ><img src="/activation_dot.svg" alt=""
-                /></span>
                 <span>{{ activation.title }}</span>
               </a>
             </li>
@@ -273,7 +270,7 @@ onUnmounted(() => {
 .mobile-menu .mobile-exploration__title {
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--color-text-primary);
   transition: color 0.25s ease;
 }
 
@@ -282,14 +279,16 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem !important;
-  padding-left: 1rem !important;
+  /* No indent — the small dot already signals the sub-level. */
+  padding-left: 0 !important;
 }
 
 .mobile-menu .mobile-activation {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 1rem !important;
+  /* Match the exploration title size — the small dot marks the sub-level. */
+  font-size: 1.2rem !important;
   font-weight: 500;
   color: var(--color-text-muted);
   transition: color 0.25s ease;
@@ -299,17 +298,6 @@ onUnmounted(() => {
 .mobile-menu__list.is-active .mobile-exploration__title,
 .mobile-menu__list.is-active .mobile-activation {
   color: var(--color-text-primary);
-}
-
-.mobile-activation .activation_dot {
-  flex: 0 0 0.9rem;
-  display: flex;
-  align-items: center;
-}
-
-.mobile-activation .activation_dot img {
-  width: 0.9rem;
-  height: auto;
 }
 
 /* 3. Pinned bottom CTA — a pill button kept at the foot of the drawer */
