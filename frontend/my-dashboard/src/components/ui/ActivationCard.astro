@@ -151,5 +151,18 @@ const locationDisplay = location
   margin: 0;
 }
 
+/* On mobile the card fills the column and sizes to its content — drop the
+   40vw cap and the fixed 80vh height so there's no empty space below it. */
+@media (max-width: 768px) {
+  .activation-card {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+
+  .activation-card__image img {
+    height: auto;
+  }
+}
 
 </style>

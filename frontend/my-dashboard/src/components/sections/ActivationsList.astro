@@ -34,4 +34,21 @@ const { activations, emptyMessage } = Astro.props
   display: flex;
   justify-content: center;
 }
+
+/* On mobile, match the 90vw / no-side-padding inset used by the rest of the
+   page so the empty-state message lines up at the same left edge.
+   Compound selector (.section.section--centered) outranks the global
+   `.section` padding so the side padding is reliably removed. */
+@media (max-width: 768px) {
+  .section.section--centered {
+    width: 90vw;
+    margin-inline: auto;
+    padding: var(--space-8) 0;
+    justify-content: flex-start;
+  }
+  .no-content {
+    margin: 0;
+    padding: 0;
+  }
+}
 </style>

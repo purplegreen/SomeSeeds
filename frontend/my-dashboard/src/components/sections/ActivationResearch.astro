@@ -62,6 +62,14 @@ const { research } = Astro.props
   padding-left: var(--space-24);
 }
 
+/* On mobile the grid collapses to a single 90vw column — drop the left inset
+   so the title aligns with the body text below it. */
+@media (max-width: 768px) {
+  .display_l {
+    padding-left: 0;
+  }
+}
+
 .body_text {
   grid-area: a-5;
   padding-bottom: var(--space-16);

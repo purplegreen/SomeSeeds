@@ -73,8 +73,12 @@ html.mobile-menu-open .navbar {
   --text-body: clamp(1.1rem, 0.26vw + 1rem, 1.313rem);
   --text-big: clamp(1.05rem, 0.38vw + 0.98rem, 1.25rem);
   --text-2xl: clamp(1.25rem, 0.59vw + 1.14rem, 1.563rem);
-  --text-3xl: clamp(1.5rem, 0.85vw + 1.34rem, 1.953rem);
-  --text-3-5xl: clamp(1.65rem, 1.03vw + 1.46rem, 2.197rem);
+  --text-3xl: clamp(
+    1.5rem,
+    0.85vw + 1.34rem,
+    1.953rem
+  ); /* bigger decrease on mobile */
+  --text-3-5xl: clamp(1.35rem, 1.27vw + 1.05rem, 2.197rem);
   --text-4xl: clamp(1.8rem, 1.2vw + 1.58rem, 2.441rem);
   --text-5xl: clamp(2.15rem, 1.69vw + 1.83rem, 3.052rem);
   --text-6xl: clamp(2.6rem, 2.28vw + 2.17rem, 3.815rem);
@@ -100,6 +104,7 @@ html.mobile-menu-open .navbar {
   --space-16: 4rem; /*  64px   */
   --space-20: 5rem; /*  80px   */
   --space-24: 6rem; /*  96px   */
+  --space-28: 7rem; /*  112px   */
 
   /* Layout */
   --container-max: 1200px;

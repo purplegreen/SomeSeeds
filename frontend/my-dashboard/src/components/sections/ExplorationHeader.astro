@@ -95,7 +95,7 @@ const { title, description, image, category, tags, body } = Astro.props
 
 @media (max-width: 768px) {
   .display_l {
-    padding-left: var(--space-1);
+    padding-left: 0;
   }
 
   /* Stack title above image, both at the same 90vw as the body text below */
@@ -111,6 +111,10 @@ const { title, description, image, category, tags, body } = Astro.props
   .container {
     width: 100%;
     gap: var(--space-8);
+    /* Cancel the 24px padding-inline leaked in by the global `.container`
+       utility (class-name collision) so the title aligns with the image
+       and body text at the 90vw left edge. */
+    padding-inline: 0;
   }
 
   .image_wrapper {
