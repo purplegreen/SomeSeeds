@@ -510,7 +510,7 @@ svg {
   background: var(--color-text-light);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .container_grid,
   .container_grid_one_row,
   .container_grid_two_rows,
