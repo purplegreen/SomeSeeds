@@ -70,6 +70,7 @@ html.mobile-menu-open .navbar {
   --text-xs: clamp(0.55rem, 0.17vw + 0.52rem, 0.64rem);
   --text-s: clamp(0.675rem, 0.23vw + 0.63rem, 0.8rem);
   --text-m: clamp(0.875rem, 0.24vw + 0.784rem, 1rem);
+  --text-ml: clamp(0.98rem, 0.26vw + 0.92rem, 1.15rem);
   --text-body: clamp(1.1rem, 0.26vw + 1rem, 1.313rem);
   --text-big: clamp(1.05rem, 0.38vw + 0.98rem, 1.25rem);
   --text-2xl: clamp(1.25rem, 0.59vw + 1.14rem, 1.563rem);
