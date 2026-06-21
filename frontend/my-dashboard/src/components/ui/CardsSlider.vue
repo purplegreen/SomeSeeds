@@ -105,7 +105,7 @@ const measureSlides = async () => {
   );
   slideWidths.value = slideRefs.value.map((slide) => slide.offsetWidth);
   sliderWidth.value = sliderRef.value?.offsetWidth ?? 0;
-  isMobile.value = window.matchMedia("(max-width: 768px)").matches;
+  isMobile.value = window.matchMedia("(max-width: 820px)").matches;
 };
 
 onMounted(() => {
@@ -231,7 +231,7 @@ const onTouchEnd = (e: TouchEvent) => {
   opacity: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .cards-slider__slide {
     width: 87vw;
   }

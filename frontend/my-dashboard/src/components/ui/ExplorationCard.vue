@@ -145,7 +145,7 @@ defineProps({
   line-height: var(--line-height-snug);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   a.exploration-card {
     width: 100%;
     max-width: 100%;

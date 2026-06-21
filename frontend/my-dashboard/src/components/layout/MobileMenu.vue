@@ -330,7 +330,7 @@ onUnmounted(() => {
   opacity: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .hamburger {
     display: flex;
   }

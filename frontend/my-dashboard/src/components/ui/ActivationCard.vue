@@ -288,7 +288,7 @@ const locationDisplay = computed(() => {
   width: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   a.activation-card {
     width: 100%;
     max-width: 100%;
