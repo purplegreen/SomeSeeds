@@ -9,4 +9,12 @@ export default defineConfig({
   output: "server",
   adapter: vercel(),
   integrations: [vue(), sitemap()],
+  vite: {
+    // GSAP's plugin subpaths are deep ESM imports; pre-bundle them so the
+    // ImageSlider island doesn't trigger a mid-hydration re-optimization
+    // ("Failed to fetch dynamically imported module").
+    optimizeDeps: {
+      include: ["gsap", "gsap/Draggable", "gsap/InertiaPlugin"],
+    },
+  },
 });
