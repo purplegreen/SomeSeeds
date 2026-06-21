@@ -21,6 +21,7 @@ const activation = await getActivation(slug)
 const research = activation.research
 const documentation = activation.documentation
 const outcomes = activation.outcomes
+const overview = activation.overview
 
 const posterImage = documentation?.posterImage
 const sliderImages = documentation?.images?.map((img: { url: string; caption?: string }) => ({
@@ -84,25 +85,35 @@ const jsonLd: Record<string, unknown> = {
 
 
   {/* ── Documentation ─────────────────────────────────── */}
-  {documentation && (documentation.posterImage || documentation.text || documentation.images?.length) && (
+  {(overview || (documentation && (documentation.text || documentation.images?.length || documentation.posterImage))) && (
     <section>
+      <div class="container_grid">
+        <h2 class="display_l">{typeDisplay}</h2>
+        {overview && (
+          <div class="overview portable-text p_lead">
+            <PortableTextRenderer body={overview} client:load />
+          </div>
+        )}
+      </div>
+
+      {sliderImages.length > 0 && (
+        <div class="slider-fullwidth">
+          <ImageSlider images={sliderImages} client:load />
+        </div>
+      )}
+
+      {documentation?.text && (
+        <div class="container_grid">
+          <div class="body_text p_medium">
+            <PortableTextRenderer body={documentation.text} client:load />
+          </div>
+        </div>
+      )}
+
       {posterImage && (
         <div class="poster">
           <img src={posterImage} alt="" />
         </div>
-      )}
-
-      <div class="container_grid">
-        <h2 class="display_l">{typeDisplay}</h2>
-        <div class="body_text p_medium">
-          {documentation.text && (
-            <PortableTextRenderer body={documentation.text} client:load />
-          )}
-        </div>
-      </div>
-
-      {sliderImages.length > 0 && (
-        <ImageSlider images={sliderImages} client:load />
       )}
     </section>
   )}
@@ -197,6 +208,21 @@ const jsonLd: Record<string, unknown> = {
 .body_text {
   grid-area: a-5;
   padding-bottom: var(--space-16);
+}
+
+/* ── Documentation: Overview lead sits in the center column ── */
+.overview {
+  grid-area: a-5;
+}
+
+/* Full-bleed: break out of the centered content column to span the viewport */
+.slider-fullwidth {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 /* On mobile the grid collapses to a single 90vw column — drop the left inset

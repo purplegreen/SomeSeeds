@@ -230,6 +230,7 @@ export async function getActivation(slug: string) {
       endDate,
       endTime,
       location,
+      overview,
       credits,
       "partnerInstitutions": partnerInstitutions[]{
         name,

@@ -131,6 +131,14 @@ export const activation = defineType({
 
     // ── Credits Info ───────────────────────────────────────────────
     defineField({
+      name: 'overview',
+      title: 'Overview',
+      description: 'Lead / intro paragraph shown at the top of the Documentation section.',
+      type: 'array',
+      of: [{type: 'block'}],
+    }),
+
+    defineField({
       name: 'credits',
       title: 'Credits',
       description: 'Mentions of Partner Credits.',
