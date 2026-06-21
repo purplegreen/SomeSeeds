@@ -1,14 +1,10 @@
 ---
 import PortableTextRenderer from '../ui/PortableTextRenderer.vue'
-import CategoryTag from '../ui/CategoryTag.astro'
-import TagPill from '../ui/TagPill.astro'
 
 interface Props {
   title: string
   description?: string
   image?: string
-  category?: { title: string }
-  tags?: { title: string }[]
   credits?: any[]
   type?: string
   startDate?: string
@@ -19,7 +15,7 @@ interface Props {
   partnerInstitutions?: { name?: string; logo?: string; url?: string }[]
 }
 
-const { title, image, category, tags, credits, type, startDate, startTime, endDate, endTime, location, partnerInstitutions } = Astro.props
+const { title, image, credits, type, startDate, startTime, endDate, endTime, location, partnerInstitutions } = Astro.props
 
 // ── Date formatting ───────────────────────────────────────
 const formatDate = (dateStr: string) => {
@@ -105,16 +101,6 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : null
 
 </div>
 
-
-<div class="description_grid">
-<div class="tags_cat__box">
-  {category && <CategoryTag label={category.title} />}
-  {tags && tags.length > 0 && (
-    tags.map(tag => <TagPill label={tag.title} />)
-  )}
-</div>
-</div>
-
 </section>
 
 <style>
@@ -182,30 +168,6 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : null
 }
 
 
- /* -----Second wrapper----- */
-
-.description_grid {
-  display: grid;
-  grid-template-columns: 18vw 1fr 18vw;
-  grid-template-rows: auto auto;
-  gap: 2rem;
-  grid-template-areas:
-    "B-Area  B-Area-2 B-4"
-    "B-Area  B-Area-3 B-5";
-  padding: var(--space-16) var(--space-4);
-}
-.tags_cat__box{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  gap: var(--space-4);
-  padding: var(--space-0) 0;
-  grid-area: B-Area-2;
-  max-width: 68ch;
-}
-
-
 @media (max-width: 768px) {
   /* Stack title above image, both at the same 90vw as the body text below */
   .first_wrapper {
@@ -236,20 +198,6 @@ const typeDisplay = type ? (typeLabels[type] ?? type) : null
     height: auto;
     max-height: 60vh;
     object-fit: cover;
-  }
-
-  /* Collapse the 18vw / 1fr / 18vw grid into a single 90vw column */
-  .description_grid {
-    display: flex;
-    flex-direction: column;
-    width: 90vw;
-    margin-inline: auto;
-    padding: var(--space-8) 0;
-    gap: var(--space-8);
-  }
-
-  .tags_cat__box {
-    justify-content: flex-start;
   }
 }
 </style>

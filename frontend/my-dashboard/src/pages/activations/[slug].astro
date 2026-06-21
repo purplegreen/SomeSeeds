@@ -5,6 +5,8 @@ import Layout from "../../layouts/Layout.astro"
 import ContentHeader from "../../components/sections/ContentHeader.astro"
 import PortableTextRenderer from "../../components/ui/PortableTextRenderer.vue"
 import ImageSlider from "../../components/ui/ImageSlider.vue"
+import CategoryTag from "../../components/ui/CategoryTag.astro"
+import TagPill from "../../components/ui/TagPill.astro"
 
 
 export async function getStaticPaths() {
@@ -22,6 +24,8 @@ const research = activation.research
 const documentation = activation.documentation
 const outcomes = activation.outcomes
 const overview = activation.overview
+const category = activation.categories?.[0]
+const tags = activation.tags
 
 const posterImage = documentation?.posterImage
 const sliderImages = documentation?.images?.map((img: { url: string; caption?: string }) => ({
@@ -71,8 +75,6 @@ const jsonLd: Record<string, unknown> = {
 <ContentHeader
   title={activation.title}
   image={activation.coverImage}
-  tags={activation.tags}
-  category={activation.categories?.[0]}
   type={activation.type}
   startDate={activation.startDate}
   startTime={activation.startTime}
@@ -88,12 +90,21 @@ const jsonLd: Record<string, unknown> = {
   {(overview || (documentation && (documentation.text || documentation.images?.length || documentation.posterImage))) && (
     <section>
       <div class="container_grid">
-        <h2 class="display_l">{typeDisplay}</h2>
-        {overview && (
-          <div class="overview portable-text p_lead">
-            <PortableTextRenderer body={overview} client:load />
-          </div>
-        )}
+        <div class="doc-intro">
+          {(category || tags?.length) && (
+            <div class="tags_cat__box">
+              {category && <CategoryTag label={category.title} />}
+              {tags && tags.length > 0 && (
+                tags.map((tag: { title: string }) => <TagPill label={tag.title} />)
+              )}
+            </div>
+          )}
+          {overview && (
+            <div class="overview portable-text p_lead">
+              <PortableTextRenderer body={overview} client:load />
+            </div>
+          )}
+        </div>
       </div>
 
       {sliderImages.length > 0 && (
@@ -102,8 +113,10 @@ const jsonLd: Record<string, unknown> = {
         </div>
       )}
 
+
       {documentation?.text && (
         <div class="container_grid">
+           <h2 class="display_l">{typeDisplay}</h2>
           <div class="body_text p_medium">
             <PortableTextRenderer body={documentation.text} client:load />
           </div>
@@ -210,9 +223,19 @@ const jsonLd: Record<string, unknown> = {
   padding-bottom: var(--space-16);
 }
 
-/* ── Documentation: Overview lead sits in the center column ── */
-.overview {
+/* ── Documentation: tags row + Overview stacked in the center column ── */
+.doc-intro {
   grid-area: a-5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.tags_cat__box {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;   /* keep pills centered */
+  gap: var(--space-4);
 }
 
 /* Full-bleed: break out of the centered content column to span the viewport */

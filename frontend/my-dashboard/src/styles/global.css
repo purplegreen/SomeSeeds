@@ -385,6 +385,7 @@ svg {
   background-color: var(--color-white);
   position: relative;
   z-index: 3;
+  border: 1 px solid red;
 }
 
 .container_grid_one_row {
