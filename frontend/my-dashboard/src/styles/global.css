@@ -119,9 +119,12 @@ html.mobile-menu-open .navbar {
   --space-20: 5rem; /*  80px   */
   --space-24: 6rem; /*  96px   */
   --space-28: 7rem; /*  112px   */
+  --space-32: 8rem; /*  128px   */
+  --space-36: 9rem; /*  144px   */
 
   /* Layout */
   --container-max: 1200px;
+  --container-wide: 1600px; /* big-screen cap */
   --container-padding: 1.5rem;
 
   /* Borders */
@@ -455,6 +458,26 @@ svg {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-light);
+}
+
+/* ── Big screen ───────────────────────────────────── */
+@media (min-width: 1600px) {
+  .container_grid,
+  .container_grid_one_row,
+  .container_grid_two_rows,
+  .container_grid_three_rows {
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    grid-template-columns: 16% 1fr 16%; /* 16% of 1600 = 256px = 16vw@1600 */
+    padding: var(--space-24) var(--space-8); /* tune here */
+  }
+
+  .container_grid_two_cols {
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    grid-template-columns: 1fr 65%;
+    padding: var(--space-20) var(--space-24) var(--space-20) var(--space-16); /* tune here */
+  }
 }
 
 @media (max-width: 820px) {
