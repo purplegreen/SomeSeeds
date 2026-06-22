@@ -43,6 +43,7 @@ export const activation = defineType({
           {title: 'Event', value: 'event'},
           {title: 'Session', value: 'session'},
           {title: 'Field Work', value: 'field-work'},
+          {title: 'Open Observation', value: 'open-observation'},
         ],
         layout: 'radio',
       },

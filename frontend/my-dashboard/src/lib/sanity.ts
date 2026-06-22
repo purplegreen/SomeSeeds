@@ -6,6 +6,7 @@ export const sanityClient = createClient({
   useCdn: import.meta.env.PROD,
   apiVersion: import.meta.env.PUBLIC_SANITY_API_VERSION,
   token: import.meta.env.SANITY_API_TOKEN,
+  perspective: 'published',
 });
 
 // ── Homepage ──
