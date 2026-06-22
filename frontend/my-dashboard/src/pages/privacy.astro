@@ -1,5 +1,4 @@
 ---
-export const prerender = true
 import { getSimplePage } from "../lib/sanity"
 import PageHeader from "../components/sections/PageHeader.astro"
 import Layout from "../layouts/Layout.astro"
@@ -13,6 +12,7 @@ const data = await getSimplePage("privacy")
   image={data?.seo?.ogImage ?? data?.image}
 >
   <PageHeader
+    variant="text"
     title={data?.title}
     description={data?.description}
     image={data?.image}

@@ -6,41 +6,83 @@ interface Props {
   description: string
   image?: string
   body?: any[]
+  variant?: 'default' | 'text'
 }
 
 
-const { title, description, image, body } = Astro.props
+const { title, description, image, body, variant = 'default' } = Astro.props
 ---
 
-<div class="hero__svg hero__svg--one">
-  <img src="/bacter.svg" alt="" aria-hidden="true" />
-</div>
-<div class="hero__svg hero__svg--two">
-  <img src="/moves.svg" alt="" aria-hidden="true" />
-</div>
+{variant === 'text' ? (
+  <section class="text_page">
+    <div class="text_page__inner">
+      <h1 class="heading_s_a">{title}</h1>
+      {description && <p class="p_lead text_page__lead">{description}</p>}
+      {body && (
+        <div class="p_medium">
+          <PortableTextRenderer body={body} client:load />
+        </div>
+      )}
+    </div>
+  </section>
+) : (
+  <>
+    <div class="hero__svg hero__svg--one">
+      <img src="/bacter.svg" alt="" aria-hidden="true" />
+    </div>
+    <div class="hero__svg hero__svg--two">
+      <img src="/moves.svg" alt="" aria-hidden="true" />
+    </div>
 
-<section>
+    <section>
+      <div class="container_grid_two_cols">
+        <h1 class="heading_s_a">{title}</h1>
+        <div class="p_lead">
+          {description}
+        </div>
+      </div>
 
-  <div class="container_grid_two_cols">
-  <h1 class="heading_s_a">{title}</h1>
-  <div class="p_lead">
-  {description}
- </div>
-</div>
+      <section class="poster_section">
+        <div class="image_wrapper">{image && <img src={image} alt={title} />    }</div>
+      </section>
 
-
-<section class="poster_section">
- <div class="image_wrapper">{image && <img src={image} alt={title} />    }</div>
-</section>
-
-  <div class="container_grid">
-  <div class="p_medium">
-  <PortableTextRenderer body={body} client:load />
-  </div>
-</div>
-</section>
+      <div class="container_grid">
+        <div class="p_medium">
+          <PortableTextRenderer body={body} client:load />
+        </div>
+      </div>
+    </section>
+  </>
+)}
 
 <style>
+
+/* ---- text variant (imprint / privacy) ---- */
+.text_page {
+  background-color: var(--color-white);
+  position: relative;
+  z-index: 3;
+  padding: var(--space-24) var(--space-8);
+}
+.text_page__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 70ch;
+  margin-inline: auto;
+}
+.text_page__lead {
+  margin: 0;
+}
+
+@media (max-width: 820px) {
+  .text_page {
+    padding: var(--space-12) 0;
+  }
+  .text_page__inner {
+    width: 90vw;
+  }
+}
 
 .heading_s_a {
    grid-area: a-1;

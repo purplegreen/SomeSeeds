@@ -62,15 +62,6 @@ export async function getContactPage() {
       description,
       body,
       destinationEmail,
-      formFields[]{
-        label,
-        "fieldKey": fieldKey.current,
-        fieldType,
-        placeholder,
-        required
-      },
-      submitButtonLabel,
-      successMessage,
       seo {
         metaTitle,
         metaDescription,

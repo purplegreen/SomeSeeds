@@ -1,9 +1,8 @@
 ---
-export const prerender = false
 import { getContactPage } from "../lib/sanity"
 import Layout from "../layouts/Layout.astro"
 import PortableTextRenderer from "../components/ui/PortableTextRenderer.vue"
-import ContactForm from "../components/ui/ContactForm.vue"
+import Button from "../components/ui/Button.vue"
 
 const data = await getContactPage()
 ---
@@ -23,14 +22,16 @@ const data = await getContactPage()
       </div>
     )}
 
-    {data?.formFields?.length > 0 && (
+    {data?.destinationEmail && (
       <div class="form_area">
-        <ContactForm
-          formFields={data.formFields}
-          submitButtonLabel={data.submitButtonLabel}
-          successMessage={data.successMessage}
+        <Button
+          href={`mailto:${data.destinationEmail}`}
+          variant="primary"
+          size="md"
           client:load
-        />
+        >
+          Email us
+        </Button>
       </div>
     )}
 
@@ -50,5 +51,7 @@ const data = await getContactPage()
 .form_area {
   grid-area: a-6;
   margin-top: var(--space-8);
+  display: flex;
+  justify-content: center;
 }
 </style>
