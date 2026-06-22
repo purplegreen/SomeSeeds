@@ -1,0 +1,21 @@
+---
+export const prerender = true
+import { getSimplePage } from "../lib/sanity"
+import PageHeader from "../components/sections/PageHeader.astro"
+import Layout from "../layouts/Layout.astro"
+
+const data = await getSimplePage("imprint")
+---
+
+<Layout
+  title={data?.seo?.metaTitle ?? data?.title}
+  description={data?.seo?.metaDescription ?? data?.description}
+  image={data?.seo?.ogImage ?? data?.image}
+>
+  <PageHeader
+    title={data?.title}
+    description={data?.description}
+    image={data?.image}
+    body={data?.body}
+  />
+</Layout>

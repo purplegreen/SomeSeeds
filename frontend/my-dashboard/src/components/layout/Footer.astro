@@ -76,7 +76,6 @@ const year = new Date().getFullYear()
 .footer {
   display: flex;
   flex-direction: row;
-  background: var(--color-surface);
   padding: var(--space-8);
   justify-content: space-between;
   align-items: baseline;
@@ -122,8 +121,9 @@ const year = new Date().getFullYear()
   transition: color var(--transition-fast);
 }
 
-  .footer__links a:hover { 
+  .footer__links a:hover {
     text-decoration: underline;
+    text-decoration-color: var(--color-primary);
     text-underline-offset: var(--space-2);
     text-decoration-thickness: 3px;
   }
@@ -136,17 +136,11 @@ const year = new Date().getFullYear()
 
 
 
-.footer__links a:hover {
-  color: var(--color-accent);
-}
-
 .section__b {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: var(--space-6);
-  border-top: var(--border-default);
-
 }
 
 .footer__copyleft {

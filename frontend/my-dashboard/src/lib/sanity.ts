@@ -113,26 +113,6 @@ export async function getNavigation() {
   );
 }
 
-// ── Categories ──
-export async function getAllCategories() {
-  return sanityClient.fetch(
-    `*[_type == "category"] | order(title asc){
-      title,
-      slug,
-      description
-    }`,
-  );
-}
-
-// ── Tags ──
-export async function getAllTags() {
-  return sanityClient.fetch(
-    `*[_type == "tag"] | order(title asc){
-      title,
-      slug
-    }`,
-  );
-}
 // ── Explorations ──
 export async function getExplorations() {
   return sanityClient.fetch(
