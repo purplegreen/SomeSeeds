@@ -1,8 +1,16 @@
-/* Pin the navbar in place while the Explorations dropdown overlay OR the mobile
-   menu drawer is open so it doesn't drift away on scroll — this keeps the logo
-   and the close (X) button visible on top of the full-screen overlay. Uses
-   sticky (not fixed) to avoid a layout jump, and avoids touching overflow so the
-   scrollbar never disappears / shifts the page. */
+/* While the Explorations dropdown overlay is open, lock page scroll so the page
+   behind the full-screen overlay can't scroll up and bleed in at the top. The
+   navbar stays sticky at top:0 so the logo + trigger stay visible above the
+   overlay. The dropdown panel itself still scrolls internally (overflow-y:auto).
+   --scrollbar-width is measured in JS before the lock and padded back in so the
+   removed scrollbar doesn't shift the flex-end navbar to the right. */
+html.nav-dropdown-open,
+html.nav-dropdown-open body {
+  overflow: hidden;
+}
+html.nav-dropdown-open body {
+  padding-right: var(--scrollbar-width, 0px);
+}
 html.nav-dropdown-open .navbar {
   position: sticky;
   top: 0;

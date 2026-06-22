@@ -89,10 +89,17 @@ const isActive = computed(
     props.currentPath.startsWith("/activations"),
 );
 
-// Pin the navbar in place while the dropdown is open (via the .nav-dropdown-open
-// class) so it doesn't drift away on scroll under the full-viewport overlay.
+// Lock page scroll while the dropdown is open (via the .nav-dropdown-open class).
+// Measure the scrollbar width *before* locking and expose it as --scrollbar-width
+// so the CSS can pad it back in — otherwise removing the scrollbar shifts the
+// flex-end navbar a few px to the right (the "jump" on open).
 watch(isOpen, (open) => {
-  document.documentElement.classList.toggle("nav-dropdown-open", open);
+  const root = document.documentElement;
+  if (open) {
+    const sbw = window.innerWidth - root.clientWidth;
+    root.style.setProperty("--scrollbar-width", `${sbw}px`);
+  }
+  root.classList.toggle("nav-dropdown-open", open);
 });
 
 onUnmounted(() => {
