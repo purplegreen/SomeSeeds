@@ -1,9 +1,3 @@
-/* While the Explorations dropdown overlay is open, lock page scroll so the page
-   behind the full-screen overlay can't scroll up and bleed in at the top. The
-   navbar stays sticky at top:0 so the logo + trigger stay visible above the
-   overlay. The dropdown panel itself still scrolls internally (overflow-y:auto).
-   --scrollbar-width is measured in JS before the lock and padded back in so the
-   removed scrollbar doesn't shift the flex-end navbar to the right. */
 html.nav-dropdown-open,
 html.nav-dropdown-open body {
   overflow: hidden;
@@ -16,9 +10,7 @@ html.nav-dropdown-open .navbar {
   top: 0;
 }
 
-/* The mobile menu drawer is a full-screen fixed overlay; pin the navbar (logo +
-   close button) to the viewport with fixed so it can't scroll away behind it.
-   The content jump from taking the navbar out of flow is hidden by the drawer. */
+/* The mobile menu drawer is a full-screen fixed overlay */
 html.mobile-menu-open .navbar {
   position: fixed;
   top: 0;
@@ -92,7 +84,11 @@ html.mobile-menu-open .navbar {
     0.85vw + 1.34rem,
     1.953rem
   ); /* bigger decrease on mobile */
-  --text-3-5xl: clamp(1.35rem, 1.27vw + 1.05rem, 2.197rem);
+  --text-3-5xl: clamp(
+    1.35rem,
+    1.27vw + 1.05rem,
+    1.75rem
+  ); /* smppther increase on big screen */
   --text-4xl: clamp(1.8rem, 1.2vw + 1.58rem, 2.441rem);
   --text-5xl: clamp(2.15rem, 1.69vw + 1.83rem, 3.052rem);
   --text-6xl: clamp(2.6rem, 2.28vw + 2.17rem, 3.815rem);
