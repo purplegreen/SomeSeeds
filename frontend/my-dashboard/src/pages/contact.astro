@@ -17,7 +17,7 @@ const data = await getContactPage()
     <h1 class="display_xl title">{data?.title}</h1>
 
     {data?.body && (
-      <div class="portable_text">
+      <div class="p_lead">
         <PortableTextRenderer body={data.body} client:load />
       </div>
     )}
@@ -43,9 +43,14 @@ const data = await getContactPage()
   grid-area: a-1;
 }
 
-.portable_text {
-  grid-area: a-4;
+.p_lead {
+   grid-area: a-4; 
+   grid-column: 2 / -1;
   margin-top: var(--space-6);
+}
+
+.p_lead :global(p) {
+  max-width: none;   /* allow the text to use the wider cell */
 }
 
 .form_area {
