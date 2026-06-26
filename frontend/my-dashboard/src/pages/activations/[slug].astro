@@ -1,5 +1,5 @@
 ---
-import { getAllActivations, getActivation } from "../../lib/sanity"
+import { getActivation } from "../../lib/sanity"
 import Layout from "../../layouts/Layout.astro"
 import ContentHeader from "../../components/sections/ContentHeader.astro"
 import PortableTextRenderer from "../../components/ui/PortableTextRenderer.vue"
@@ -7,16 +7,11 @@ import ImageSlider from "../../components/ui/ImageSlider.vue"
 import CategoryTag from "../../components/ui/CategoryTag.astro"
 import TagPill from "../../components/ui/TagPill.astro"
 
-
-export async function getStaticPaths() {
-  const activations = await getAllActivations()
-  return activations.map((a: any) => ({
-    params: { slug: a.slug },
-  }))
-}
-
 const { slug } = Astro.params
 const activation = await getActivation(slug)
+if (!activation) {
+  return Astro.rewrite('/404')
+}
 
 // ── Documentation section locals ──────────────────────────
 const research = activation.research
@@ -59,18 +54,19 @@ const jsonLd: Record<string, unknown> = {
   "organizer": {
     "@type": "Organization",
     "name": "SomeSeeds",
-    "url": "https://www.someseeds.net"
+    "url": new URL('/', Astro.site).href
   }
 }
 
 ---
 
 <Layout
-  title={activation.title}
-  description={activation.summary}
-  image={activation.coverImage}
+  title={activation.seo?.metaTitle ?? activation.title}
+  description={activation.seo?.metaDescription ?? activation.summary}
+  image={activation.seo?.ogImage ?? activation.coverImage}
+  noIndex={activation.seo?.noIndex}
   seoType="article"
-   jsonLd={jsonLd as Record<string, unknown>}
+  jsonLd={jsonLd as Record<string, unknown>}
 >
 <ContentHeader
   title={activation.title}
@@ -125,7 +121,7 @@ const jsonLd: Record<string, unknown> = {
 
       {posterImage && (
         <div class="poster">
-          <img src={posterImage} alt="" />
+          <img src={posterImage} alt={activation.title} />
         </div>
       )}
     </section>

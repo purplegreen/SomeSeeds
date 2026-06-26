@@ -1,12 +1,14 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import vue from "@astrojs/vue";
-import sitemap from "@astrojs/sitemap";
+import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "static",
-  integrations: [vue(), sitemap()],
+  site: "https://someseeds.net",
+  output: "server",
+  adapter: cloudflare({ platformProxy: { enabled: true } }),
+  integrations: [vue()],
   vite: {
     // GSAP's plugin subpaths are deep ESM imports; pre-bundle them so the
     // ImageSlider island doesn't trigger a mid-hydration re-optimization

@@ -122,6 +122,13 @@ export const exploration = defineType({
         },
       ],
     }),
+
+    // ── SEO ───────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+    }),
   ],
 
   preview: {

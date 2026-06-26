@@ -25,5 +25,12 @@ export const seo = defineType({
       description: 'Image shown when shared on social media. Recommended: 1200×630px.',
       options: {hotspot: true},
     }),
+    defineField({
+      name: 'noIndex',
+      title: 'Hide from search engines',
+      type: 'boolean',
+      description: 'Adds a noindex tag so this page is excluded from Google and other search results.',
+      initialValue: false,
+    }),
   ],
 })

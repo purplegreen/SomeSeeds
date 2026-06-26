@@ -11,12 +11,24 @@ const homepage = await getHomepage()
 const approach   = homepage?.sections?.find((s: any) => s.key === 'approach')
 const explorations = homepage?.sections?.find((s: any) => s.key === 'explorations')
 const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved')
+
+const siteOrigin = new URL('/', Astro.site).href
+const jsonLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SomeSeeds",
+  "url": siteOrigin,
+  "logo": new URL('/og-default.jpg', Astro.site).href,
+  "description": "An interdisciplinary research initiative exploring restorative practices, regenerative principles, and modes of coexistence among life forms and their ecosystems, founded by artist Deborah Ligorio.",
+  "founder": { "@type": "Person", "name": "Deborah Ligorio" }
+}
 ---
 
 <Layout
   title={homepage?.seo?.metaTitle ?? 'SomeSeeds'}
   description={homepage?.seo?.metaDescription ?? 'An interdisciplinary research initiative exploring restorative practices, regenerative principles, and modes of coexistence among life forms and their ecosystems.'}
   image={homepage?.seo?.ogImage}
+  jsonLd={jsonLd}
 >
 
   <!-- ── 1. Hero ──────────────────────────────────────── -->
@@ -36,7 +48,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   </section>
 
   <!-- ── Fixed Scroll Bar ─────────────────────────────── -->
-<div class="scroll-bar" aria-hidden="false">
+<div class="scroll-bar" aria-hidden="true">
   {homepage?.scrollBarSvgOne && (
     <img src={homepage.scrollBarSvgOne} alt="" class="scroll-bar__svg scroll-bar__svg--one" />
   )}
@@ -64,7 +76,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
   <!-- ── 3. Poster Image 1 ────────────────────────────── -->
   {homepage?.posterImageOne && (
     <div class="poster">
-      <img src={homepage.posterImageOne} alt="" class="poster__image" />
+      <img src={homepage.posterImageOne} alt="SomeSeeds" class="poster__image" />
     </div>
   )}
 
@@ -113,7 +125,7 @@ const getInvolved = homepage?.sections?.find((s: any) => s.key === 'get-involved
     <!-- ── 7. Poster Image 2 ────────────────────────────── -->
   {homepage?.posterImageTwo && (
     <div class="poster">
-      <img src={homepage.posterImageTwo} alt="" class="poster__image" />
+      <img src={homepage.posterImageTwo} alt="SomeSeeds" class="poster__image" />
     </div>
   )}
 

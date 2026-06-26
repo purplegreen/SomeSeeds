@@ -5,6 +5,7 @@ interface Props {
   image?: string
   type?: 'website' | 'article'
   canonicalURL?: string
+  noIndex?: boolean
   jsonLd?: Record<string, unknown>
 }
 
@@ -13,27 +14,30 @@ const {
   description = 'An interdisciplinary research initiative exploring restorative practices, regenerative principles, and ways in which life forms coexist with their ecosystems, founded by artist Deborah Ligorio.',
   image,
   type = 'website',
-  canonicalURL = Astro.url.href,
+  canonicalURL,
+  noIndex = false,
   jsonLd
 } = Astro.props
 
 const siteName = 'SomeSeeds'
 const fullTitle = title === 'SomeSeeds' ? title : `${title} — ${siteName}`
-const siteURL = Astro.site ?? Astro.url.origin
-const imageURL = image ?? `${siteURL}/og-default.jpg`
+const siteURL = Astro.site ?? new URL(Astro.url.origin)
+const canonical = canonicalURL ?? new URL(Astro.url.pathname, siteURL).href
+const imageURL = image ?? new URL('/og-default.jpg', siteURL).href
 ---
 
 <!-- Primary -->
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonicalURL} />
+<link rel="canonical" href={canonical} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
 
 <!-- Open Graph -->
 <meta property="og:site_name" content={siteName} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:url" content={canonicalURL} />
+<meta property="og:url" content={canonical} />
 <meta property="og:type" content={type} />
 
 <!-- Twitter/X -->

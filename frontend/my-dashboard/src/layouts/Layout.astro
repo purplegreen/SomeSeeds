@@ -11,10 +11,12 @@ interface Props {
   description?: string
   image?: string
   seoType?: 'website' | 'article'
-    jsonLd?: Record<string, unknown>
+  canonicalURL?: string
+  noIndex?: boolean
+  jsonLd?: Record<string, unknown>
 }
 
-const { title, description, image, seoType, jsonLd } = Astro.props
+const { title, description, image, seoType, canonicalURL, noIndex, jsonLd } = Astro.props
 
 const currentPath = Astro.url.pathname.replace(/\/$/, ""); 
 const nav = await getNavigation()
@@ -26,7 +28,6 @@ const explorations = await getExplorations()
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<SEO
@@ -34,7 +35,9 @@ const explorations = await getExplorations()
       description={description}
       image={image}
       type={seoType}
-	  jsonLd={jsonLd}
+      canonicalURL={canonicalURL}
+      noIndex={noIndex}
+      jsonLd={jsonLd}
     />
 	</head>
 	<body id="top">

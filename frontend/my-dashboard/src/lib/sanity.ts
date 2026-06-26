@@ -3,7 +3,7 @@ import { createClient } from "@sanity/client";
 export const sanityClient = createClient({
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
   dataset: import.meta.env.PUBLIC_SANITY_DATASET,
-  useCdn: import.meta.env.PROD,
+  useCdn: true,
   apiVersion: import.meta.env.PUBLIC_SANITY_API_VERSION,
   token: import.meta.env.SANITY_API_TOKEN,
   perspective: 'published',
@@ -148,6 +148,12 @@ export async function getExploration(slug: string) {
         name,
         "logo": logo.asset->url,
         url
+      },
+      seo{
+        metaTitle,
+        metaDescription,
+        "ogImage": ogImage.asset->url,
+        noIndex
       }
     }`,
     { slug },
@@ -155,14 +161,6 @@ export async function getExploration(slug: string) {
 }
 
 // ── Activations ──
-export async function getAllActivations() {
-  return sanityClient.fetch(
-    `*[_type == "activation" && defined(slug.current)]{ 
-      "slug": slug.current 
-    }`,
-  );
-}
-
 export async function getActivationsByExploration(explorationId: string) {
   return sanityClient.fetch(
     `*[_type == "activation" && references($explorationId)] | order(startDate desc){
@@ -230,8 +228,33 @@ export async function getActivation(slug: string) {
         },
       "explorations": explorations[]->{ title, "slug": slug.current },
       "categories": categories[]->{ title, slug },
-      "tags": tags[]->{ title, slug }
+      "tags": tags[]->{ title, slug },
+      seo{
+        metaTitle,
+        metaDescription,
+        "ogImage": ogImage.asset->url,
+        noIndex
+      }
     }`,
     { slug },
   );
+}
+
+// ── Sitemap ──
+export type SitemapEntry = { path: string; lastmod?: string };
+
+export async function getSitemapEntries(): Promise<SitemapEntry[]> {
+  const docs: { type: string; slug: string; lastmod?: string }[] =
+    await sanityClient.fetch(
+      `*[_type in ["exploration", "activation"] && defined(slug.current) && seo.noIndex != true]{
+        "type": _type,
+        "slug": slug.current,
+        "lastmod": _updatedAt
+      }`,
+    );
+
+  return docs.map((d) => ({
+    path: d.type === "exploration" ? `/explorations/${d.slug}` : `/activations/${d.slug}`,
+    lastmod: d.lastmod,
+  }));
 }

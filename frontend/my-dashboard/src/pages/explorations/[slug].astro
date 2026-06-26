@@ -1,19 +1,15 @@
 ---
-import { getExplorations, getExploration, getActivationsByExploration } from "../../lib/sanity"
+import { getExploration, getActivationsByExploration } from "../../lib/sanity"
 import Layout from "../../layouts/Layout.astro"
 import ExplorationHeader from "../../components/sections/ExplorationHeader.astro"
 import ActivationsList from "../../components/sections/ActivationsList.astro"
 import PortableTextRenderer from "../../components/ui/PortableTextRenderer.vue"
 
-export async function getStaticPaths() {
-  const explorations = await getExplorations()
-  return explorations.map((e: any) => ({
-    params: { slug: e.slug },
-  }))
-}
-
 const { slug } = Astro.params
 const exploration = await getExploration(slug)
+if (!exploration) {
+  return Astro.rewrite('/404')
+}
 const activations = await getActivationsByExploration(exploration._id)
 const jsonLd: Record<string, unknown> = {
   "@context": "https://schema.org",
@@ -24,17 +20,18 @@ const jsonLd: Record<string, unknown> = {
   "author": {
     "@type": "Organization",
     "name": "SomeSeeds",
-    "url": "https://www.someseeds.net"
+    "url": new URL('/', Astro.site).href
   }
 }
 
 
 ---
 
-<Layout 
-  title={exploration.title}
-  description={exploration.summary}
-  image={exploration.coverImage}
+<Layout
+  title={exploration.seo?.metaTitle ?? exploration.title}
+  description={exploration.seo?.metaDescription ?? exploration.summary}
+  image={exploration.seo?.ogImage ?? exploration.coverImage}
+  noIndex={exploration.seo?.noIndex}
   seoType="article"
   jsonLd={jsonLd as Record<string, unknown>}
 >
