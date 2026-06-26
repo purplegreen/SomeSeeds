@@ -4,9 +4,8 @@ export const sanityClient = createClient({
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
   dataset: import.meta.env.PUBLIC_SANITY_DATASET,
   useCdn: true,
-  apiVersion: import.meta.env.PUBLIC_SANITY_API_VERSION,
-  token: import.meta.env.SANITY_API_TOKEN,
-  perspective: 'published',
+  apiVersion: "2024-01-01",
+  perspective: "published",
 });
 
 // ── Homepage ──
@@ -254,7 +253,10 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
     );
 
   return docs.map((d) => ({
-    path: d.type === "exploration" ? `/explorations/${d.slug}` : `/activations/${d.slug}`,
+    path:
+      d.type === "exploration"
+        ? `/explorations/${d.slug}`
+        : `/activations/${d.slug}`,
     lastmod: d.lastmod,
   }));
 }
