@@ -75,11 +75,6 @@ defineEmits(["click"]);
   padding: 0.6rem 1.25rem;
 }
 
-.btn--lg {
-  font-size: var(--text-body);
-  padding: 0.8rem 1.75rem;
-}
-
 /* ── Primary ── */
 .btn--primary {
   background-color: var(--color-accent);

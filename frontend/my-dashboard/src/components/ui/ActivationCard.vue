@@ -302,6 +302,4 @@ const locationDisplay = computed(() => {
     width: 100%;
   }
 }
-@media (max-width: 480px) {
-}
 </style>

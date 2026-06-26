@@ -1,13 +1,9 @@
 ---
 interface Props {
   label: string
-  href?: string
 }
 
-const { label, href } = Astro.props
+const { label } = Astro.props
 ---
 
-{href 
-  ? <a href={href} class="category-tag">{label}</a>
-  : <span class="category-tag">{label}</span>
-}
+<span class="category-tag">{label}</span>

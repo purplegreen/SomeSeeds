@@ -75,6 +75,7 @@ defineProps({
 }
 
 .exploration-card__image {
+  position: relative;
   width: 100%;
   min-height: 0;
   flex: 1;
@@ -86,14 +87,6 @@ defineProps({
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.exploration-card__image {
-  position: relative;
-  width: 100%;
-  min-height: 0;
-  flex: 1;
-  overflow: hidden;
 }
 
 .exploration-card__tag {

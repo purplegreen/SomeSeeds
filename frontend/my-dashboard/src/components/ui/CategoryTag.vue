@@ -1,9 +1,7 @@
 <template>
-  <component :is="href ? 'a' : 'span'" :href="href" class="category-tag">
-    {{ label }}
-  </component>
+  <span class="category-tag">{{ label }}</span>
 </template>
 
 <script setup>
-defineProps({ label: String, href: String });
+defineProps({ label: String });
 </script>
