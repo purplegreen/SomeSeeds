@@ -354,10 +354,32 @@ const goTo = (index: number) => {
   loop?.toIndex(index, { duration: 0.4, ease: "power1.inOut" });
 };
 
+const waitForImage = (img: HTMLImageElement) =>
+  new Promise<void>((resolve) => {
+    if (img.complete && img.naturalWidth > 0) {
+      resolve();
+      return;
+    }
+    img.addEventListener("load", () => resolve(), { once: true });
+    img.addEventListener("error", () => resolve(), { once: true }); // don't hang on a 404
+  });
+
 onMounted(async () => {
   await nextTick();
-  const slides = trackRef.value?.querySelectorAll(".slider__slide");
-  if (!slides?.length) return;
+  const track = trackRef.value;
+  if (!track) return;
+
+  const slides = track.querySelectorAll(".slider__slide");
+  if (!slides.length) return;
+
+  // Measure only after every image has real dimensions
+  const imgs = Array.from(track.querySelectorAll("img"));
+  await Promise.all(imgs.map(waitForImage));
+
+  // One more frame so layout settles before GSAP reads offsetWidth
+  await new Promise((r) => requestAnimationFrame(() => r(null)));
+
+  if (!trackRef.value) return; // component may have unmounted while waiting
 
   loop = horizontalLoop(slides, {
     paused: true,
