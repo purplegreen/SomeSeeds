@@ -106,7 +106,6 @@ const currentPath = rawPath.replace(/\/$/, "");
     font-size: var(--text-m);
     font-weight: 600;
     text-decoration: none;
-    transition: opacity 0.15s ease;
     align-items: center;
     position: relative;
     z-index: 210;
@@ -117,7 +116,8 @@ const currentPath = rawPath.replace(/\/$/, "");
     z-index: 210;
   }
 
-  .navbar__links a:not(.btn):hover { 
+  .navbar__links a:not(.btn):hover {
+    color: var(--color-text-primary);
     text-decoration: underline;
     text-underline-offset: var(--space-2);
     text-decoration-thickness: 3px;
