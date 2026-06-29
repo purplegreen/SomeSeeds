@@ -1,0 +1,142 @@
+---
+import { getAllTopicsWithContent } from "../../lib/sanity"
+import Layout from "../../layouts/Layout.astro"
+import ContentListItem from "../../components/ui/ContentListItem.astro"
+
+type Item = {
+  title: string
+  slug: string
+  coverImage?: string
+  tags?: { title: string; slug: string }[]
+}
+type Term = {
+  _type: "tag" | "category"
+  title: string
+  slug: string
+  explorations?: Item[]
+  activations?: Item[]
+}
+type Topic = { slug: string; title: string; explorations: Item[]; activations: Item[] }
+
+const { slug } = Astro.params
+const terms: Term[] = await getAllTopicsWithContent()
+
+// Dedup a list of content by slug.
+const dedup = <T extends { slug: string }>(items: T[]) => {
+  const seen = new Set<string>()
+  return items.filter((item) => !seen.has(item.slug) && seen.add(item.slug))
+}
+
+// Featured block: the clicked topic, which may be a tag or a category (and a tag +
+// category can share a slug, so merge any terms that match the slug).
+const featuredTerms = terms.filter((t) => t.slug === slug)
+if (featuredTerms.length === 0) {
+  return Astro.rewrite("/404")
+}
+const featured: Topic = {
+  slug,
+  title: featuredTerms[0].title,
+  explorations: dedup(featuredTerms.flatMap((t) => t.explorations ?? [])),
+  activations: dedup(featuredTerms.flatMap((t) => t.activations ?? [])),
+}
+
+// The list below is categories only — an exploration has a single category, so this
+// avoids the repetition that listing every tag produced. Rank by how much content each
+// category shares with the featured topic; ties (and zero overlap) fall back to A–Z.
+const selExpl = new Set(featured.explorations.map((e) => e.slug))
+const selAct = new Set(featured.activations.map((a) => a.slug))
+
+const categories = terms
+  .filter((t) => t._type === "category" && t.slug !== slug)
+  .map((t) => ({
+    slug: t.slug,
+    title: t.title,
+    explorations: dedup(t.explorations ?? []),
+    activations: dedup(t.activations ?? []),
+  }))
+  .map((t) => ({
+    ...t,
+    overlap:
+      t.explorations.filter((e) => selExpl.has(e.slug)).length +
+      t.activations.filter((a) => selAct.has(a.slug)).length,
+  }))
+  .sort((a, b) => b.overlap - a.overlap || a.title.localeCompare(b.title))
+
+const blocks: Topic[] = [featured, ...categories]
+---
+
+<Layout
+  title={`Topic: ${featured.title}`}
+  description={`Explorations and activations related to “${featured.title}”.`}
+>
+  {blocks.map((topic, i) => (
+    <section class="topic-block">
+      {i === 0 ? (
+        <h1 class="display_l">{topic.title}</h1>
+      ) : (
+        <h2 class="topic-heading">
+          <a href={`/topics/${topic.slug}`}>{topic.title}</a>
+        </h2>
+      )}
+
+      {topic.explorations.length > 0 && (
+        <div class="content-list">
+          {topic.explorations.map((exploration) => (
+            <ContentListItem
+              title={exploration.title}
+              label="Exploration"
+              href={`/explorations/${exploration.slug}`}
+              image={exploration.coverImage}
+              tags={exploration.tags}
+            />
+          ))}
+        </div>
+      )}
+
+      {topic.activations.length > 0 && (
+        <div class="content-list">
+          {topic.activations.map((activation) => (
+            <ContentListItem
+              title={activation.title}
+              label="Activation"
+              href={`/activations/${activation.slug}`}
+              image={activation.coverImage}
+              tags={activation.tags}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  ))}
+</Layout>
+
+<style>
+.topic-block {
+  display: flex;
+  margin-bottom: var(--space-16);
+}
+
+.topic-heading {
+  font-size: var(--text-l);
+  margin: 0 0 var(--space-4);
+}
+
+.topic-heading a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.topic-heading a:hover {
+  opacity: 0.7;
+}
+
+.content-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.content-list + .content-list {
+  margin-top: var(--space-8);
+}
+</style>

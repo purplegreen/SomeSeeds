@@ -1,0 +1,117 @@
+---
+import TagPill from './TagPill.astro'
+
+interface Props {
+  title: string
+  label: string
+  href: string
+  image?: string
+  tags?: { title: string; slug: string }[]
+}
+
+const { title, label, href, image, tags } = Astro.props
+---
+
+<article class="content-list-item"> 
+   <a class="card-link" href={href}>
+  <div class="info-wrapper">
+  
+      <h3 class="title">{title}</h3>
+   
+    <span class="label">{label}</span>
+    {tags && tags.length > 0 && (
+      <div class="tags">
+        {tags.map((tag) => (
+          <TagPill label={tag.title} href={`/topics/${tag.slug}`} />
+        ))}
+      </div>
+    )}
+  </div> 
+</a>
+  <div class="image-wrapper">
+    {image && <img src={image} alt={title} />}
+  </div>
+</article>
+
+<style>
+.content-list-item {
+  position: relative; /* anchor for the stretched card link */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  color: var(--color-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-primary);
+}
+
+.info-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.15s ease;
+}
+
+/* Stretch the detail link across the whole card so the card is clickable. */
+.card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.content-list-item:hover .card-link {
+  opacity: 0.7;
+}
+
+.title {
+  font-size: var(--text-l);
+  margin: 0;
+}
+
+.label {
+  font-size: var(--text-m);
+  opacity: 0.6;
+}
+
+/* Sit the tags above the stretched link so they stay independently clickable. */
+.tags {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.image-wrapper {
+  flex: 0 0 auto;
+  width: 40%;
+  max-width: 360px;
+}
+
+.image-wrapper img {
+  width: 17vw;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 820px) {
+  .content-list-item {
+    gap: var(--space-4);
+  }
+
+  .image-wrapper {
+    width: 40%;
+  }
+}
+</style>

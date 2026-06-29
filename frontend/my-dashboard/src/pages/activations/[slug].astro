@@ -89,9 +89,9 @@ const jsonLd: Record<string, unknown> = {
         <div class="doc-intro">
           {(category || tags?.length) && (
             <div class="tags_cat__box">
-              {category && <CategoryTag label={category.title} />}
+              {category && <CategoryTag label={category.title} href={`/topics/${category.slug.current}`} />}
               {tags && tags.length > 0 && (
-                tags.map((tag: { title: string }) => <TagPill label={tag.title} />)
+                tags.map((tag: { title: string; slug: { current: string } }) => <TagPill label={tag.title} href={`/topics/${tag.slug.current}`} />)
               )}
             </div>
           )}

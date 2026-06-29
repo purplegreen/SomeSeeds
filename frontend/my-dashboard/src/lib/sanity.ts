@@ -239,6 +239,64 @@ export async function getActivation(slug: string) {
   );
 }
 
+// ── Tags & Categories (archive pages + master index) ──
+const taxonomyContentProjection = `
+  title,
+  "slug": slug.current,
+  "explorations": *[_type == "exploration" && references(^._id)] | order(title asc){
+    title,
+    "slug": slug.current,
+    summary,
+    "coverImage": coverImage.asset->url,
+    "tags": tags[]->{ title, "slug": slug.current }
+  },
+  "activations": *[_type == "activation" && references(^._id)] | order(startDate desc){
+    title,
+    "slug": slug.current,
+    type,
+    startDate,
+    startTime,
+    endDate,
+    endTime,
+    location,
+    "coverImage": coverImage.asset->url,
+    "tags": tags[]->{ title, "slug": slug.current }
+  }
+`
+
+// Every tag/category that has at least one exploration/activation. The topic page
+// renders the selected one first, then all others ordered by content overlap.
+export async function getAllTopicsWithContent() {
+  return sanityClient.fetch(
+    `*[(_type == "tag" || _type == "category")
+      && defined(slug.current)
+      && count(*[_type in ["exploration", "activation"] && references(^._id)]) > 0]{
+      _type,
+      ${taxonomyContentProjection}
+    }`,
+  )
+}
+
+export async function getTags() {
+  return sanityClient.fetch(
+    `*[_type == "tag" && defined(slug.current)] | order(title asc){
+      title,
+      "slug": slug.current,
+      "count": count(*[_type in ["exploration", "activation"] && references(^._id)])
+    }`,
+  )
+}
+
+export async function getCategories() {
+  return sanityClient.fetch(
+    `*[_type == "category" && defined(slug.current)] | order(title asc){
+      title,
+      "slug": slug.current,
+      "count": count(*[_type in ["exploration", "activation"] && references(^._id)])
+    }`,
+  )
+}
+
 // ── Sitemap ──
 export type SitemapEntry = { path: string; lastmod?: string };
 

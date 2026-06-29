@@ -1,0 +1,62 @@
+---
+import { getTags, getCategories } from "../lib/sanity"
+import Layout from "../layouts/Layout.astro"
+import CategoryTag from "../components/ui/CategoryTag.astro"
+import TagPill from "../components/ui/TagPill.astro"
+
+type Term = { title: string; slug: string; count: number }
+
+const categories: Term[] = await getCategories()
+const tags: Term[] = await getTags()
+
+// Only surface terms that actually have content attached.
+const usedCategories = categories.filter((c) => c.count > 0)
+const usedTags = tags.filter((t) => t.count > 0)
+---
+
+<Layout
+  title="Topics"
+  description="Browse explorations and activations by category and tag."
+>
+  <section class="section">
+    <h1 class="display_l">Topics</h1>
+    <p class="page_description">
+      Browse explorations and activations by category and tag.
+    </p>
+  </section>
+
+  {usedCategories.length > 0 && (
+    <section class="section">
+      <h2 class="taxonomy-heading">Categories</h2>
+      <div class="terms">
+        {usedCategories.map((c) => (
+          <CategoryTag label={`${c.title} (${c.count})`} href={`/topics/${c.slug}`} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {usedTags.length > 0 && (
+    <section class="section">
+      <h2 class="taxonomy-heading">Tags</h2>
+      <div class="terms">
+        {usedTags.map((t) => (
+          <TagPill label={`${t.title} (${t.count})`} href={`/topics/${t.slug}`} />
+        ))}
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+.taxonomy-heading {
+  font-size: var(--text-l);
+  margin: 0 0 var(--space-4);
+}
+
+.terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+</style>
