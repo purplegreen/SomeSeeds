@@ -200,7 +200,7 @@ h1 {
   z-index: 150;
   pointer-events: none;
 }
-
+/* ── Ape-mosca ─────────────────────────────────────── */
 .scroll-bar__svg--two {
   width: 6rem;
   height: auto;
@@ -397,25 +397,31 @@ h1 {
 
   // scroll-bar svg two — moves from bottom to top as page scrolls
   // Native scroll listener keeps this completely decoupled from GSAP scrub tweens
-  const scrollBarTwo = document.querySelector('.scroll-bar__svg--two')
-  if (scrollBarTwo) {
-    const updateScrollBar = () => {
-      const maxScroll = document.body.scrollHeight - window.innerHeight
-      const progress = maxScroll > 0 ? Math.min(1, window.scrollY / maxScroll) : 0
-      const y = window.innerHeight * (0.85 - 0.84 * progress)
-          // Rotate -180 near top (progress ~0), 180 near bottom (progress ~1)
-    // Transition zone: 0–0.08 for top, 0.92–1.0 for bottom
-    let rotation = 0
-    if (progress < 0.08) {
-      // top zone: -180 → 0
-      rotation = -180 * (1 - progress / 0.08)
-    } else if (progress > 0.92) {
-      // bottom zone: 0 → 180
-      rotation = 180 * ((progress - 0.92) / 0.08)
+const scrollBarTwo = document.querySelector('.scroll-bar__svg--two')
+if (scrollBarTwo) {
+  let flipped = false
+
+  const updateScrollBar = () => {
+    const maxScroll = document.body.scrollHeight - window.innerHeight
+    const progress = maxScroll > 0 ? Math.min(1, window.scrollY / maxScroll) : 0
+    const y = window.innerHeight * (0.09 + 0.47 * progress)
+
+    if (progress > 0.92) flipped = true
+    if (progress < 0.05) flipped = false  // reset only when back near the top
+
+    let rotation = 180 // base: pointing down
+    if (flipped) {
+      if (progress > 0.92) {
+        // animate the flip
+        rotation = 180 * (1 - (progress - 0.92) / 0.08)
+      } else {
+        rotation = 0 // stay pointing up
+      }
     }
-  
+
     ;(scrollBarTwo as HTMLElement).style.transform = `translateY(${y}px) rotate(${rotation}deg)`
   }
+
   updateScrollBar()
   window.addEventListener('scroll', updateScrollBar, { passive: true })
 }
