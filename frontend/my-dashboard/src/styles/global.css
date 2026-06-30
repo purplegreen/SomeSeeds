@@ -270,7 +270,21 @@ svg {
   TAGS & CATEGORIES
    ============================================ */
 
-.category-tag,
+.category-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-s);
+  font-weight: 400;
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+  padding: var(--space-2);
+  border: 1px solid currentColor;
+}
+
 .tag-pill {
   display: inline-flex;
   align-items: center;
@@ -289,7 +303,6 @@ svg {
 .tag-pill:hover {
   opacity: 0.7;
 }
-
 /* ============================================
    LAYOUT UTILITIES
    ============================================ */
