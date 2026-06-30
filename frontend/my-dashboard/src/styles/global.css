@@ -32,6 +32,7 @@ html.mobile-menu-open .navbar {
   --color-primary: #001eff;
 
   --color-neutral-surface: #fbfafc;
+  --color-neutral-surface-200: #f9f3fe;
 
   /* Semantic aliases — referenced by border/focus/scrollbar rules below */
   --color-border: var(--color-neutral-200);
@@ -274,15 +275,20 @@ svg {
   display: inline-flex;
   align-items: center;
   font-size: var(--text-s);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 0.8;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  text-decoration: none;
+
   white-space: nowrap;
   transition: opacity 0.15s ease;
   padding: var(--space-2);
   border: 1px solid currentColor;
+}
+
+a.category-tag {
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 .tag-pill {
@@ -297,8 +303,14 @@ svg {
   white-space: nowrap;
   transition: opacity 0.15s ease;
   padding: var(--space-2);
-  border: 1px solid currentColor;
 }
+
+a.tag-pill {
+  text-decoration: none;
+  background-color: var(--color-neutral-surface-200);
+  border-radius: 4px;
+}
+
 .category-tag:hover,
 .tag-pill:hover {
   opacity: 0.7;
