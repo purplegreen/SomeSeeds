@@ -12,12 +12,11 @@ interface Props {
 const { title, label, href, image, tags } = Astro.props
 ---
 
-<article class="content-list-item"> 
-   <a class="card-link" href={href}>
+<article class="content-list-item">
   <div class="info-wrapper">
-  
+    <a class="card-link" href={href}>
       <h3 class="title">{title}</h3>
-   
+    </a>
     <span class="label">{label}</span>
     {tags && tags.length > 0 && (
       <div class="tags">
@@ -26,8 +25,7 @@ const { title, label, href, image, tags } = Astro.props
         ))}
       </div>
     )}
-  </div> 
-</a>
+  </div>
   <div class="image-wrapper">
     {image && <img src={image} alt={title} />}
   </div>
