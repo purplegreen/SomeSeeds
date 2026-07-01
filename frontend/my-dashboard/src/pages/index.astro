@@ -135,17 +135,17 @@ const jsonLd: Record<string, unknown> = {
 /* ── Hero ─────────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 70vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
- justify-content: center;
+  justify-content: center;
 }
 
 
 h1 {
   font-size: clamp(2.5rem, 15.5vw, 17vh);
   line-height: 0.80;
-  font-weight: 800;
+  font-weight: 300;
 
 }
 .hero__text{
@@ -153,6 +153,7 @@ h1 {
   z-index: 1;
   max-width: 96vw;
   align-self: center;
+  justify-self: center;
   color: var(--color-primary);
   padding-left: var(--space-8);
   mix-blend-mode: multiply;
