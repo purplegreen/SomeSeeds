@@ -62,7 +62,20 @@ const categories = terms
   }))
   .sort((a, b) => b.overlap - a.overlap || a.title.localeCompare(b.title))
 
+// Each item appears once on the page: blocks claim items in display order (featured
+// first, then categories by overlap rank); categories left empty are dropped.
+const claimedExpl = new Set<string>()
+const claimedAct = new Set<string>()
+const claim = (items: Item[], claimed: Set<string>) =>
+  items.filter((item) => !claimed.has(item.slug) && claimed.add(item.slug))
+
 const blocks: Topic[] = [featured, ...categories]
+  .map((t) => ({
+    ...t,
+    explorations: claim(t.explorations, claimedExpl),
+    activations: claim(t.activations, claimedAct),
+  }))
+  .filter((t, i) => i === 0 || t.explorations.length > 0 || t.activations.length > 0)
 ---
 
 <Layout
