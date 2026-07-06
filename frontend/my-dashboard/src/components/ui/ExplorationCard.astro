@@ -1,0 +1,52 @@
+---
+interface Props {
+  title: string
+  slug: string
+  summary?: string
+  coverImage?: string
+}
+
+const { title, slug, summary, coverImage } = Astro.props
+---
+
+<a href={`/explorations/${slug}`} class="exploration-card">
+  {coverImage && (
+    <div class="exploration-card__image">
+      <img src={coverImage} alt={title} />
+    </div>
+  )}
+  <div class="exploration-card__body">
+    <h2 class="exploration-card__title">{title}</h2>
+    {summary && <p class="exploration-card__summary">{summary}</p>}
+  </div>
+</a>
+
+<style>
+.exploration-card {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: opacity 0.15s ease;
+}
+
+.exploration-card:hover {
+  opacity: 0.7;
+}
+
+.exploration-card__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.exploration-card__title {
+  font-size: var(--text-l);
+  margin: 0;
+}
+
+.exploration-card__summary {
+  font-size: var(--text-m);
+  margin: 0;
+}
+</style>

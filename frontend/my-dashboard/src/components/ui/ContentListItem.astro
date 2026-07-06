@@ -1,0 +1,130 @@
+---
+import TagPill from './TagPill.astro'
+
+interface Props {
+  title: string
+  label: string
+  href: string
+  image?: string
+  tags?: { title: string; slug: string }[]
+}
+
+const { title, label, href, image, tags } = Astro.props
+---
+
+<article class="content-list-item">
+  <div class="info-wrapper">
+    <a class="card-link" href={href}>
+      <h3 class="title">{title}</h3>
+    </a>
+    <span class="label">{label}</span>
+    {tags && tags.length > 0 && (
+      <div class="tags">
+        {tags.map((tag) => (
+          <TagPill label={tag.title} href={`/topics/${tag.slug}`} />
+        ))}
+      </div>
+    )}
+  </div>
+  {image && (
+    <div class="image-wrapper">
+      <img src={image} alt={title} />
+    </div>
+  )}
+</article>
+
+<style>
+.content-list-item {
+  position: relative; /* anchor for the stretched card link */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  color: var(--color-primary);
+  padding: 0 var(--space-4);
+  background-color: var( --color-white);
+  border-radius: var(--radius-lg);
+}
+
+.info-wrapper {
+  flex: 1;
+  min-width: 0;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.15s ease;
+}
+
+/* Stretch the detail link across the whole card so the card is clickable. */
+.card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.content-list-item:hover .card-link {
+  opacity: 0.7;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.label {
+  font-size: var(--text-m);
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.6;
+  padding-top: var(--space-2);
+  color: var(--color-text-primary);
+}
+
+/* Sit the tags above the stretched link so they stay independently clickable. */
+.tags {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: var(--space-0);
+  column-gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.image-wrapper {
+  flex: 0 0 auto;
+  width: 40%;
+  max-width: 360px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+
+@media (max-width: 820px) {
+  /* Stack: image markup comes last, column-reverse shows it on top. */
+  .content-list-item {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .image-wrapper {
+    width: 100%;
+    max-width: none;
+  }
+}
+</style>

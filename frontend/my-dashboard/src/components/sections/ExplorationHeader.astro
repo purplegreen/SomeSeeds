@@ -7,8 +7,8 @@ interface Props {
   title: string
   description?: string
   image?: string 
-  category?: { title: string }
-  tags?: { title: string }[]
+  category?: { title: string; slug: { current: string } }
+  tags?: { title: string; slug: { current: string } }[]
   body?: any[]
 }
 
@@ -22,9 +22,9 @@ const { title, description, image, category, tags, body } = Astro.props
   <div class="container">
   <h1 class="display_xl">{title}</h1>
   <div class="tags_box">
-  {category && <CategoryTag label={category.title} />}
+  {category && <CategoryTag label={category.title} href={`/topics/${category.slug.current}`} />}
   {tags && tags.length > 0 && (
-    tags.map(tag => <TagPill label={tag.title} />)
+    tags.map(tag => <TagPill label={tag.title} href={`/topics/${tag.slug.current}`} />)
   )}
 </div>
   </div>
@@ -83,7 +83,7 @@ const { title, description, image, category, tags, body } = Astro.props
 .tags_box {
   display: flex;
   flex-wrap: wrap;
-  align-items: start;
+  align-items: center;
   gap: var(--space-4);
   margin-top: var(--space-2);
 }
