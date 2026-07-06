@@ -74,7 +74,7 @@ const blocks: Topic[] = [featured, ...categories]
       {i === 0 ? (
         <h1 class="display_l">{topic.title}</h1>
       ) : (
-        <h2 class="topic-heading">
+        <h2 class="topic-heading display_l">
           <a href={`/topics/${topic.slug}`}>{topic.title}</a>
         </h2>
       )}
@@ -113,11 +113,14 @@ const blocks: Topic[] = [featured, ...categories]
 <style>
 .topic-block {
   display: flex;
+  flex-direction: column;
   margin-bottom: var(--space-16);
+  padding: var(--space-8) var(--space-4);
+  background-color: var( --color-neutral-surface-200);
+  border-radius: var(--radius-lg);
 }
 
 .topic-heading {
-  font-size: var(--text-l);
   margin: 0 0 var(--space-4);
 }
 
@@ -133,7 +136,7 @@ const blocks: Topic[] = [featured, ...categories]
 .content-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-4);
 }
 
 .content-list + .content-list {

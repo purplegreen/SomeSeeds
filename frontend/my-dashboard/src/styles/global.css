@@ -32,7 +32,7 @@ html.mobile-menu-open .navbar {
   --color-primary: #001eff;
 
   --color-neutral-surface: #fbfafc;
-  --color-neutral-surface-200: #f9f3fe;
+  --color-neutral-surface-200: #f8f4f7;
 
   /* Semantic aliases — referenced by border/focus/scrollbar rules below */
   --color-border: var(--color-neutral-200);
@@ -294,10 +294,10 @@ a.category-tag {
 .tag-pill {
   display: inline-flex;
   align-items: center;
-  font-size: var(--text-s);
-  font-weight: 400;
+  font-size: var(--text-m);
+  font-weight: 600;
   line-height: 0.8;
-  text-transform: uppercase;
+  font-style: oblique;
   letter-spacing: 0.05em;
   text-decoration: none;
   white-space: nowrap;
@@ -307,7 +307,8 @@ a.category-tag {
 
 a.tag-pill {
   text-decoration: none;
-  background-color: var(--color-neutral-surface-200);
+  color: var(--color-primary);
+  background-color: var(--color-neutral-surface-100);
   border-radius: 4px;
 }
 
