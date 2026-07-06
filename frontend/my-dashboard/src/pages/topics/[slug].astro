@@ -129,8 +129,7 @@ const blocks: Topic[] = [featured, ...categories]
   flex-direction: column;
   margin-bottom: var(--space-16);
   padding: var(--space-8) var(--space-4);
-  background-color: var( --color-neutral-surface-200);
-  border-radius: var(--radius-lg);
+  background-color: var( --color-neutral-surface);
 }
 
 .topic-heading {
@@ -155,4 +154,13 @@ const blocks: Topic[] = [featured, ...categories]
 .content-list + .content-list {
   margin-top: var(--space-8);
 }
+
+
+/* ── Big screen ───────────────────────────────────── */
+@media (min-width: 1600px) {
+  .topic-block {
+      margin: var(--space-8) var(--space-32);
+  }
+}
+
 </style>
